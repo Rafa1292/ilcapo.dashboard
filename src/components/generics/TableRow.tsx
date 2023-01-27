@@ -12,7 +12,8 @@ const TableRow = ({ tableData, children }: Props) => {
         tableData.map((data, index) => <td key={index}>{data}</td>)
       }
       {
-        children && <td>
+        children && 
+        <td className='d-flex justify-content-around'>
           {children}
         </td>
       }

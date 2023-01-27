@@ -4,7 +4,7 @@ import { useInitialState } from './hooks/useIntitialState'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './scss/app.scss'
 import Home from './pages/Home'
-import Layout from './containers/Layout'
+import Layout from './containers/generics/Layout'
 import Providers from './pages/Providers'
 
 function App() {

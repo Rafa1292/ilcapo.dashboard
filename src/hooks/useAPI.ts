@@ -62,7 +62,7 @@ const useCustom = async<T>(route: string, method: string, data: T): Promise<Cust
       return customResponse.badResponse()
     }
 
-    return customResponse.setResponse(response.data, false, '')
+    return customResponse.setResponse(response.data.content, false, '')
 
   } catch (error) {
     return customResponse.badResponse()

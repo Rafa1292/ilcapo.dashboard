@@ -131,6 +131,17 @@ body{
     .user-select-none{
       user-select: none;
     }
+
+    .btn-white{
+      background-color: transparent;
+      border: 1px solid white;
+      color: white;
+    }
+
+    .btn-white:hover{
+      background-color: white;
+      color: black;
+    }
   
   
   

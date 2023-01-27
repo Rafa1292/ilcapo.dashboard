@@ -1,6 +1,6 @@
 import React from 'react'
-import Navbar from '../components/Navbar'
-import SideMenu from '../components/SideMenu'
+import Navbar from '../../components/generics/Navbar'
+import SideMenu from '../../components/generics/SideMenu'
 
 interface Props {
   children: React.ReactNode;

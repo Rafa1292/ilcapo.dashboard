@@ -1,5 +1,5 @@
 import React from 'react'
-import '../scss/sideMenu.scss'
+import '../../scss/sideMenu.scss'
 import { Link } from 'react-router-dom'
 
 const Navbar = () => {

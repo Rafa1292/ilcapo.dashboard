@@ -28,7 +28,6 @@ const Resume = () => {
       },
     ]
   }
-
   const yearGoals: ChartData = {
     labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
     title: 'Ventas mensuales',
