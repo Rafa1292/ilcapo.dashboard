@@ -13,7 +13,7 @@ const EditProvider = ({ provider }: Props) => {
   }
 
   return (
-    <ProviderForm currentProvider={provider} handleSubmit={handleSubmit}/>
+    <ProviderForm currentProvider={provider} action={handleSubmit}/>
   )
 }
 

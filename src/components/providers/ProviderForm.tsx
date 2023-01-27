@@ -6,19 +6,12 @@ import CustomInputNumber from '../generics/CustomInputNumber'
 import CustomInputCheck from '../generics/CustomInputChecbox'
 
 interface Props {
-  currentProvider?: Provider
-  handleSubmit: () => void
+  currentProvider: Provider
+  action: (provider: Provider) => void
 }
 
-const initialProvider: Provider = {
-  id: 0,
-  name: '',
-  phone: 0,
-  fixedExpense: true
-}
-
-const ProviderForm = ({ currentProvider, handleSubmit }: Props) => {
-  const [provider, setProvider] = useState<Provider>(currentProvider ? currentProvider : initialProvider)
+const ProviderForm = ({ currentProvider, action }: Props) => {
+  const [provider, setProvider] = useState<Provider>(currentProvider)
   const submitText = currentProvider?.id === 0 ? 'Agregar' : 'Editar'
   
   const handleChange = (event: any) => {
@@ -31,6 +24,10 @@ const ProviderForm = ({ currentProvider, handleSubmit }: Props) => {
     setProvider({ ...provider, [name]: checked })
   }
 
+  const handleSubmit = () => {
+    action(provider)
+  }
+
   return (
     <>
       <GenericForm submitText={submitText} handleSubmit={handleSubmit}>
@@ -38,7 +35,7 @@ const ProviderForm = ({ currentProvider, handleSubmit }: Props) => {
           customInputText={
             {
               label: 'Nombre del proveedor', name: 'name',
-              handleChange: handleChange, pattern: '^[a-zA-Z0-9 ]+$',
+              handleChange: handleChange, pattern: '[a-zA-Z0-9\\s?]*',
               validationMessage: 'Ingrese un nombre válido'
             }
           } />

@@ -10,9 +10,10 @@ interface Props {
   addProvider: () => void
   show: boolean
   setShow: (show: boolean) => void
+  refreshProviders: () => void
 }
 
-const ProviderFormContainer = ({ provider, addProvider, show, setShow }: Props) => {
+const ProviderFormContainer = ({ refreshProviders, provider, addProvider, show, setShow }: Props) => {
   const title = provider.id === 0 ? 'Agregar proovedor' : 'Editar proveedor'
   return (
     <>
@@ -21,7 +22,7 @@ const ProviderFormContainer = ({ provider, addProvider, show, setShow }: Props) 
       </Button>
       <CustomModal title={title} show={show} handleClose={(() => setShow(false))}>
         {provider.id === 0 ?
-          <CreateProvider provider={provider} /> :
+          <CreateProvider refreshProviders={refreshProviders} provider={provider} /> :
           <EditProvider provider={provider} />}
       </CustomModal>
     </>

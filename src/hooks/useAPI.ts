@@ -59,6 +59,7 @@ const useCustom = async<T>(route: string, method: string, data: T): Promise<Cust
     })
 
     if (response?.data?.error) {
+      console.log(response)
       return customResponse.badResponse()
     }
 

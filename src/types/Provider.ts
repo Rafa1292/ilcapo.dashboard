@@ -3,4 +3,6 @@ export interface Provider {
     name: string;
     phone: number;
     fixedExpense: boolean;
+    createdBy: number;
+    updatedBy: number;
   }
