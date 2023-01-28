@@ -8,9 +8,10 @@ import CustomInputCheck from '../generics/CustomInputChecbox'
 interface Props {
   currentProvider: Provider
   action: (provider: Provider) => void
+  errors?: string[]
 }
 
-const ProviderForm = ({ currentProvider, action }: Props) => {
+const ProviderForm = ({ currentProvider, action, errors }: Props) => {
   const [provider, setProvider] = useState<Provider>(currentProvider)
   const submitText = currentProvider?.id === 0 ? 'Agregar' : 'Editar'
   
@@ -30,7 +31,7 @@ const ProviderForm = ({ currentProvider, action }: Props) => {
 
   return (
     <>
-      <GenericForm submitText={submitText} handleSubmit={handleSubmit}>
+      <GenericForm errors={errors} submitText={submitText} handleSubmit={handleSubmit}>
         <CustomInputText value={provider.name}
           customInputText={
             {

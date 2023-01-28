@@ -9,11 +9,11 @@ const TableRow = ({ tableData, children }: Props) => {
   return (
     <tr>
       {
-        tableData.map((data, index) => <td key={index}>{data}</td>)
+        tableData.map((data, index) => <td className='' key={index}>{data}</td>)
       }
       {
         children && 
-        <td className='d-flex justify-content-around'>
+        <td className=''>
           {children}
         </td>
       }

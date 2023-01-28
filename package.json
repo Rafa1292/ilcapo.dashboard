@@ -46,6 +46,7 @@
     ]
   },
   "devDependencies": {
-    "axios": "^1.2.3"
+    "axios": "^1.2.3",
+    "sweetalert2": "^11.7.1"
   }
 }

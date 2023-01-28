@@ -60,8 +60,8 @@ const Providers = () => {
           {
             providers.map((provider, index) => (
               <TableRow key={index} tableData={[provider.id.toString(), provider.name, provider.phone.toString(), provider.fixedExpense ? 'si' : 'no']}>
-                <button className="btn btn-white" onClick={(()=>editProvider(provider.id))}>Editar</button>
-                <button className="btn btn-outline-danger">Eliminar</button>
+                <button className="btn btn-white my-1 mx-2" onClick={(()=>editProvider(provider.id))}>Editar</button>
+                <button className="btn btn-outline-danger my-1 mx-2">Eliminar</button>
               </TableRow>
             ))
           }

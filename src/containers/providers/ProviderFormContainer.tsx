@@ -23,7 +23,7 @@ const ProviderFormContainer = ({ refreshProviders, provider, addProvider, show, 
       <CustomModal title={title} show={show} handleClose={(() => setShow(false))}>
         {provider.id === 0 ?
           <CreateProvider refreshProviders={refreshProviders} provider={provider} /> :
-          <EditProvider provider={provider} />}
+          <EditProvider refreshProviders={refreshProviders} provider={provider} />}
       </CustomModal>
     </>
   )

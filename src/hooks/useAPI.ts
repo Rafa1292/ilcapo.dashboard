@@ -1,24 +1,25 @@
 import axios from 'axios'
+import Swal from 'sweetalert2'
 
 class CustomResponse<T> {
   public data!: T
   public error!: boolean
-  public message!: string
+  public message!: string[]
 
   constructor() {
     this.data = {} as T
     this.error = false
-    this.message = ''
+    this.message = ['']
   }
 
-  public badResponse(): CustomResponse<T> {
+  public badResponse(errors:string[]): CustomResponse<T> {
     const response = new CustomResponse<T>()
     response.error = true
-    response.message = 'Bad response'
+    response.message = errors
     return response
   }
 
-  public setResponse(data: T, error: boolean, message: string): CustomResponse<T> {
+  public setResponse(data: T, error: boolean, message: string[]): CustomResponse<T> {
     const response = new CustomResponse<T>()
     response.data = data
     response.error = error
@@ -59,14 +60,14 @@ const useCustom = async<T>(route: string, method: string, data: T): Promise<Cust
     })
 
     if (response?.data?.error) {
-      console.log(response)
-      return customResponse.badResponse()
+      Swal.fire('Error', response.data.message.toString(), 'error')
+      return customResponse.badResponse(response.data.message)
     }
 
-    return customResponse.setResponse(response.data.content, false, '')
+    return customResponse.setResponse(response.data.content, false, [''])
 
   } catch (error) {
-    return customResponse.badResponse()
+    return customResponse.badResponse(['Bad response'])
 
   }
 
