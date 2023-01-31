@@ -35,9 +35,7 @@ const Providers = () => {
 
   const refreshProviders = async () => {
     const response = await useGetList<Provider[]>('providers')
-    if (response.error) {
-      console.log(response.error)
-    } else {
+    if (!response.error) {
       setProviders(response.data)
       setShow(false)
     }

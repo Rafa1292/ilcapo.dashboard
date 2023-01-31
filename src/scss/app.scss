@@ -142,6 +142,30 @@ body{
       background-color: white;
       color: black;
     }
+
+    .table>:not(caption)>*>*{
+      padding: 0.75rem !important;
+      position: relative;
+      
+    }
+
+    .custom-center{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
   
+    .top-left-radius{
+      border-top-left-radius: 1.25rem;
+    }
+
+    .top-right-radius{
+      border-top-right-radius: 1.25rem;
+    }
   
   

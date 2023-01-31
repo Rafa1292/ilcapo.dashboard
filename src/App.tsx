@@ -6,6 +6,7 @@ import './scss/app.scss'
 import Home from './pages/Home'
 import Layout from './containers/generics/Layout'
 import Providers from './pages/Providers'
+import Magnitudes from './pages/Magnitudes'
 
 function App() {
   const { state } = useInitialState()
@@ -16,6 +17,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/Providers" element={<Providers />} />
+            <Route path="/Magnitudes" element={<Magnitudes />} />
           </Routes>
         </Layout>
       </BrowserRouter>
