@@ -39,7 +39,7 @@ const GenericForm = ({ children, submitText, handleSubmit, errors }: Props) => {
       }
       <Form noValidate onSubmit={validateForm} validated={validated} className='col-12 rounded p-4 shadow'>
         {children}
-        <Button className='btn btn-dark col-12' type="submit">{submitText}</Button>
+        <Button className='btn btn-dark col-12 my-4' type="submit">{submitText}</Button>
       </Form>
     </>
   )
