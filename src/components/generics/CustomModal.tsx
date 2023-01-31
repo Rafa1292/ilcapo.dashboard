@@ -12,11 +12,11 @@ interface Props {
 function CustomModal({ children, title, show, handleClose }: Props) {
   return (
     <>
-      <Modal show={show} onHide={handleClose}>
+      <Modal centered show={show}  onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>{title}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className='p-4'>
           {children}
         </Modal.Body>
       </Modal>

@@ -36,7 +36,7 @@ const ProviderForm = ({ currentProvider, action, errors }: Props) => {
           customInputText={
             {
               label: 'Nombre del proveedor', name: 'name',
-              handleChange: handleChange, pattern: '[a-zA-Z0-9\\s?]*',
+              handleChange: handleChange, pattern: '[a-zA-Z0-9\\u00E0-\\u00FC\\s?]*',
               validationMessage: 'Ingrese un nombre válido'
             }
           } />

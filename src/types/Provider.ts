@@ -5,4 +5,5 @@ export interface Provider {
     fixedExpense: boolean;
     createdBy: number;
     updatedBy: number;
+    delete: boolean;
   }
