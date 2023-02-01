@@ -8,7 +8,7 @@ interface Props {
   refreshMagnitudes: () => void
 }
 
-const CreateMagnitude = ({ magnitude, refreshMagnitudes }: Props) => {
+const EditMagnitude = ({ magnitude, refreshMagnitudes }: Props) => {
   const [errors, setErrors] = useState<string[]>([])
 
   const handleSubmit = async (editMagnitude: Magnitude) => {
@@ -26,4 +26,4 @@ const CreateMagnitude = ({ magnitude, refreshMagnitudes }: Props) => {
   )
 }
 
-export default CreateMagnitude
+export default EditMagnitude

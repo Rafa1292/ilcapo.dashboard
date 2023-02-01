@@ -34,14 +34,14 @@ const Navbar = () => {
             <li className="nav-item">
               <Link className="nav-link" aria-current="page" to='/Measures'>
                 <span data-feather="home" className="align-text-bottom" />
-                Measures
+                Medidas
               </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/Tags">
-                <span data-feather="file" className="align-text-bottom" />
-                Etiquetas
-              </a>
+              <Link className="nav-link" aria-current="page" to='/Inputs'>
+                <span data-feather="home" className="align-text-bottom" />
+                Insumos
+              </Link>
             </li>
           </ul>
         </div>

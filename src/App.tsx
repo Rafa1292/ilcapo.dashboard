@@ -8,6 +8,7 @@ import Layout from './containers/generics/Layout'
 import Providers from './pages/Providers'
 import Magnitudes from './pages/Magnitudes'
 import Measures from './pages/Measures'
+import Inputs from './pages/Inputs'
 
 function App() {
   const { state } = useInitialState()
@@ -20,6 +21,7 @@ function App() {
             <Route path="/Providers" element={<Providers />} />
             <Route path="/Magnitudes" element={<Magnitudes />} />
             <Route path="/Measures" element={<Measures />} />
+            <Route path="/Inputs" element={<Inputs />} />
           </Routes>
         </Layout>
       </BrowserRouter>

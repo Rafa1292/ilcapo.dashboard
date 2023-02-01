@@ -42,10 +42,10 @@ const Providers = () => {
   }
 
   useEffect(() => {
-    const getProducts = async () => {
+    const getProviders = async () => {
       await refreshProviders()
     }
-    getProducts()
+    getProviders()
   }, [])
 
 

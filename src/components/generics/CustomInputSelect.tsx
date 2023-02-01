@@ -32,7 +32,7 @@ const CustomInputSelect = ({defaultLegend, customInputSelect, value, data }: Pro
             ))}
           </Form.Select>
           <Form.Control.Feedback type="invalid">
-            {customInputSelect.validationMessage}a
+            {customInputSelect.validationMessage}
           </Form.Control.Feedback>
         </InputGroup>
       </Form.Group>
