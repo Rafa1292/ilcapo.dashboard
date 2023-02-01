@@ -9,6 +9,7 @@ import Providers from './pages/Providers'
 import Magnitudes from './pages/Magnitudes'
 import Measures from './pages/Measures'
 import Inputs from './pages/Inputs'
+import InputCategories from './pages/InputCategories'
 
 function App() {
   const { state } = useInitialState()
@@ -22,6 +23,7 @@ function App() {
             <Route path="/Magnitudes" element={<Magnitudes />} />
             <Route path="/Measures" element={<Measures />} />
             <Route path="/Inputs" element={<Inputs />} />
+            <Route path="/InputCategories" element={<InputCategories />} />
           </Routes>
         </Layout>
       </BrowserRouter>

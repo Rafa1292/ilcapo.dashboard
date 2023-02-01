@@ -13,7 +13,7 @@ interface Props {
   refreshInputs: () => void
 }
 
-const MagnitudeFormContainer = ({ refreshInputs, input, addInput, show, setShow }: Props) => {
+const InputFormContainer = ({ refreshInputs, input, addInput, show, setShow }: Props) => {
   const title = input.id === 0 ? 'Agregar insumo' : 'Editar insumo'
   return (
     <>
@@ -29,4 +29,4 @@ const MagnitudeFormContainer = ({ refreshInputs, input, addInput, show, setShow 
   )
 }
 
-export default MagnitudeFormContainer
+export default InputFormContainer
