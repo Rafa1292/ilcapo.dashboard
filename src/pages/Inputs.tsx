@@ -69,7 +69,7 @@ const Inputs = () => {
         <Table headers={['#', 'Nombre', 'Precio bajo', 'Precio alto',
           'Precio actual', 'Precio anterior', 'Precio esperado', 'Stock',
           'Presentacion', 'Stock sugerido', 'Proveedor actual', 'Medida', 'Categoria',
-          '']} darkMode={true}>
+          '']}>
           {
             inputs.map((input, index) => (
               <TableRow key={index} tableData={

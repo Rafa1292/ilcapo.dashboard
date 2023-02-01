@@ -55,7 +55,7 @@ const Magnitudes = () => {
       <MagnitudeFormContainer refreshMagnitudes={refreshMagnitudes} magnitude={magnitude} addMagnitude={addMagnitude} show={show} setShow={setShow} />
       {
         magnitudes.length > 0 &&
-        <Table headers={['#', 'Nombre','']} darkMode={true}>
+        <Table headers={['#', 'Nombre','']}>
           {
             magnitudes.map((magnitude, index) => (
               <TableRow key={index} tableData={[magnitude.id.toString(), magnitude.name]}>

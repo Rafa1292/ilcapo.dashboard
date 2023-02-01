@@ -55,7 +55,7 @@ const InputCategories = () => {
         addInputCategory={addInputCategory} show={show} setShow={setShow} />
       {
         inputCategories.length > 0 &&
-        <Table headers={['#', 'Nombre', '']} darkMode={true}>
+        <Table headers={['#', 'Nombre', '']}>
           {
             inputCategories.map((inputCategory, index) => (
               <TableRow key={index} tableData={[inputCategory.id.toString(), inputCategory.name]}>

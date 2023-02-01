@@ -10,6 +10,7 @@ import Magnitudes from './pages/Magnitudes'
 import Measures from './pages/Measures'
 import Inputs from './pages/Inputs'
 import InputCategories from './pages/InputCategories'
+import Brands from './pages/Brands'
 
 function App() {
   const { state } = useInitialState()
@@ -24,6 +25,7 @@ function App() {
             <Route path="/Measures" element={<Measures />} />
             <Route path="/Inputs" element={<Inputs />} />
             <Route path="/InputCategories" element={<InputCategories />} />
+            <Route path="/Brands" element={<Brands />} />
           </Routes>
         </Layout>
       </BrowserRouter>

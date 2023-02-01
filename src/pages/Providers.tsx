@@ -56,7 +56,7 @@ const Providers = () => {
       <ProviderFormContainer refreshProviders={refreshProviders} provider={provider} addProvider={addProvider} show={show} setShow={setShow} />
       {
         providers.length > 0 &&
-        <Table headers={['#', 'Nombre', 'Telefono', 'Gasto', '']} darkMode={true}>
+        <Table headers={['#', 'Nombre', 'Telefono', 'Gasto', '']}>
           {
             providers.map((provider, index) => (
               <TableRow key={index} tableData={[provider.id.toString(), provider.name, provider.phone.toString(), provider.fixedExpense ? 'si' : 'no']}>

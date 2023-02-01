@@ -59,7 +59,7 @@ const Measures = () => {
       <MeasureFormContainer refreshMeasures={refreshMeasures} measure={measure} addMeasure={addMeasure} show={show} setShow={setShow} />
       {
         measures.length > 0 &&
-        <Table headers={['#', 'Nombre', 'Medida principal', 'Valor', 'Magnitud', 'Abreviatura', '']} darkMode={true}>
+        <Table headers={['#', 'Nombre', 'Medida principal', 'Valor', 'Magnitud', 'Abreviatura', '']}>
           {
             measures.map((measure, index) => (
               <TableRow key={index} tableData={[measure.id.toString(), measure.name,
