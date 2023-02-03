@@ -3,8 +3,6 @@ import '../../scss/sideMenu.scss'
 import { Link } from 'react-router-dom'
 
 const Navbar = () => {
-
-
   return (
     <>
       <nav

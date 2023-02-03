@@ -8,9 +8,10 @@ interface Props {
   handleSubmit: () => void
   submitText: string
   errors?: string[]
+  cancel?: () => void
 }
 
-const GenericForm = ({ children, submitText, handleSubmit, errors }: Props) => {
+const GenericForm = ({ children, submitText, handleSubmit, errors, cancel }: Props) => {
   const [validated, setValidated] = useState(false)
 
   const validateForm = async (event: any) => {
@@ -27,19 +28,24 @@ const GenericForm = ({ children, submitText, handleSubmit, errors }: Props) => {
     <>
       {
         errors &&
-          <div className="col-12 d-flex justify-content-center">
-            <ul className="list-group list-group-flush">
-              {
-                errors.map((error, index) => (
-                  <li key={index} className="list-group-item text-danger">{error}</li>
-                ))
-              }
-            </ul>
-          </div>
+        <div className="col-12 d-flex justify-content-center">
+          <ul className="list-group list-group-flush">
+            {
+              errors.map((error, index) => (
+                <li key={index} className="list-group-item text-danger">{error}</li>
+              ))
+            }
+          </ul>
+        </div>
       }
       <Form noValidate onSubmit={validateForm} validated={validated} className='col-12 rounded p-4 shadow'>
         {children}
-        <Button className='btn btn-dark col-12 my-4' type="submit">{submitText}</Button>
+        <Button className='btn btn-dark col-12 mt-2' type="submit">{submitText}</Button>
+        {
+          cancel &&
+          <button className='btn btn-outline-secondary col-12 my-2' onClick={cancel} type="button">Cancelar</button>
+        }
+
       </Form>
     </>
   )

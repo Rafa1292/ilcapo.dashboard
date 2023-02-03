@@ -28,7 +28,7 @@ const DeleteInput = ({ refreshInputs, id }: Props) => {
 
   return (
     <>
-      <Button variant={'outline-danger'} className='my-2' onClick={(() => setShow(true))}>
+      <Button variant={'outline-danger'} className='m-2' onClick={(() => setShow(true))}>
         Eliminar
       </Button>
       <CustomModal title='Eliminar insumo' show={show} handleClose={(() => setShow(false))}>

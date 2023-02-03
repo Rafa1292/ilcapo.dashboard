@@ -15,9 +15,6 @@ interface Props {
 }
 
 const CustomInputSelect = ({defaultLegend, customInputSelect, value, data }: Props) => {
-  useEffect(() => {
-    console.log(value)
-  }, [value])
   return (
     <>
       <Form.Group className='my-2' as={Col} md="12">

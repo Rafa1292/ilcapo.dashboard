@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import Table from '../components/generics/Table'
-import TableRow from '../components/generics/TableRow'
-import DeleteProvider from '../containers/providers/DeleteProvider'
-import ProviderFormContainer from '../containers/providers/ProviderFormContainer'
-import { useGetList } from '../hooks/useAPI'
-import { Provider } from '../types/Provider'
+import Table from '../../components/generics/Table'
+import TableRow from '../../components/generics/TableRow'
+import DeleteProvider from '../../containers/providers/DeleteProvider'
+import ProviderFormContainer from '../../containers/providers/ProviderFormContainer'
+import { useGetList } from '../../hooks/useAPI'
+import { Provider } from '../../types/Provider'
 
 const Providers = () => {
   const initialProvider: Provider = {

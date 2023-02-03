@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import Table from '../components/generics/Table'
-import TableRow from '../components/generics/TableRow'
-import DeleteInput from '../containers/inputs/DeleteInput'
-import InputFormContainer from '../containers/inputs/InputFormContainer'
-import { useGetList } from '../hooks/useAPI'
-import { Input } from '../types/Input'
+import { Link } from 'react-router-dom'
+import Table from '../../components/generics/Table'
+import TableRow from '../../components/generics/TableRow'
+import DeleteInput from '../../containers/inputs/DeleteInput'
+import InputFormContainer from '../../containers/inputs/InputFormContainer'
+import { useGetList } from '../../hooks/useAPI'
+import { Input } from '../../types/Input'
 
 const Inputs = () => {
   const initialInput: Input = {
@@ -79,7 +80,8 @@ const Inputs = () => {
                   input.presentation.toString(), input.suggestedStock.toString(), input.currentProviderId.toString(), input.measureId.toString(),
                   input.inputCategoryId.toString()
                 ]}>
-                <button className="btn btn-white my-1 mx-2" onClick={(() => editInput(input.id))}>Editar</button>
+                <button className="btn btn-outline-secondary my-1 m-2" onClick={(() => editInput(input.id))}>Editar</button>
+                <Link to={`/Inputs/AddProvider/${input.id}`} className="btn btn-outline-success m-2" onClick={(() => editInput(input.id))}>Proveedores</Link>
                 <DeleteInput id={input.id} refreshInputs={refreshInputs} />
               </TableRow>
             ))
