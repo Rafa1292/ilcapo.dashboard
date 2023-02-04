@@ -13,7 +13,7 @@ const Layout = ({ children }: Props) => {
       <div className="container-fluid">
         <div className="row">
           <SideMenu />
-          <main className="col-md-10 ms-sm-auto col-lg-10 d-flex flex-wrap p-2 justify-content-center">
+          <main className="col-md-9 ms-sm-auto col-lg-10 d-flex flex-wrap p-2 justify-content-center">
             {
               children
             }

@@ -7,6 +7,7 @@ import CustomInputNumber from '../generics/CustomInputNumber'
 import { Brand } from '../../types/Brand'
 import { ProviderInput } from '../../types/ProviderInput'
 import { Provider } from '../../types/Provider'
+import { Input } from '../../types/Input'
 
 interface Props {
   currentProviderInput: ProviderInput
@@ -14,13 +15,15 @@ interface Props {
   errors?: string[]
   cancelAction?: () => void
   getRestringedBrandsId: (providerId: number) => number[]
+  showProviders?: boolean
 }
 
-const ProviderInputForm = ({ currentProviderInput, cancelAction, action, errors, getRestringedBrandsId }: Props) => {
+const ProviderInputForm = ({ currentProviderInput, cancelAction, action, errors, getRestringedBrandsId, showProviders = false }: Props) => {
   const [providerInput, setProviderInput] = useState<ProviderInput>(currentProviderInput)
   const [measures, setMeasures] = useState<Measure[]>([])
   const [brands, setBrands] = useState<Brand[]>([])
   const [providers, setProviders] = useState<Provider[]>([])
+  const [inputs, setInputs] = useState<Input[]>([])
   const submitText = currentProviderInput?.id === 0 ? 'Agregar' : 'Editar'
   const [tempBrands, setTempBrands] = useState<Brand[]>([])
   const handleChange = (event: any) => {
@@ -59,24 +62,43 @@ const ProviderInputForm = ({ currentProviderInput, cancelAction, action, errors,
         setProviders(response.data)
       }
     }
+    const getinputs = async () => {
+      const response = await useGetList<Input[]>('inputs')
+      if (!response.error) {
+        setInputs(response.data)
+      }
+    }
     getProviders()
     getMeasures()
     getBrands()
+    getinputs()
   }, [])
 
   return (
     <>
       <GenericForm cancel={cancelAction} errors={errors} submitText={submitText} handleSubmit={handleSubmit}>
-
-        <CustomInputSelect value={providerInput.providerId}
-          customInputSelect={
-            {
-              label: 'Proveedor', name: 'providerId',
-              handleChange: HandleProviderChange, pattern: '', validationMessage: 'Seleccione un proveedor'
-            }}
-          data={providers.map(provider => { return { value: provider.id, label: provider.name } })}
-          defaultLegend={'Seleccione un proveedor'}
-        />
+        {
+          showProviders ?
+            <CustomInputSelect value={providerInput.providerId}
+              customInputSelect={
+                {
+                  label: 'Proveedor', name: 'providerId',
+                  handleChange: HandleProviderChange, pattern: '', validationMessage: 'Seleccione un proveedor'
+                }}
+              data={providers.map(provider => { return { value: provider.id, label: provider.name } })}
+              defaultLegend={'Seleccione un proveedor'}
+            />
+            :
+            <CustomInputSelect value={providerInput.inputId}
+              customInputSelect={
+                {
+                  label: 'Insumo', name: 'inputId',
+                  handleChange: HandleProviderChange, pattern: '', validationMessage: 'Seleccione un insumo'
+                }}
+              data={inputs.map(input => { return { value: input.id, label: input.name } })}
+              defaultLegend={'Seleccione un insumo'}
+            />
+        }
 
         <CustomInputNumber value={providerInput.presentation} customInputNumber={
           {

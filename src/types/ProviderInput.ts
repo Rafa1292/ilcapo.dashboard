@@ -1,4 +1,5 @@
 import { Brand } from './Brand'
+import { Input } from './Input'
 import { Measure } from './Measure'
 import { Provider } from './Provider'
 
@@ -15,6 +16,7 @@ export interface ProviderInput {
   measureId: number
   brandId: number
   provider?: Provider
+  input?: Input
   brand?: Brand
   measure?: Measure
   delete: boolean

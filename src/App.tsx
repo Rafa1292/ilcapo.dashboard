@@ -12,6 +12,7 @@ import Inputs from './pages/inputs/Inputs'
 import InputCategories from './pages/InputCategories'
 import Brands from './pages/Brands'
 import AddProviders from './pages/inputs/AddProviders'
+import AddInputs from './pages/providers/AddInputs'
 
 function App() {
   const { state } = useInitialState()
@@ -25,6 +26,7 @@ function App() {
             <Route path="/Magnitudes" element={<Magnitudes />} />
             <Route path="/Measures" element={<Measures />} />
             <Route path="/Inputs/AddProvider/:id" element={<AddProviders />} />
+            <Route path="/Providers/AddInput/:id" element={<AddInputs />} />
             <Route path="/Inputs" element={<Inputs />} />
             <Route path="/InputCategories" element={<InputCategories />} />
             <Route path="/Brands" element={<Brands />} />

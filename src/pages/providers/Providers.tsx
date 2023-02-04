@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import Table from '../../components/generics/Table'
 import TableRow from '../../components/generics/TableRow'
 import DeleteProvider from '../../containers/providers/DeleteProvider'
@@ -60,7 +61,8 @@ const Providers = () => {
           {
             providers.map((provider, index) => (
               <TableRow key={index} tableData={[provider.id.toString(), provider.name, provider.phone.toString(), provider.fixedExpense ? 'si' : 'no']}>
-                <button className="btn btn-white my-1 mx-2" onClick={(()=>editProvider(provider.id))}>Editar</button>
+                <button className="btn btn-outline-secondary my-1 mx-2" onClick={(()=>editProvider(provider.id))}>Editar</button>
+                <Link to={`/Providers/AddInput/${provider.id}`} className="btn btn-outline-success m-2">Insumos</Link>
                 <DeleteProvider id={provider.id} refreshProviders={refreshProviders}/>
               </TableRow>
             ))

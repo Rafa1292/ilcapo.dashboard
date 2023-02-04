@@ -10,9 +10,10 @@ interface Props {
   refreshProviderInputs: () => void
   cancelAction: () => void
   getRestringedBrandsId: (providerId: number) => number[]
+  showProviders?: boolean
 }
 
-const EditProviderInput = ({ providerInput, refreshProviderInputs, cancelAction, getRestringedBrandsId }: Props) => {
+const EditProviderInput = ({ providerInput, refreshProviderInputs, cancelAction, getRestringedBrandsId, showProviders }: Props) => {
   const [errors, setErrors] = useState<string[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [editProviderInput, setCreateProviderInput] = useState<ProviderInput>(providerInput)
@@ -32,7 +33,7 @@ const EditProviderInput = ({ providerInput, refreshProviderInputs, cancelAction,
   }
   return (
     <Content isLoading={isLoading} minHeight='400px'>
-      <ProviderInputForm getRestringedBrandsId={getRestringedBrandsId} cancelAction={cancelAction} errors={errors} currentProviderInput={editProviderInput} action={handleSubmit} />
+      <ProviderInputForm showProviders={showProviders} getRestringedBrandsId={getRestringedBrandsId} cancelAction={cancelAction} errors={errors} currentProviderInput={editProviderInput} action={handleSubmit} />
     </Content>
   )
 }

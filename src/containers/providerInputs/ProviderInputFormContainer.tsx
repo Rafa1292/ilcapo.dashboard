@@ -8,14 +8,15 @@ interface Props {
   refreshProviderInputs: () => void
   cancelAction: () => void
   getRestringedBrandsId: (providerId: number) => number[]
+  showProviders?: boolean
 }
 
-const ProviderInputFormContainer = ({ refreshProviderInputs, providerInput, cancelAction, getRestringedBrandsId }: Props) => {
+const ProviderInputFormContainer = ({ refreshProviderInputs, providerInput, cancelAction, getRestringedBrandsId, showProviders }: Props) => {
   return (
     <>
       {providerInput.id === 0 ?
-        <CreateProviderInput getRestringedBrandsId={getRestringedBrandsId} refreshProviderInputs={refreshProviderInputs} providerInput={providerInput} /> :
-        <EditProviderInput getRestringedBrandsId={getRestringedBrandsId} cancelAction={cancelAction} refreshProviderInputs={refreshProviderInputs} providerInput={providerInput} />}
+        <CreateProviderInput showProviders={showProviders} getRestringedBrandsId={getRestringedBrandsId} refreshProviderInputs={refreshProviderInputs} providerInput={providerInput} /> :
+        <EditProviderInput showProviders={showProviders} getRestringedBrandsId={getRestringedBrandsId} cancelAction={cancelAction} refreshProviderInputs={refreshProviderInputs} providerInput={providerInput} />}
     </>
   )
 }

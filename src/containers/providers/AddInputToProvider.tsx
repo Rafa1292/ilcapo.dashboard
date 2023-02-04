@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Table from '../../components/generics/Table'
 import TableRow from '../../components/generics/TableRow'
 import { useGetList } from '../../hooks/useAPI'
-import { Input } from '../../types/Input'
+import { Provider } from '../../types/Provider'
 import { ProviderInput } from '../../types/ProviderInput'
 import ProviderInputFormContainer from '../providerInputs/ProviderInputFormContainer'
 
@@ -30,20 +30,20 @@ const initialProviderInput: ProviderInput = {
 const AddProviderToInput = ({ id }: Props) => {
   const [title, setTitle] = useState<string>('')
   const [providerInputs, setProviderInputs] = useState<ProviderInput[]>([])
-  const [providerInput, setProviderInput] = useState<ProviderInput>({ ...initialProviderInput, inputId: id ? id : 0 })
-  const setInitialProviderInput = () => setProviderInput({ ...initialProviderInput, inputId: id ? id : 0 })
+  const [providerInput, setProviderInput] = useState<ProviderInput>({...initialProviderInput, providerId: id ? id : 0})
+  const setInitialProviderInput = () => setProviderInput({...initialProviderInput, providerId: id ? id : 0})
 
   const refreshProviderInputs = async () => {
-    const response = await useGetList<ProviderInput[]>(`providerInputs/providerInputsByInputId/${id}`)
+    const response = await useGetList<ProviderInput[]>(`providerInputs/providerInputsByProviderId/${id}`)
     if (!response.error) {
       setProviderInputs(response.data)
       setInitialProviderInput()
     }
   }
 
-  const getRestringedBrandsId = (providerId: number) => {
-    const providerInputBrandsIdByProvider = providerInputs.filter(x => x.providerId == providerId).map(x => x.brandId)
-    return providerInputBrandsIdByProvider
+  const getRestringedBrandsId = (inputId: number) => {
+    const providerInputBrandsIdByInput = providerInputs.filter(x => x.inputId == inputId).map(x => x.brandId)
+    return providerInputBrandsIdByInput
   }
 
   const editProviderInput = (id: number) => {
@@ -57,39 +57,41 @@ const AddProviderToInput = ({ id }: Props) => {
     const getProviderInputs = async () => {
       await refreshProviderInputs()
     }
-    const getInput = async () => {
+
+    const getProvider = async () => {
       if (id) {
         console.log('id', id)
-        const response = await useGetList<Input>(`inputs/${id}`)
+        const response = await useGetList<Provider>(`providers/${id}`)
         if (!response.error) {
           setTitle(response.data.name)
         }
       }
     }
+    
     getProviderInputs()
     setInitialProviderInput()
-    getInput()
+    getProvider()
   }, [])
 
   return (
     <div className='d-flex flex-wrap justify-content-center col-12'>
       <h2 className='col-12 text-center'>{title}</h2>
       <div className="col-lg-3 d-flex justify-content-center">
-        <ProviderInputFormContainer showProviders={true} getRestringedBrandsId={getRestringedBrandsId} cancelAction={setInitialProviderInput} refreshProviderInputs={refreshProviderInputs} providerInput={providerInput} />
+        <ProviderInputFormContainer showProviders={false} getRestringedBrandsId={getRestringedBrandsId} cancelAction={setInitialProviderInput} refreshProviderInputs={refreshProviderInputs} providerInput={providerInput} />
       </div>
       <div className="col-9 p-2">
 
         {
           providerInputs.length > 0 &&
           <Table headers={['#', 'Precio espereado', 'Precio anterior', 'Precio actual', 'Precio bajo', 'Precio alto',
-            'Presentacion', 'Medida', 'Proveedor', 'Marca', '']}>
+            'Presentacion', 'Medida', 'Insumo', 'Marca', '']}>
             {
               providerInputs.map((providerInput, index) => (
                 <TableRow key={index} tableData={[providerInput.id.toString(), providerInput.expectedPrice.toString(),
                   providerInput.lastPrice.toString(), providerInput.currentPrice.toString(), providerInput.lowerPrice.toString(),
-                  providerInput.upperPrice.toString(), providerInput.presentation.toString(),
+                  providerInput.upperPrice.toString(), providerInput.presentation.toString(), 
                   providerInput.measure ? providerInput.measure.name : 'Medida',
-                  providerInput.provider ? providerInput.provider.name : 'Proveedor',
+                  providerInput.input ? providerInput.input.name : 'Insumo', 
                   providerInput.brand ? providerInput.brand.name : 'Marca'
                 ]}>
                   <button className="btn btn-outline-secondary my-1 mx-2" onClick={(() => editProviderInput(providerInput.id))}>Editar</button>
