@@ -2,27 +2,26 @@ import React, { useState } from 'react'
 import { Button } from 'react-bootstrap'
 import CustomModal from '../../components/generics/CustomModal'
 import { useDelete } from '../../hooks/useAPI'
-import { InputCategory } from '../../types/InputCategory'
+import { IngredientCategory } from '../../types/IngredientCategory'
 
 interface Props {
-  refreshInputCategories: () => void
+  refreshIngredientCategories: () => void
   id: number
 }
-
-const DeleteInputCategory = ({ refreshInputCategories, id }: Props) => {
+const DeleteIngredientCategory = ({ refreshIngredientCategories, id }: Props) => {
 
   const [show, setShow] = useState<boolean>(false)
 
   const handleSubmit = async () => {
-    await deleteInputCategory()
-    await refreshInputCategories()
+    await deleteIngredientCategory()
+    await refreshIngredientCategories()
     setShow(false)
   }
 
-  const deleteInputCategory = async () => {
-    const response = await useDelete<InputCategory>(`inputCategories/${id}`)
+  const deleteIngredientCategory = async () => {
+    const response = await useDelete<IngredientCategory>(`ingredientCategories/${id}`)
     if (!response.error) {
-      refreshInputCategories()
+      refreshIngredientCategories()
     }
   }
 
@@ -46,4 +45,4 @@ const DeleteInputCategory = ({ refreshInputCategories, id }: Props) => {
   )
 }
 
-export default DeleteInputCategory
+export default DeleteIngredientCategory

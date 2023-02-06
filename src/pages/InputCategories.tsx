@@ -50,7 +50,7 @@ const InputCategories = () => {
 
   return (
     <div className='col-lg-6 justify-content-center d-flex  flex-wrap'>
-      <h1 className='my-2 col-12 text-center'>Insumos</h1>
+      <h1 className='my-2 col-12 text-center'>Categorias de insumo</h1>
       <InputCategoryFormContainer refreshInputCategories={refreshInputCategories} inputCategory={inputCategory}
         addInputCategory={addInputCategory} show={show} setShow={setShow} />
       {
@@ -59,7 +59,7 @@ const InputCategories = () => {
           {
             inputCategories.map((inputCategory, index) => (
               <TableRow key={index} tableData={[inputCategory.id.toString(), inputCategory.name]}>
-                <button className="btn btn-white my-1 mx-2" onClick={(() => editInputCategory(inputCategory.id))}>Editar</button>
+                <button className="btn btn-outline-secondary my-1 mx-2" onClick={(() => editInputCategory(inputCategory.id))}>Editar</button>
                 <DeleteInputCategory id={inputCategory.id} refreshInputCategories={refreshInputCategories} />
               </TableRow>
             ))
