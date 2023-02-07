@@ -11,6 +11,7 @@ import Measures from './pages/Measures'
 import Inputs from './pages/inputs/Inputs'
 import InputCategories from './pages/InputCategories'
 import IngredientCategories from './pages/IngredientCategories'
+import Ingredients from './pages/Ingredients'
 import Brands from './pages/Brands'
 import AddProviders from './pages/inputs/AddProviders'
 import AddInputs from './pages/providers/AddInputs'
@@ -33,6 +34,7 @@ function App() {
             <Route path="/Brands" element={<Brands />} />
             <Route path="/Brands" element={<Brands />} />
             <Route path="/IngredientCategories" element={<IngredientCategories />} />
+            <Route path="/Ingredients" element={<Ingredients />} />
           </Routes>
         </Layout>
       </BrowserRouter>
