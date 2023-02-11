@@ -5,13 +5,18 @@ import { CustomInputAttributes } from '../../types/customInputAttributes'
 interface Props {
   customInputNumber: CustomInputAttributes
   value: number
+  showLabel?: boolean
+  isRequired?: boolean
 }
 
-const CustomInputNumber = ({customInputNumber, value}: Props) => {  
+const CustomInputNumber = ({ customInputNumber, value, showLabel = true, isRequired = true }: Props) => {
   return (
     <>
       <Form.Group className='my-2' as={Col} md="12">
-        <Form.Label className='m-0'>{customInputNumber.label}</Form.Label>
+        {
+          showLabel &&
+          <Form.Label className='m-0'>{customInputNumber.label}</Form.Label>
+        }
         <InputGroup hasValidation>
           <Form.Control
             type="string"
@@ -19,10 +24,10 @@ const CustomInputNumber = ({customInputNumber, value}: Props) => {
             name={customInputNumber.name}
             value={value}
             onChange={customInputNumber.handleChange}
-            required
+            required={isRequired}
             pattern={customInputNumber.pattern}
           />
-          <Form.Control.Feedback type="invalid">
+          <Form.Control.Feedback id={customInputNumber.name} type="invalid">
             {customInputNumber.validationMessage}
           </Form.Control.Feedback>
         </InputGroup>

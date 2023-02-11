@@ -12,13 +12,17 @@ interface Props {
   value: number
   data: option[]
   defaultLegend: string
+  showLabel?: boolean
 }
 
-const CustomInputSelect = ({defaultLegend, customInputSelect, value, data }: Props) => {
+const CustomInputSelect = ({ defaultLegend, customInputSelect, value, data, showLabel = true }: Props) => {
   return (
     <>
       <Form.Group className='my-2' as={Col} md="12">
-        <Form.Label className='m-0'>{customInputSelect.label}</Form.Label>
+        {
+          showLabel &&
+          <Form.Label className='m-0'>{customInputSelect.label}</Form.Label>
+        }
         <InputGroup hasValidation>
           <Form.Select name={customInputSelect.name} onChange={customInputSelect.handleChange} value={value} required>
             <option value={''}>{defaultLegend}</option>
@@ -28,7 +32,7 @@ const CustomInputSelect = ({defaultLegend, customInputSelect, value, data }: Pro
               </option>
             ))}
           </Form.Select>
-          <Form.Control.Feedback type="invalid">
+          <Form.Control.Feedback id={customInputSelect.name} type="invalid">
             {customInputSelect.validationMessage}
           </Form.Control.Feedback>
         </InputGroup>

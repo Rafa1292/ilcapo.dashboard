@@ -9,18 +9,26 @@ interface Props {
   submitText: string
   errors?: string[]
   cancel?: () => void
+  formNeedsValidation?: boolean
 }
 
-const GenericForm = ({ children, submitText, handleSubmit, errors, cancel }: Props) => {
+const GenericForm = ({ children, submitText, handleSubmit, errors, cancel, formNeedsValidation = true }: Props) => {
   const [validated, setValidated] = useState(false)
 
   const validateForm = async (event: any) => {
-    event.preventDefault()
-    event.stopPropagation()
-    setValidated(true)
-    const form = event.target
-    if (form.checkValidity() === true) {
+    if (!formNeedsValidation) {
+      event.preventDefault()
+      event.stopPropagation()
       await handleSubmit()
+    }
+    else {
+      event.preventDefault()
+      event.stopPropagation()
+      setValidated(true)
+      const form = event.target
+      if (form.checkValidity() === true) {
+        await handleSubmit()
+      }
     }
   }
 

@@ -3,6 +3,7 @@ import Table from '../components/generics/Table'
 import TableRow from '../components/generics/TableRow'
 import DeleteIngredient from '../containers/ingredients/DeleteIngredient'
 import IngredientFormContainer from '../containers/ingredients/IngredientFormContainer'
+import IngredientPreparation from '../containers/ingredients/IngredientPreparation'
 import { useGetList } from '../hooks/useAPI'
 import { Ingredient } from '../types/Ingredient'
 
@@ -60,10 +61,11 @@ const Ingredients = () => {
         addIngredient={addIngredient} show={show} setShow={setShow} />
       {
         ingredients.length > 0 &&
-        <Table headers={['#', 'Nombre', '']}>
+        <Table headers={['Nombre', '']}>
           {
             ingredients.map((ingredient, index) => (
-              <TableRow key={index} tableData={[ingredient.id.toString(), ingredient.name]}>
+              <TableRow key={index} tableData={[ingredient.name]}>
+                <IngredientPreparation ingredient={ingredient} id={ingredient.id} />
                 <button className="btn btn-outline-secondary my-1 mx-2" onClick={(() => editIngredient(ingredient.id))}>Editar</button>
                 <DeleteIngredient id={ingredient.id} refreshIngredients={refreshIngredients} />
               </TableRow>

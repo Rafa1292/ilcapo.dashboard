@@ -154,6 +154,7 @@ body{
       position: absolute;
       top: 0;
       left: 0;
+      text-align: center;
     }
   
     .top-left-radius{
@@ -168,6 +169,14 @@ body{
       min-height: calc(100vh - 70px);
       align-content: center;
       overflow-x: hidden;
+    }
+
+    .w-90{
+      min-width: 100vw !important;
+    }
+
+    .hover:hover{
+      scale: 1.1;
     }
   
   

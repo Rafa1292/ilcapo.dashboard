@@ -12,7 +12,7 @@ interface Props {
 function CustomModal({ children, title, show, handleClose }: Props) {
   return (
     <>
-      <Modal centered show={show}  onHide={handleClose}>
+      <Modal dialogClassName="w-90" fullscreen='fullscreen' centered show={show}  onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>{title}</Modal.Title>
         </Modal.Header>
