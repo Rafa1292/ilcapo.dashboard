@@ -1,4 +1,5 @@
 import { Input } from './Input'
+import { Measure } from './Measure'
 
 export interface PreparationStepInput {
   id: number
@@ -6,6 +7,7 @@ export interface PreparationStepInput {
   preparationStepId: number
   quantity: number
   measureId: number
+  measure: Measure,
   input: Input
   delete: boolean
   createdBy?: number

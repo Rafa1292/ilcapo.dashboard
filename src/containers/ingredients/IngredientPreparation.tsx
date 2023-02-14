@@ -1,16 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button } from 'react-bootstrap'
 import CustomModal from '../../components/generics/CustomModal'
-import PreparationStepForm from '../../components/preparationSteps/PreparationStepForm'
-import { useDelete } from '../../hooks/useAPI'
 import { Ingredient } from '../../types/Ingredient'
 import { PreparationStep } from '../../types/PreparationStep'
+import { PreparationStepInput } from '../../types/PreparationStepInput'
 import CreatePreparationStep from '../preparationStep/CreatePreparationStep'
-
-interface Props {
-  id: number
-  ingredient: Ingredient
-}
 
 const initialPreparationStep: PreparationStep = {
   id: 0,
@@ -21,23 +15,63 @@ const initialPreparationStep: PreparationStep = {
   stepNumber: 0,
   delete: false,
   preparationStepInputs: [],
+  createdBy: 0,
+  updatedBy: 0
 }
-const IngredientPreparation = ({ id }: Props) => {
+
+interface Props {
+  ingredient: Ingredient
+  refreshIngredient: (id: number) => void
+}
+
+const IngredientPreparation = ({ ingredient, refreshIngredient }: Props) => {
   const [show, setShow] = useState<boolean>(false)
   const [preparationStep, setPreparationStep] = useState<PreparationStep>(initialPreparationStep)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
-  const refreshPreparationSteps = () => {
-    console.log('refreshPreparationSteps')
+  const addPreparationStepInput = (preparationStepInput: PreparationStepInput) => {
+    setPreparationStep({ ...preparationStep, preparationStepInputs: [...preparationStep.preparationStepInputs, preparationStepInput] })
   }
+
+  const editPreparationStepInput = (preparationStepInput: PreparationStepInput) => {
+    const tmpInputs = preparationStep.preparationStepInputs.filter(input => input.id !== preparationStepInput.id)
+    setPreparationStep({ ...preparationStep, preparationStepInputs: [...tmpInputs, preparationStepInput] })
+  }
+
+  const deletePreparationStepInput = (id: number) => {
+    const tmpInputs = preparationStep.preparationStepInputs.filter(input => input.id !== id)
+    setPreparationStep({ ...preparationStep, preparationStepInputs: [...tmpInputs] })
+  }
+
+  const refreshingIngredient = async (id: number) => {
+    setIsLoading(true)
+    await refreshIngredient(id)
+    setIsLoading(false)
+  }
+
+  useEffect(() => {
+    setPreparationStep({ ...preparationStep, ingredientId: ingredient.id })
+  }, [])
+
   return (
     <>
       <Button variant={'outline-success'} className='m-2' onClick={(() => setShow(true))}>
         Preparacion
       </Button>
       <CustomModal title='Agregar preparacion' show={show} handleClose={(() => setShow(false))}>
-        {/* create preparation step */}
-        <CreatePreparationStep preparationStep={preparationStep} refreshPreparationSteps={refreshPreparationSteps}/>
-        {/* edit each preparation step existing */}
+        {
+          !isLoading &&
+            <CreatePreparationStep deletePreparationStepInput={deletePreparationStepInput} editPreparationStepInput={editPreparationStepInput}
+              preparationStep={preparationStep} addPreparationStepInput={addPreparationStepInput} refreshIngredient={refreshingIngredient} />
+        }
+
+        {ingredient.preparationSteps.map((preparationStep, index) => (
+          <div className='col-12' key={index}>
+            <CreatePreparationStep deletePreparationStepInput={deletePreparationStepInput} editPreparationStepInput={editPreparationStepInput}
+              preparationStep={preparationStep} addPreparationStepInput={addPreparationStepInput} refreshIngredient={refreshingIngredient}
+            />
+          </div>
+        ))}
       </CustomModal>
     </>
   )

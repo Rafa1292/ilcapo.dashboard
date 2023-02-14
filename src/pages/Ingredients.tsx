@@ -4,7 +4,7 @@ import TableRow from '../components/generics/TableRow'
 import DeleteIngredient from '../containers/ingredients/DeleteIngredient'
 import IngredientFormContainer from '../containers/ingredients/IngredientFormContainer'
 import IngredientPreparation from '../containers/ingredients/IngredientPreparation'
-import { useGetList } from '../hooks/useAPI'
+import { useGet, useGetList } from '../hooks/useAPI'
 import { Ingredient } from '../types/Ingredient'
 
 const Ingredients = () => {
@@ -16,6 +16,7 @@ const Ingredients = () => {
     presentation: 0,
     measureId: 0,
     ingredientCategoryId: 0,
+    preparationSteps: [],
     delete: false,
     createdBy: 0,
     updatedBy: 0
@@ -45,6 +46,10 @@ const Ingredients = () => {
     }
   }
 
+  const refreshIngredient = async (id: number) => {
+    await refreshIngredients()
+  }
+
   useEffect(() => {
     const getIngredients = async () => {
       await refreshIngredients()
@@ -65,7 +70,7 @@ const Ingredients = () => {
           {
             ingredients.map((ingredient, index) => (
               <TableRow key={index} tableData={[ingredient.name]}>
-                <IngredientPreparation ingredient={ingredient} id={ingredient.id} />
+                <IngredientPreparation refreshIngredient={refreshIngredient} ingredient={ingredient}/>
                 <button className="btn btn-outline-secondary my-1 mx-2" onClick={(() => editIngredient(ingredient.id))}>Editar</button>
                 <DeleteIngredient id={ingredient.id} refreshIngredients={refreshIngredients} />
               </TableRow>

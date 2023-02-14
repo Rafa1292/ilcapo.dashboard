@@ -6,29 +6,37 @@ import { PreparationStepInput } from '../../types/PreparationStepInput'
 
 interface Props {
   preparationStep: PreparationStep
-  refreshPreparationSteps: () => void
+  addPreparationStepInput: (preparationStepInput: PreparationStepInput) => void
+  editPreparationStepInput: (preparationStepInput: PreparationStepInput) => void
+  deletePreparationStepInput: (int: number) => void
+  refreshIngredient: (id: number) => void
 }
 
-const CreatePreparationStep = ({ preparationStep, refreshPreparationSteps }: Props) => {
+const CreatePreparationStep = ({ preparationStep, refreshIngredient, deletePreparationStepInput, addPreparationStepInput, editPreparationStepInput }: Props) => {
   const [errors, setErrors] = useState<string[]>([])
 
   const handleSubmit = async (newPreparationStep: PreparationStep) => {
-    const response = await usePost<PreparationStep>('preparationSteps', newPreparationStep)
+    const newProviderStepInputs = newPreparationStep.preparationStepInputs.map((preparationStepInput) => {
+      return {
+        ...preparationStepInput, id:0
+      }
+    })
+    const sendPreparationStep = {
+      ...newPreparationStep,
+      preparationStepInputs: newProviderStepInputs
+    }
+
+    const response = await usePost<PreparationStep>('preparationSteps', sendPreparationStep)
     if (!response.error) {
-      refreshPreparationSteps()
+      refreshIngredient(sendPreparationStep.ingredientId)
     }
     else{
       setErrors(response.message)
     }
   }
 
-  const addPreparationStepInput = (preparationStepInput: PreparationStepInput) => {
-    preparationStep.preparationStepInputs.push(preparationStepInput)
-    console.log(preparationStep)
-  }
-
   return (
-    <PreparationStepForm addPreparationStepInput={addPreparationStepInput} errors={errors} preparationStep={preparationStep} action={handleSubmit} />
+    <PreparationStepForm deletePreparationStepInput={deletePreparationStepInput} editPreparationStepInput={editPreparationStepInput} addPreparationStepInput={addPreparationStepInput} errors={errors} preparationStep={preparationStep} action={handleSubmit} />
   )
 }
 

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { buttonTypes } from '../../enums/buttonTypes'
 import checkBtn from '../../assets/icons/check-circle-outline.png'
 import closeBtn from '../../assets/icons/close-circle-outline.png'
+import editBtn from '../../assets/icons/note-edit.png'
+import deleteBtn from '../../assets/icons/trash-can.png'
 
 interface Props {
   buttonType: buttonTypes
@@ -19,6 +21,12 @@ const CustomBtn = ({ buttonType, action, height }: Props) => {
       break
     case buttonTypes.cancel:
       setBtn(closeBtn)
+      break
+    case buttonTypes.edit:
+      setBtn(editBtn)
+      break
+    case buttonTypes.delete:
+      setBtn(deleteBtn)
       break
     default:
       setBtn(checkBtn)

@@ -23,7 +23,7 @@ const CustomInputText = ({customInputText, value}: Props) => {
             required
             pattern={customInputText.pattern}
           />
-          <Form.Control.Feedback type="invalid">
+          <Form.Control.Feedback id={customInputText.name} type="invalid">
             {customInputText.validationMessage}
           </Form.Control.Feedback>
         </InputGroup>
