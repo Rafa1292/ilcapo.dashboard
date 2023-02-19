@@ -1,0 +1,11 @@
+.step-form_container{
+  transition: all ease 500ms;
+  max-height: 0px;
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+}
+
+.step-form_containerOpen{
+  max-height: 500px;
+}

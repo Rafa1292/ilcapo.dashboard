@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import CustomBtn from '../../components/generics/CustomBtn'
 import PreparationStepInputForm from '../../components/preparationStepInputs/PreparationStepInputForm'
 import { buttonTypes } from '../../enums/buttonTypes'
-import { usePatch } from '../../hooks/useAPI'
+import { useDelete, usePatch } from '../../hooks/useAPI'
 import { PreparationStepInput } from '../../types/PreparationStepInput'
 
 interface Props {
@@ -15,21 +15,8 @@ const EditPreparationStepInput = ({ preparationStepInput, editPreparationStepInp
   const [errors, setErrors] = useState<string[]>([])
   const [editMode, setEditMode] = useState<boolean>(false)
 
-  const handleSubmit = async (currentPreparationStepInput: PreparationStepInput) => {
-    const response = await usePatch<PreparationStepInput>(`preparationStepInputs/${currentPreparationStepInput.id}`, currentPreparationStepInput)
-    if (response.error) {
-      setErrors(response.message)
-    }
-  }
-
   const action = (currentPreparationStepInput: PreparationStepInput) => {
-    if (currentPreparationStepInput.preparationStepId === 0) {
-      editPreparationStepInput(currentPreparationStepInput)
-      
-    }
-    else {
-      handleSubmit(currentPreparationStepInput)
-    }
+    editPreparationStepInput(currentPreparationStepInput)
     setEditMode(false)
   }
 
@@ -37,7 +24,7 @@ const EditPreparationStepInput = ({ preparationStepInput, editPreparationStepInp
     <>
       {
         editMode ?
-          <PreparationStepInputForm action={action} errors={errors} currentPreparationStepInput={preparationStepInput} /> :
+          <PreparationStepInputForm cancelAction={(()=>setEditMode(false))} action={action} errors={errors} currentPreparationStepInput={preparationStepInput} /> :
           <div className="col-12 d-flex flex-wrap">
             <div className="col-1 d-flex justify-content-center align-items-center">
               {preparationStepInput.quantity}
@@ -49,10 +36,10 @@ const EditPreparationStepInput = ({ preparationStepInput, editPreparationStepInp
               {preparationStepInput.input.name}
             </div>
             <div className="py-1 px-1 d-flex justify-content-center align-items-center">
-              <CustomBtn height='30px' buttonType={buttonTypes.edit} action={(()=>setEditMode(true))} />
+              <CustomBtn height='30px' buttonType={buttonTypes.edit} action={(() => setEditMode(true))} />
             </div>
             <div className="py-1 px-1 d-flex justify-content-center align-items-center">
-              <CustomBtn height='30px' buttonType={buttonTypes.delete} action={(()=>deletePreparationStepInput(preparationStepInput.id))} />
+              <CustomBtn height='30px' buttonType={buttonTypes.delete} action={(() => deletePreparationStepInput(preparationStepInput.id))} />
             </div>
           </div>
       }

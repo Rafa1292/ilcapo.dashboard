@@ -2,5 +2,7 @@ export enum buttonTypes {
   success,
   cancel,
   edit,
-  delete
+  delete,
+  arrowDown,
+  arrowUp,
 }

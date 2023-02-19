@@ -4,6 +4,8 @@ import checkBtn from '../../assets/icons/check-circle-outline.png'
 import closeBtn from '../../assets/icons/close-circle-outline.png'
 import editBtn from '../../assets/icons/note-edit.png'
 import deleteBtn from '../../assets/icons/trash-can.png'
+import arrowUp from '../../assets/icons/arrow-up.png'
+import arrowDown from '../../assets/icons/arrow-down.png'
 
 interface Props {
   buttonType: buttonTypes
@@ -27,6 +29,12 @@ const CustomBtn = ({ buttonType, action, height }: Props) => {
       break
     case buttonTypes.delete:
       setBtn(deleteBtn)
+      break
+    case buttonTypes.arrowUp:
+      setBtn(arrowUp)
+      break
+    case buttonTypes.arrowDown:
+      setBtn(arrowDown)
       break
     default:
       setBtn(checkBtn)

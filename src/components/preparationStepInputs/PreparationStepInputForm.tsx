@@ -14,9 +14,10 @@ interface Props {
   currentPreparationStepInput: PreparationStepInput
   action?: (preparationStepInput: PreparationStepInput) => void
   errors?: string[]
+  cancelAction?: () => void
 }
 
-const PreparationStepInputForm = ({ currentPreparationStepInput, errors, action }: Props) => {
+const PreparationStepInputForm = ({ currentPreparationStepInput, errors, action, cancelAction }: Props) => {
   const [preparationStepInput, setPreparationStepInput] = useState<PreparationStepInput>(currentPreparationStepInput)
   const [measures, setMeasures] = useState<Measure[]>([])
   const [inputCategories, setInputCategories] = useState<InputCategory[]>([])
@@ -54,7 +55,7 @@ const PreparationStepInputForm = ({ currentPreparationStepInput, errors, action 
   }
 
   const handleSubmit = () => {
-    if (validate() && action){
+    if (validate() && action) {
       action(preparationStepInput)
       resetPreparationStepInput()
     }
@@ -62,7 +63,7 @@ const PreparationStepInputForm = ({ currentPreparationStepInput, errors, action 
 
   const setUniqueId = () => {
     if (preparationStepInput.id === 0) {
-      setPreparationStepInput({ ...preparationStepInput, id: new Date(Date.now()).valueOf() })      
+      setPreparationStepInput({ ...preparationStepInput, id: new Date(Date.now()).valueOf() })
     }
   }
 
@@ -80,8 +81,13 @@ const PreparationStepInputForm = ({ currentPreparationStepInput, errors, action 
   }
 
   const resetPreparationStepInput = () => {
-    setPreparationStepInput({...currentPreparationStepInput, id: new Date(Date.now()).valueOf()})
-    setInputCategory(undefined)
+    if (cancelAction) {
+      cancelAction()
+    }
+    else {
+      setPreparationStepInput({ ...currentPreparationStepInput, id: new Date(Date.now()).valueOf() })
+      setInputCategory(undefined)
+    }
   }
 
   useEffect(() => {
