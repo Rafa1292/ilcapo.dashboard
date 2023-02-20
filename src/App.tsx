@@ -9,6 +9,7 @@ import Providers from './pages/providers/Providers'
 import Magnitudes from './pages/Magnitudes'
 import Measures from './pages/Measures'
 import Inputs from './pages/inputs/Inputs'
+import Recipes from './pages/Recipes'
 import InputCategories from './pages/InputCategories'
 import IngredientCategories from './pages/IngredientCategories'
 import Ingredients from './pages/Ingredients'
@@ -35,6 +36,7 @@ function App() {
             <Route path="/Brands" element={<Brands />} />
             <Route path="/IngredientCategories" element={<IngredientCategories />} />
             <Route path="/Ingredients" element={<Ingredients />} />
+            <Route path="/Recipes" element={<Recipes />} />
           </Routes>
         </Layout>
       </BrowserRouter>

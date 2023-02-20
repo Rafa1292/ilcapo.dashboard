@@ -58,17 +58,17 @@ const IngredientForm = ({ currentIngredient, action, errors }: Props) => {
             }
           } />
 
-        <CustomInputNumber value={ingredient.price} customInputNumber={
+        <CustomInputNumber value={ingredient.cost} customInputNumber={
           {
             label: 'Costo', name: 'cost',
-            handleChange: handleChange, pattern: '[0-9]*', validationMessage: 'Ingrese un precio válido'
+            handleChange: handleChange, pattern: '^[0-9]*+(,[0-9]+)?$', validationMessage: 'Ingrese un precio válido'
           }
         } />
 
         <CustomInputNumber value={ingredient.presentation} customInputNumber={
           {
             label: 'Presentacion', name: 'presentation',
-            handleChange: handleChange, pattern: '[0-9]*', validationMessage: 'Ingrese una presentacion válida'
+            handleChange: handleChange, pattern: '^[0-9]*+(,[0-9]+)?$', validationMessage: 'Ingrese una presentacion válida'
           }
         } />
 

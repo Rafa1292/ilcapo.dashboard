@@ -11,6 +11,7 @@ const IngredientCategories = () => {
     id: 0,
     name: '',
     delete: false,
+    ingredients: [],
     createdBy: 0,
     updatedBy: 0
   }

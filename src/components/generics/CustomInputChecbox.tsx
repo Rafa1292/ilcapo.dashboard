@@ -13,9 +13,8 @@ const CustomInputCheck = ({customInputCheck, value }: Props) => {
   return (
     <>
       <Form.Group className='my-2' as={Col} md="12">
-        <Form.Label htmlFor={customInputCheck.name} className='m-0 user-select-none'>{customInputCheck.label}</Form.Label>
         <InputGroup hasValidation>
-          <Form.Check id={customInputCheck.name} checked={value} name={customInputCheck.name} type='checkbox' onChange={customInputCheck.handleChange}/>
+          <Form.Check id={customInputCheck.name} checked={value} label={customInputCheck.name} name={customInputCheck.name} type='checkbox' onChange={customInputCheck.handleChange}/>
           <Form.Control.Feedback type="invalid">
             {customInputCheck.validationMessage}
           </Form.Control.Feedback>

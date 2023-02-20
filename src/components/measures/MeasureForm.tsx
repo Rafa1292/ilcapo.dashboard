@@ -24,6 +24,11 @@ const MeasureForm = ({ currentMeasure, action, errors }: Props) => {
     setMeasure({ ...measure, [name]: value })
   }
 
+  const handleCheck = (event: any) => {
+    const { name, checked } = event.target
+    setMeasure({ ...measure, [name]: checked })
+  }
+
   const handleSubmit = () => {
     action(measure)
   }
@@ -54,7 +59,7 @@ const MeasureForm = ({ currentMeasure, action, errors }: Props) => {
           customInputCheck={
             {
               label: 'Es medida principal', name: 'principalMeasure',
-              handleChange: handleChange, pattern: '', validationMessage: ''
+              handleChange: handleCheck, pattern: '', validationMessage: ''
             }
           } />
 
