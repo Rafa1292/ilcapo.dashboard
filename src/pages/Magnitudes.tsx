@@ -10,6 +10,7 @@ const initialMagnitude: Magnitude = {
   id: 0,
   name: '',
   delete: false,
+  measures: [],
   createdBy: 0,
   updatedBy: 0
 }

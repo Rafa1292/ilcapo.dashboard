@@ -7,6 +7,7 @@ import { useGetList } from '../../hooks/useAPI'
 import { Measure } from '../../types/Measure'
 import { Ingredient } from '../../types/Ingredient'
 import { IngredientCategory } from '../../types/IngredientCategory'
+import { Magnitude } from '../../types/Magnitude'
 
 interface Props {
   currentIngredient: Ingredient
@@ -16,9 +17,10 @@ interface Props {
 
 const IngredientForm = ({ currentIngredient, action, errors }: Props) => {
   const [ingredient, setIngredient] = useState<Ingredient>(currentIngredient)
-  const [measures, setMeasures] = useState<Measure[]>([])
   const [ingredientCategories, setIngredientCategories] = useState<IngredientCategory[]>([])
   const submitText = currentIngredient?.id === 0 ? 'Agregar' : 'Editar'
+  const [magnitudes, setMagnitudes] = useState<Magnitude[]>([])
+  const [magnitude, setMagnitude] = useState<Magnitude>()
 
   const handleChange = (event: any) => {
     const { name, value } = event.target
@@ -29,11 +31,17 @@ const IngredientForm = ({ currentIngredient, action, errors }: Props) => {
     action(ingredient)
   }
 
+  const handleChangeMagnitude = (event: any) => {
+    const { value } = event.target
+    setIngredient({ ...ingredient, measure: { magnitudeId: parseInt(value) } as Measure, measureId: 0 })
+    setMagnitude(magnitudes.find(magnitude => magnitude.id === parseInt(value)))
+  }
+
   useEffect(() => {
-    const getMeasures = async () => {
-      const response = await useGetList<Measure[]>('measures')
+    const getMagnitudes = async () => {
+      const response = await useGetList<Magnitude[]>('magnitudes')
       if (!response.error) {
-        setMeasures(response.data)
+        setMagnitudes(response.data)
       }
     }
     const getIngredientCategories = async () => {
@@ -42,7 +50,7 @@ const IngredientForm = ({ currentIngredient, action, errors }: Props) => {
         setIngredientCategories(response.data)
       }
     }
-    getMeasures()
+    getMagnitudes()
     getIngredientCategories()
   }, [])
 
@@ -61,26 +69,39 @@ const IngredientForm = ({ currentIngredient, action, errors }: Props) => {
         <CustomInputNumber value={ingredient.cost} customInputNumber={
           {
             label: 'Costo', name: 'cost',
-            handleChange: handleChange, pattern: '^[0-9]*+(,[0-9]+)?$', validationMessage: 'Ingrese un precio válido'
+            handleChange: handleChange, pattern: '^[0-9]+(.[0-9]+)?$', validationMessage: 'Ingrese un precio válido'
           }
         } />
 
         <CustomInputNumber value={ingredient.presentation} customInputNumber={
           {
             label: 'Presentacion', name: 'presentation',
-            handleChange: handleChange, pattern: '^[0-9]*+(,[0-9]+)?$', validationMessage: 'Ingrese una presentacion válida'
+            handleChange: handleChange, pattern: '^[0-9]+(.[0-9]+)?$', validationMessage: 'Ingrese una presentacion válida'
           }
         } />
 
-        <CustomInputSelect value={ingredient.measureId}
+        <CustomInputSelect value={ingredient.measure.magnitudeId}
           customInputSelect={
             {
-              label: 'Medida', name: 'measureId',
-              handleChange: handleChange, pattern: '', validationMessage: 'Seleccione una medida'
+              label: 'Magnitud', name: 'measureId',
+              handleChange: handleChangeMagnitude, pattern: '', validationMessage: 'Seleccione una magnitud'
             }}
-          data={measures.map(measure => { return { value: measure.id, label: measure.name } })}
-          defaultLegend={'Seleccione una medida'}
+          data={magnitudes.map(magnitud => { return { value: magnitud.id, label: magnitud.name } })}
+          defaultLegend={'Seleccione una magnitud'}
         />
+
+        {
+          magnitude?.measures &&
+          <CustomInputSelect value={ingredient.measureId}
+            customInputSelect={
+              {
+                label: 'Medida', name: 'measureId',
+                handleChange: handleChange, pattern: '', validationMessage: 'Seleccione una medida'
+              }}
+            data={magnitude.measures.map(measure => { return { value: measure.id, label: measure.name } })}
+            defaultLegend={'Seleccione una medida'}
+          />
+        }
 
         <CustomInputSelect value={ingredient.ingredientCategoryId}
           customInputSelect={

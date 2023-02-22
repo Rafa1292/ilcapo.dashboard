@@ -1,3 +1,4 @@
+import { Measure } from './Measure'
 import { PreparationStep } from './PreparationStep'
 
 export interface Ingredient {
@@ -5,6 +6,7 @@ export interface Ingredient {
   name: string
   cost: number
   measureId: number
+  measure: Measure
   presentation: number
   price: number
   ingredientCategoryId: number

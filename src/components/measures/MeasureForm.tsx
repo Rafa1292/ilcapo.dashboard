@@ -66,7 +66,7 @@ const MeasureForm = ({ currentMeasure, action, errors }: Props) => {
         <CustomInputNumber value={measure.value} customInputNumber={
           {
             label: 'Valor', name: 'value',
-            handleChange: handleChange, pattern: '[0-9]{1}[.]{1}[0-9]{1,2}', validationMessage: 'Debe asignar un valor entre 0 y 1 con dos decimales ej: 0.01'
+            handleChange: handleChange, pattern: '^[0-9]+(.[0-9]+)?$', validationMessage: 'Debe asignar un valor entre 0 y 1 con dos decimales ej: 0.01'
           }
         } />
 

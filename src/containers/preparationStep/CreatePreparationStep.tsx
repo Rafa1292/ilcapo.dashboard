@@ -27,7 +27,6 @@ const CreatePreparationStep = ({ preparationStep, refreshIngredient, deletePrepa
     }
 
     const response = await usePost<PreparationStep>('preparationSteps', sendPreparationStep)
-    console.log(sendPreparationStep)
     if (!response.error) {
       refreshIngredient(sendPreparationStep.ingredientId)
     }

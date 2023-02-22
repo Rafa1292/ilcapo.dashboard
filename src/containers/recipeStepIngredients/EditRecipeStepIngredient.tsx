@@ -31,7 +31,7 @@ const EditRecipeStepIngredient = ({ recipeStepIngredient, editRecipeStepIngredie
             <div className="col-1 d-flex justify-content-center align-items-center">
               {recipeStepIngredient?.measure?.name}
             </div>
-            <div className="col-1 d-flex justify-content-center align-items-center">
+            <div className="col-1 text-center d-flex justify-content-center align-items-center">
               {recipeStepIngredient.ingredient.name}
             </div>
             <div className="py-1 px-1 d-flex justify-content-center align-items-center">

@@ -9,6 +9,7 @@ import CustomBtn from '../generics/CustomBtn'
 import { buttonTypes } from '../../enums/buttonTypes'
 import * as validator from '../../utils/errorValidation'
 import { Input } from '../../types/Input'
+import { Magnitude } from '../../types/Magnitude'
 
 interface Props {
   currentPreparationStepInput: PreparationStepInput
@@ -19,7 +20,8 @@ interface Props {
 
 const PreparationStepInputForm = ({ currentPreparationStepInput, errors, action, cancelAction }: Props) => {
   const [preparationStepInput, setPreparationStepInput] = useState<PreparationStepInput>(currentPreparationStepInput)
-  const [measures, setMeasures] = useState<Measure[]>([])
+  const [magnitudes, setMagnitudes] = useState<Magnitude[]>([])
+  const [magnitude, setMagnitude] = useState<Magnitude>()
   const [inputCategories, setInputCategories] = useState<InputCategory[]>([])
   const [inputCategory, setInputCategory] = useState<InputCategory>()
 
@@ -44,7 +46,7 @@ const PreparationStepInputForm = ({ currentPreparationStepInput, errors, action,
 
   const handleMeasure = (event: any) => {
     const { value } = event.target
-    const tmpMeasure = measures.find(measure => measure.id === parseInt(value))
+    const tmpMeasure = magnitude?.measures.find(measure => measure.id === parseInt(value))
     tmpMeasure && setPreparationStepInput({ ...preparationStepInput, measure: tmpMeasure, measureId: tmpMeasure.id })
   }
 
@@ -52,6 +54,12 @@ const PreparationStepInputForm = ({ currentPreparationStepInput, errors, action,
     const { value } = event.target
     setPreparationStepInput({ ...preparationStepInput, input: { inputCategoryId: parseInt(value) } as Input, inputId: 0 })
     setInputCategory(inputCategories.find(inputCategory => inputCategory.id === parseInt(value)))
+  }
+
+  const handleChangeMagnitude = (event: any) => {
+    const { value } = event.target
+    setPreparationStepInput({ ...preparationStepInput, measure: { magnitudeId: parseInt(value) } as Measure, measureId: 0 })
+    setMagnitude(magnitudes.find(magnitude => magnitude.id === parseInt(value)))
   }
 
   const handleSubmit = () => {
@@ -85,16 +93,17 @@ const PreparationStepInputForm = ({ currentPreparationStepInput, errors, action,
       cancelAction()
     }
     else {
-      setPreparationStepInput({ ...currentPreparationStepInput, id: new Date(Date.now()).valueOf() })
+      setPreparationStepInput({ ...currentPreparationStepInput, measure: { magnitudeId: 0} as Measure, id: new Date(Date.now()).valueOf() })
       setInputCategory(undefined)
+      setMagnitude(undefined)
     }
   }
 
   useEffect(() => {
-    const getMeasures = async () => {
-      const response = await useGetList<Measure[]>('measures')
+    const getMagnitudes = async () => {
+      const response = await useGetList<Magnitude[]>('magnitudes')
       if (!response.error) {
-        setMeasures(response.data)
+        setMagnitudes(response.data)
       }
     }
     const getInputCategories = async () => {
@@ -104,7 +113,7 @@ const PreparationStepInputForm = ({ currentPreparationStepInput, errors, action,
         setInitialInputCategory(response.data)
       }
     }
-    getMeasures()
+    getMagnitudes()
     getInputCategories()
     setUniqueId()
   }, [])
@@ -132,17 +141,32 @@ const PreparationStepInputForm = ({ currentPreparationStepInput, errors, action,
             }
           } />
         </div>
-        <div className="col-3 p-1">
-          <CustomInputSelect showLabel={false} value={preparationStepInput.measureId}
+        <div className="col-2 p-1">
+          <CustomInputSelect showLabel={false} value={preparationStepInput.measure.magnitudeId}
             customInputSelect={
               {
-                label: 'Medida', name: 'measureId',
-                handleChange: handleMeasure, pattern: '', validationMessage: 'Seleccione una medida'
+                label: 'Magnitud', name: 'measureId',
+                handleChange: handleChangeMagnitude, pattern: '', validationMessage: 'Seleccione una magnitud'
               }}
-            data={measures.map(measure => { return { value: measure.id, label: measure.name } })}
-            defaultLegend={'Medida'}
+            data={magnitudes.map(magnitud => { return { value: magnitud.id, label: magnitud.name } })}
+            defaultLegend={'Magnitud'}
           />
         </div>
+
+        {
+          magnitude?.measures &&
+          <div className="col-2 p-1">
+            <CustomInputSelect showLabel={false} value={preparationStepInput.measureId}
+              customInputSelect={
+                {
+                  label: 'Medida', name: 'measureId',
+                  handleChange: handleMeasure, pattern: '', validationMessage: 'Seleccione una medida'
+                }}
+              data={magnitude.measures.map(measure => { return { value: measure.id, label: measure.name } })}
+              defaultLegend={'Seleccione una medida'}
+            />
+          </div>
+        }
 
         <div className="col-3 p-1">
           <CustomInputSelect showLabel={false} value={preparationStepInput.input?.inputCategoryId}

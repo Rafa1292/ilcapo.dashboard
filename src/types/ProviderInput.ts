@@ -18,7 +18,7 @@ export interface ProviderInput {
   provider?: Provider
   input?: Input
   brand?: Brand
-  measure?: Measure
+  measure: Measure
   delete: boolean
   createdAt?: Date
   updatedAt?: Date

@@ -10,6 +10,7 @@ import { buttonTypes } from '../../enums/buttonTypes'
 import * as validator from '../../utils/errorValidation'
 import { Ingredient } from '../../types/Ingredient'
 import CustomInputCheck from '../generics/CustomInputChecbox'
+import { Magnitude } from '../../types/Magnitude'
 
 interface Props {
   currentRecipeStepIngredient: RecipeStepIngredient
@@ -20,7 +21,8 @@ interface Props {
 
 const RecipeStepIngredientForm = ({ currentRecipeStepIngredient, errors, action, cancelAction }: Props) => {
   const [recipeStepIngredient, setRecipeStepIngredient] = useState<RecipeStepIngredient>(currentRecipeStepIngredient)
-  const [measures, setMeasures] = useState<Measure[]>([])
+  const [magnitudes, setMagnitudes] = useState<Magnitude[]>([])
+  const [magnitude, setMagnitude] = useState<Magnitude>()  
   const [ingredientCategories, setIngredientCategories] = useState<IngredientCategory[]>([])
   const [ingredientCategory, setIngredientCategory] = useState<IngredientCategory>()
 
@@ -28,6 +30,12 @@ const RecipeStepIngredientForm = ({ currentRecipeStepIngredient, errors, action,
     const tmpIngredientCategory = tmpIngredientCategories.find(ingredientCategory => ingredientCategory.ingredients?.find(ingredient => ingredient.id === currentRecipeStepIngredient.ingredientId))
     setRecipeStepIngredient({ ...recipeStepIngredient, ingredient: { ingredientCategoryId: tmpIngredientCategory?.id } as Ingredient, ingredientId: currentRecipeStepIngredient.ingredientId })
     setIngredientCategory(tmpIngredientCategory)
+  }
+
+  const handleChangeMagnitude = (event: any) => {
+    const { value } = event.target
+    setRecipeStepIngredient({ ...recipeStepIngredient, measure: { magnitudeId: parseInt(value) } as Measure, measureId: 0 })
+    setMagnitude(magnitudes.find(magnitude => magnitude.id === parseInt(value)))
   }
 
   const handleChange = (event: any) => {
@@ -46,7 +54,7 @@ const RecipeStepIngredientForm = ({ currentRecipeStepIngredient, errors, action,
 
   const handleMeasure = (event: any) => {
     const { value } = event.target
-    const tmpMeasure = measures.find(measure => measure.id === parseInt(value))
+    const tmpMeasure = magnitude?.measures.find(measure => measure.id === parseInt(value))
     tmpMeasure && setRecipeStepIngredient({ ...recipeStepIngredient, measure: tmpMeasure, measureId: tmpMeasure.id })
   }
 
@@ -92,16 +100,17 @@ const RecipeStepIngredientForm = ({ currentRecipeStepIngredient, errors, action,
       cancelAction()
     }
     else {
-      setRecipeStepIngredient({ ...currentRecipeStepIngredient, id: new Date(Date.now()).valueOf() })
+      setRecipeStepIngredient({ ...currentRecipeStepIngredient, measure: { magnitudeId: 0} as Measure, id: new Date(Date.now()).valueOf() })
       setIngredientCategory(undefined)
+      setMagnitude(undefined)
     }
   }
 
   useEffect(() => {
-    const getMeasures = async () => {
-      const response = await useGetList<Measure[]>('measures')
+    const getMagnitudes = async () => {
+      const response = await useGetList<Magnitude[]>('magnitudes')
       if (!response.error) {
-        setMeasures(response.data)
+        setMagnitudes(response.data)
       }
     }
     const getIngredientCategories = async () => {
@@ -111,7 +120,7 @@ const RecipeStepIngredientForm = ({ currentRecipeStepIngredient, errors, action,
         setInitialIngredientCategory(response.data)
       }
     }
-    getMeasures()
+    getMagnitudes()
     getIngredientCategories()
     setUniqueId()
   }, [])
@@ -140,16 +149,31 @@ const RecipeStepIngredientForm = ({ currentRecipeStepIngredient, errors, action,
           } />
         </div>
         <div className="col-2 p-1">
-          <CustomInputSelect showLabel={false} value={recipeStepIngredient.measureId}
+          <CustomInputSelect showLabel={false} value={recipeStepIngredient.measure.magnitudeId}
             customInputSelect={
               {
-                label: 'Medida', name: 'measureId',
-                handleChange: handleMeasure, pattern: '', validationMessage: 'Seleccione una medida'
+                label: 'Magnitud', name: 'measureId',
+                handleChange: handleChangeMagnitude, pattern: '', validationMessage: 'Seleccione una magnitud'
               }}
-            data={measures.map(measure => { return { value: measure.id, label: measure.name } })}
-            defaultLegend={'Medida'}
+            data={magnitudes.map(magnitud => { return { value: magnitud.id, label: magnitud.name } })}
+            defaultLegend={'Magnitud'}
           />
         </div>
+
+        {
+          magnitude?.measures &&
+          <div className="col-2 p-1">
+            <CustomInputSelect showLabel={false} value={recipeStepIngredient.measureId}
+              customInputSelect={
+                {
+                  label: 'Medida', name: 'measureId',
+                  handleChange: handleMeasure, pattern: '', validationMessage: 'Seleccione una medida'
+                }}
+              data={magnitude.measures.map(measure => { return { value: measure.id, label: measure.name } })}
+              defaultLegend={'Seleccione una medida'}
+            />
+          </div>
+        }
 
         <div className="col-2 p-1">
           <CustomInputSelect showLabel={false} value={recipeStepIngredient.ingredient?.ingredientCategoryId}

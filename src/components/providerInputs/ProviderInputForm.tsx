@@ -8,6 +8,7 @@ import { Brand } from '../../types/Brand'
 import { ProviderInput } from '../../types/ProviderInput'
 import { Provider } from '../../types/Provider'
 import { Input } from '../../types/Input'
+import { Magnitude } from '../../types/Magnitude'
 
 interface Props {
   currentProviderInput: ProviderInput
@@ -20,15 +21,23 @@ interface Props {
 
 const ProviderInputForm = ({ currentProviderInput, cancelAction, action, errors, getRestringedBrandsId, showProviders = false }: Props) => {
   const [providerInput, setProviderInput] = useState<ProviderInput>(currentProviderInput)
-  const [measures, setMeasures] = useState<Measure[]>([])
   const [brands, setBrands] = useState<Brand[]>([])
   const [providers, setProviders] = useState<Provider[]>([])
   const [inputs, setInputs] = useState<Input[]>([])
   const submitText = currentProviderInput?.id === 0 ? 'Agregar' : 'Editar'
   const [tempBrands, setTempBrands] = useState<Brand[]>([])
+  const [magnitudes, setMagnitudes] = useState<Magnitude[]>([])
+  const [magnitude, setMagnitude] = useState<Magnitude>()
+
   const handleChange = (event: any) => {
     const { name, value } = event.target
     setProviderInput({ ...providerInput, [name]: value })
+  }
+
+  const handleChangeMagnitude = (event: any) => {
+    const { value } = event.target
+    setProviderInput({ ...providerInput, measure: { magnitudeId: parseInt(value) } as Measure, measureId: 0 })
+    setMagnitude(magnitudes.find(magnitude => magnitude.id === parseInt(value)))
   }
 
   const handleSubmit = () => {
@@ -43,10 +52,10 @@ const ProviderInputForm = ({ currentProviderInput, cancelAction, action, errors,
     setTempBrands(allowedBrands)
   }
   useEffect(() => {
-    const getMeasures = async () => {
-      const response = await useGetList<Measure[]>('measures')
+    const getMagnitudes = async () => {
+      const response = await useGetList<Magnitude[]>('magnitudes')
       if (!response.error) {
-        setMeasures(response.data)
+        setMagnitudes(response.data)
       }
     }
     const getBrands = async () => {
@@ -69,7 +78,7 @@ const ProviderInputForm = ({ currentProviderInput, cancelAction, action, errors,
       }
     }
     getProviders()
-    getMeasures()
+    getMagnitudes()
     getBrands()
     getinputs()
   }, [])
@@ -103,19 +112,32 @@ const ProviderInputForm = ({ currentProviderInput, cancelAction, action, errors,
         <CustomInputNumber value={providerInput.presentation} customInputNumber={
           {
             label: 'Presentacion', name: 'presentation',
-            handleChange: handleChange, pattern: '[0-9]*', validationMessage: 'Ingrese una presentacion valida'
+            handleChange: handleChange, pattern: '^[0-9]+(.[0-9]+)?$', validationMessage: 'Ingrese una presentacion valida'
           }
         } />
 
-        <CustomInputSelect value={providerInput.measureId}
+        <CustomInputSelect value={providerInput.measure.magnitudeId}
           customInputSelect={
             {
-              label: 'Medida', name: 'measureId',
-              handleChange: handleChange, pattern: '', validationMessage: 'Seleccione una medida'
+              label: 'Magnitud', name: 'measureId',
+              handleChange: handleChangeMagnitude, pattern: '', validationMessage: 'Seleccione una magnitud'
             }}
-          data={measures.map(measure => { return { value: measure.id, label: measure.name } })}
-          defaultLegend={'Seleccione una medida'}
+          data={magnitudes.map(magnitud => { return { value: magnitud.id, label: magnitud.name } })}
+          defaultLegend={'Seleccione una magnitud'}
         />
+
+        {
+          magnitude?.measures &&
+          <CustomInputSelect value={providerInput.measureId}
+            customInputSelect={
+              {
+                label: 'Medida', name: 'measureId',
+                handleChange: handleChange, pattern: '', validationMessage: 'Seleccione una medida'
+              }}
+            data={magnitude.measures.map(measure => { return { value: measure.id, label: measure.name } })}
+            defaultLegend={'Seleccione una medida'}
+          />
+        }
 
         <CustomInputSelect value={providerInput.brandId}
           customInputSelect={

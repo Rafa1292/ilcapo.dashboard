@@ -6,6 +6,7 @@ import DeleteInput from '../../containers/inputs/DeleteInput'
 import InputFormContainer from '../../containers/inputs/InputFormContainer'
 import { useGetList } from '../../hooks/useAPI'
 import { Input } from '../../types/Input'
+import { Measure } from '../../types/Measure'
 
 const Inputs = () => {
   const initialInput: Input = {
@@ -22,6 +23,7 @@ const Inputs = () => {
     currentProviderId: 0,
     measureId: 0,
     inputCategoryId: 0,
+    measure: { magnitudeId:0 } as Measure,
     delete: false,
     createdBy: 0,
     updatedBy: 0

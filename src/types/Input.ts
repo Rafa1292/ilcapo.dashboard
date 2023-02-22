@@ -1,3 +1,5 @@
+import { Measure } from './Measure'
+
 export interface Input {
   id: number
   name: string
@@ -11,6 +13,7 @@ export interface Input {
   suggestedStock: number
   currentProviderId: number
   measureId: number
+  measure: Measure
   inputCategoryId: number
   delete: boolean
   createdBy?: number

@@ -12,7 +12,6 @@ const CreateMagnitude = ({ measure, refreshMeasures }: Props) => {
   const [errors, setErrors] = useState<string[]>([])
 
   const handleSubmit = async (newMeasure: Measure) => {
-    console.log(newMeasure)
     const response = await usePost<Measure>('measures', newMeasure)
     if (!response.error) {
       refreshMeasures()

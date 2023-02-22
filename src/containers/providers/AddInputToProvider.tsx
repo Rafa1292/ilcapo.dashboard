@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Table from '../../components/generics/Table'
 import TableRow from '../../components/generics/TableRow'
 import { useGetList } from '../../hooks/useAPI'
+import { Measure } from '../../types/Measure'
 import { Provider } from '../../types/Provider'
 import { ProviderInput } from '../../types/ProviderInput'
 import ProviderInputFormContainer from '../providerInputs/ProviderInputFormContainer'
@@ -22,6 +23,7 @@ const initialProviderInput: ProviderInput = {
   presentation: 0,
   brandId: 0,
   measureId: 0,
+  measure: {magnitudeId: 0} as Measure,
   delete: false,
   createdBy: 0,
   updatedBy: 0,

@@ -6,6 +6,7 @@ import IngredientFormContainer from '../containers/ingredients/IngredientFormCon
 import IngredientPreparation from '../containers/ingredients/IngredientPreparation'
 import { useGetList } from '../hooks/useAPI'
 import { Ingredient } from '../types/Ingredient'
+import { Measure } from '../types/Measure'
 
 const Ingredients = () => {
   const initialIngredient: Ingredient = {
@@ -15,6 +16,7 @@ const Ingredients = () => {
     cost: 0,
     presentation: 0,
     measureId: 0,
+    measure: { magnitudeId: 0 } as Measure,
     ingredientCategoryId: 0,
     preparationSteps: [],
     delete: false,
