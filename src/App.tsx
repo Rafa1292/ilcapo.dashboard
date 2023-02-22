@@ -16,6 +16,7 @@ import Ingredients from './pages/Ingredients'
 import Brands from './pages/Brands'
 import AddProviders from './pages/inputs/AddProviders'
 import AddInputs from './pages/providers/AddInputs'
+import SaleItemCategories from './pages/SaleItemCategories'
 
 function App() {
   const { state } = useInitialState()
@@ -37,6 +38,7 @@ function App() {
             <Route path="/IngredientCategories" element={<IngredientCategories />} />
             <Route path="/Ingredients" element={<Ingredients />} />
             <Route path="/Recipes" element={<Recipes />} />
+            <Route path="/SaleItemCategories" element={<SaleItemCategories />} />
           </Routes>
         </Layout>
       </BrowserRouter>
