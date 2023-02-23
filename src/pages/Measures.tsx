@@ -65,7 +65,7 @@ const Measures = () => {
               <TableRow key={index} tableData={[measure.id.toString(), measure.name,
                 measure.principalMeasure ? 'Si' : 'No', measure.value.toString(), measure.magnitude ? measure.magnitude.name : '' , measure.abbreviation
               ]}>
-                <button className="btn btn-outline-secondary my-1 mx-2" onClick={(() => editMeasure(measure.id))}>Editar</button>
+                <button className="btn btn-outline-secondary m-2" onClick={(() => editMeasure(measure.id))}>Editar</button>
                 <DeleteMeasure id={measure.id} refreshMeasures={refreshMeasures} />
               </TableRow>
             ))

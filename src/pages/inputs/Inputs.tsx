@@ -82,7 +82,7 @@ const Inputs = () => {
                   input.presentation.toString(), input.suggestedStock.toString(), input.currentProviderId.toString(), input.measureId.toString(),
                   input.inputCategoryId.toString()
                 ]}>
-                <button className="btn btn-outline-secondary my-1 m-2" onClick={(() => editInput(input.id))}>Editar</button>
+                <button className="btn btn-outline-secondary m-2" onClick={(() => editInput(input.id))}>Editar</button>
                 <Link to={`/Inputs/AddProvider/${input.id}`} className="btn btn-outline-success m-2">Proveedores</Link>
                 <DeleteInput id={input.id} refreshInputs={refreshInputs} />
               </TableRow>

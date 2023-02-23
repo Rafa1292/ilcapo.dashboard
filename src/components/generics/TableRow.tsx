@@ -14,7 +14,9 @@ const TableRow = ({ tableData, children }: Props) => {
       {
         children &&
         <td className=''>
-          {children}
+          <div className='col-12 d-flex p-0 m-0 justify-content-end'>
+            {children}
+          </div>
         </td>
       }
     </tr>

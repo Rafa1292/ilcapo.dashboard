@@ -59,7 +59,7 @@ const InputCategories = () => {
           {
             inputCategories.map((inputCategory, index) => (
               <TableRow key={index} tableData={[inputCategory.id.toString(), inputCategory.name]}>
-                <button className="btn btn-outline-secondary my-1 mx-2" onClick={(() => editInputCategory(inputCategory.id))}>Editar</button>
+                <button className="btn btn-outline-secondary m-2" onClick={(() => editInputCategory(inputCategory.id))}>Editar</button>
                 <DeleteInputCategory id={inputCategory.id} refreshInputCategories={refreshInputCategories} />
               </TableRow>
             ))

@@ -77,6 +77,12 @@ const Navbar = () => {
                 Productos
               </Link>
             </li>
+            <li className="nav-item">
+              <Link className="nav-link" aria-current="page" to='/SaleItems'>
+                <span data-feather="home" className="align-text-bottom" />
+                Items de venta
+              </Link>
+            </li>
           </ul>
         </div>
         <div className="bg-dark d-flex d-md-none justify-content-center align-items-center text-white d-flex col-12"

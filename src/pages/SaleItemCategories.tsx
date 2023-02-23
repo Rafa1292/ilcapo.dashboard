@@ -60,7 +60,7 @@ const SaleItemCategories = () => {
           {
             saleItemCategories.map((saleItemCategory, index) => (
               <TableRow key={index} tableData={[saleItemCategory.id.toString(), saleItemCategory.name]}>
-                <button className="btn btn-outline-secondary my-1 mx-2" onClick={(() => editSaleItemCategory(saleItemCategory.id))}>Editar</button>
+                <button className="btn btn-outline-secondary m-2" onClick={(() => editSaleItemCategory(saleItemCategory.id))}>Editar</button>
                 <DeleteSaleItemCategory id={saleItemCategory.id} refreshSaleItemCategories={refreshSaleItemCategories} />
               </TableRow>
             ))

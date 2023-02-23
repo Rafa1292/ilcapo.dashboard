@@ -60,7 +60,7 @@ const Magnitudes = () => {
           {
             magnitudes.map((magnitude, index) => (
               <TableRow key={index} tableData={[magnitude.id.toString(), magnitude.name]}>
-                <button className="btn btn-outline-secondary my-1 mx-2" onClick={(() => editMagnitude(magnitude.id))}>Editar</button>
+                <button className="btn btn-outline-secondary m-2" onClick={(() => editMagnitude(magnitude.id))}>Editar</button>
                 <DeleteMagnitude id={magnitude.id} refreshMagnitudes={refreshMagnitudes} />
               </TableRow>
             ))

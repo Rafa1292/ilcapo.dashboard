@@ -63,7 +63,7 @@ const Recipes = () => {
             recipes.map((recipe, index) => (
               <TableRow key={index} tableData={[recipe.name]}>
                 <RecipeSteps refreshRecipes={refreshRecipes} recipe={recipe}/>
-                <button className="btn btn-outline-secondary my-1 mx-2" onClick={(() => editRecipe(recipe.id))}>Editar</button>
+                <button className="btn btn-outline-secondary m-2" onClick={(() => editRecipe(recipe.id))}>Editar</button>
                 <DeleteRecipe id={recipe.id} refreshRecipes={refreshRecipes} />
               </TableRow>
             ))

@@ -64,7 +64,7 @@ const Products = () => {
           {
             products.map((product, index) => (
               <TableRow key={index} tableData={[product.name, product.price.toString(), product.allowsModify ? 'Si': 'No']}>
-                <button className="btn btn-outline-secondary my-1 mx-2" onClick={(() => editProduct(product.id))}>Editar</button>
+                <button className="btn btn-outline-secondary m-2" onClick={(() => editProduct(product.id))}>Editar</button>
                 <DeleteProduct id={product.id} refreshProducts={refreshProducts} />
               </TableRow>
             ))

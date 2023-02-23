@@ -60,7 +60,7 @@ const IngredientCategories = () => {
           {
             ingredientCategories.map((ingredientCategory, index) => (
               <TableRow key={index} tableData={[ingredientCategory.id.toString(), ingredientCategory.name]}>
-                <button className="btn btn-outline-secondary my-1 mx-2" onClick={(() => editIngredientCategory(ingredientCategory.id))}>Editar</button>
+                <button className="btn btn-outline-secondary m-2" onClick={(() => editIngredientCategory(ingredientCategory.id))}>Editar</button>
                 <DeleteIngredientCategory id={ingredientCategory.id} refreshIngredientCategories={refreshIngredientCategories} />
               </TableRow>
             ))

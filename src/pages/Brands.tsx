@@ -59,7 +59,7 @@ const Brands = () => {
           {
             brands.map((brand, index) => (
               <TableRow key={index} tableData={[brand.id.toString(), brand.name]}>
-                <button className="btn btn-outline-secondary my-1 mx-2" onClick={(() => editBrand(brand.id))}>Editar</button>
+                <button className="btn btn-outline-secondary m-2" onClick={(() => editBrand(brand.id))}>Editar</button>
                 <DeleteBrand id={brand.id} refreshBrands={refreshBrands} />
               </TableRow>
             ))

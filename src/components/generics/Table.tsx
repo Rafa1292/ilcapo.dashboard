@@ -15,7 +15,7 @@ const Table = ({ headers, children }: Props) => {
           <label className="form-check-label text-secondary" htmlFor="flexSwitchCheckChecked">Modo oscuro</label>
         </div>
       </div>
-      <div className="table-responsive table-container">
+      <div className="table-responsive table-container col-12">
 
         <table className={`table shadow table-hover table-striped rounded ${darkMode ? 'table-dark' : ''}`}>
           <thead>
