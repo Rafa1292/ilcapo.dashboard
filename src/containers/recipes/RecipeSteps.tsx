@@ -53,7 +53,7 @@ const RecipeSteps = ({ recipe, refreshRecipes }: Props) => {
   }
 
 
-  const refreshingRecipe = async () => {
+  const refreshingRecipeStep = async () => {
     setIsLoading(true)
     setRecipeStep({ ...initialRecipeStep, recipeId: recipe.id })
     await refreshRecipes()
@@ -85,13 +85,13 @@ const RecipeSteps = ({ recipe, refreshRecipes }: Props) => {
           {
             !isLoading &&
             <CreateRecipeStep deleteRecipeStepIngredient={deleteRecipeStepIngredient} editRecipeStepIngredient={editRecipeStepIngredient}
-              recipeStep={recipeStep} addRecipeStepIngredient={addRecipeStepIngredient} refreshRecipe={refreshingRecipe} />
+              recipeStep={recipeStep} addRecipeStepIngredient={addRecipeStepIngredient} refreshRecipe={refreshingRecipeStep} />
           }
         </div>
 
         {recipe.recipeSteps.sort(function (a, b) { return a.stepNumber - b.stepNumber }).map((recipeStep, index) => (
           <div className='col-12' key={index}>
-            <EditRecipeStep recipeStep={recipeStep} refreshRecipe={refreshingRecipe}
+            <EditRecipeStep recipeStep={recipeStep} refreshRecipe={refreshingRecipeStep}
             />
           </div>
         ))}

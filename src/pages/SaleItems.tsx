@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Table from '../components/generics/Table'
 import TableRow from '../components/generics/TableRow'
+import AddProductToSaleItem from '../containers/saleItemProducts/AddProductToSaleItem'
 import DeleteSaleItem from '../containers/saleItems/DeleteSaleItem'
 import SaleItemFormContainer from '../containers/saleItems/SaleItemFormContainer'
 import { useGetList } from '../hooks/useAPI'
@@ -16,6 +17,7 @@ const SaleItems = () => {
     price: 0,
     saleItemCategoryId: 0,
     saleItemCategory: { id: 0 } as SaleItemCategory,
+    saleItemProducts: [],
     delete: false,
     createdBy: 0,
     updatedBy: 0
@@ -71,6 +73,7 @@ const SaleItems = () => {
                 saleItem.saleItemCategory?.name]}>
                 <button className="btn btn-outline-secondary m-2" onClick={(() => editSaleItem(saleItem.id))}>Editar</button>
                 <DeleteSaleItem id={saleItem.id} refreshSaleItems={refreshSaleItems} />
+                <AddProductToSaleItem refreshSaleItem={refreshSaleItems} saleItem={saleItem}/>
               </TableRow>
             ))
           }

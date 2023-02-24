@@ -1,4 +1,5 @@
 import { SaleItemCategory } from './SaleItemCategory'
+import { SaleItemProduct } from './SaleItemProduct'
 
 export interface SaleItem {
   id: number
@@ -9,6 +10,7 @@ export interface SaleItem {
   description: string
   pictureUrl: string
   delete: boolean
+  saleItemProducts: SaleItemProduct[],
   createdAt?: Date
   updatedAt?: Date
   createdBy?: number
