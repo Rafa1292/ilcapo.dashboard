@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Loader from '../../components/generics/loader'
 import ModifierElementForm from '../../components/modifierElements/ModifierElementForm'
 import { usePost } from '../../hooks/useAPI'
 import { ModifierElement } from '../../types/ModifierElement'
@@ -37,13 +38,16 @@ const CreateModifierElement = ({ modifierGroupId, refreshModifierGroups }: Props
       setModifierElement(initialModifierElement)
     }
     setLoading(false)
+    setModifierElement(modifierElement)
   }
 
   return (
-    <div className='col-12 d-flex flex-wrap p-2 rounded shadow-sm mb-3'>
+    <div className='col-12 d-flex flex-wrap p-2 rounded shadow-sm mb-3' style={{minHeight: '350px'}}>
       {
         !loading &&
         <ModifierElementForm action={addModifierElement} currentModifierElement={modifierElement} errors={errors} />
+        ||
+        <Loader/>
       }
     </div>
   )

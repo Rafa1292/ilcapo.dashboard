@@ -25,6 +25,13 @@ const ModifierElementForm = ({ currentModifierElement, action, errors }: Props) 
     setModifierElement({ ...modifierElement, [name]: value })
   }
 
+  const handleProductChange = (event: any) => {
+    const { name, value } = event.target
+    const productName = products.find(product => product.id === parseInt(value))?.name
+    setModifierElement({ ...modifierElement, [name]: value, name: productName ? productName : '' })
+
+  }
+
   const handleCheck = (event: any) => {
     const { name, checked } = event.target
     if (!checked) {
@@ -36,7 +43,6 @@ const ModifierElementForm = ({ currentModifierElement, action, errors }: Props) 
   }
 
   const handleSubmit = () => {
-    console.log(modifierElement)
     action(modifierElement)
   }
 
@@ -64,7 +70,7 @@ const ModifierElementForm = ({ currentModifierElement, action, errors }: Props) 
         <CustomInputNumber value={modifierElement.price} customInputNumber={
           {
             label: 'Precio', name: 'price',
-            handleChange: handleChange, pattern: regexOptions.integer, validationMessage: 'Ingrese un precio válido'
+            handleChange: handleChange, pattern: regexOptions.decimal, validationMessage: 'Ingrese un precio válido'
           }
         } />
 
@@ -88,7 +94,7 @@ const ModifierElementForm = ({ currentModifierElement, action, errors }: Props) 
             customInputSelect={
               {
                 label: 'Producto', name: 'productReferenceId',
-                handleChange: handleChange, pattern: '', validationMessage: 'Seleccione un producto'
+                handleChange: handleProductChange, pattern: '', validationMessage: 'Seleccione un producto'
               }}
             data={products.map(recipe => { return { value: recipe.id, label: recipe.name } })}
             defaultLegend={'Seleccione un producto'}
