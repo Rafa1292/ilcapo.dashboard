@@ -6,6 +6,7 @@ import { RecipeStep } from '../../types/RecipeStep'
 import RecipeStepIngredientFormContainer from '../../containers/recipeStepIngredients/RecipeStepIngredientFormContainer'
 import { RecipeStepIngredient } from '../../types/RecipeStepIngredient'
 import * as validator from '../../utils/errorValidation'
+import { regexOptions } from '../../enums/regexOptions'
 
 interface Props {
   recipeStep: RecipeStep
@@ -50,14 +51,14 @@ const RecipeStepForm = ({ recipeStep, action, deleteRecipeStepIngredient, errors
         <CustomInputNumber value={currentRecipeStep.stepNumber} customInputNumber={
           {
             label: 'Numero de paso', name: 'stepNumber',
-            handleChange: handleChange, pattern: '[0-9]*', validationMessage: 'Ingrese un numero válido'
+            handleChange: handleChange, pattern: regexOptions.integer, validationMessage: 'Ingrese un numero válido'
           }
         } />
         <CustomInputText value={currentRecipeStep.description}
           customInputText={
             {
               label: 'Descripcion', name: 'description',
-              handleChange: handleChange, pattern: '[a-zA-Z0-9\\u00E0-\\u00FC\\s?]*',
+              handleChange: handleChange, pattern: regexOptions.text,
               validationMessage: 'Ingrese una descripcion valida'
             }
           } />
@@ -66,7 +67,7 @@ const RecipeStepForm = ({ recipeStep, action, deleteRecipeStepIngredient, errors
         <CustomInputNumber value={currentRecipeStep.minutesOfPreparation} customInputNumber={
           {
             label: 'Duracion en minutos', name: 'minutesOfPreparation',
-            handleChange: handleChange, pattern: '[0-9]*', validationMessage: 'Ingrese una duracion válida'
+            handleChange: handleChange, pattern: regexOptions.integer, validationMessage: 'Ingrese una duracion válida'
           }
         } />
         <h5 className='col-12 text-secondary my-1 fw-bold'>Insumos</h5>

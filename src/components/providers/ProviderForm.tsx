@@ -4,6 +4,7 @@ import GenericForm from '../generics/GenericForm'
 import { Provider } from '../../types/Provider'
 import CustomInputNumber from '../generics/CustomInputNumber'
 import CustomInputCheck from '../generics/CustomInputChecbox'
+import { regexOptions } from '../../enums/regexOptions'
 
 interface Props {
   currentProvider: Provider
@@ -36,7 +37,7 @@ const ProviderForm = ({ currentProvider, action, errors }: Props) => {
           customInputText={
             {
               label: 'Nombre del proveedor', name: 'name',
-              handleChange: handleChange, pattern: '[a-zA-Z0-9\\u00E0-\\u00FC\\s?]*',
+              handleChange: handleChange, pattern: regexOptions.text,
               validationMessage: 'Ingrese un nombre válido'
             }
           } />
@@ -44,7 +45,7 @@ const ProviderForm = ({ currentProvider, action, errors }: Props) => {
         <CustomInputNumber value={provider.phone} customInputNumber={
           {
             label: 'Teléfono', name: 'phone',
-            handleChange: handleChange, pattern: '[0-9]{8}',
+            handleChange: handleChange, pattern: regexOptions.phone,
             validationMessage: 'Ingrese un teléfono válido'
           }
         } />

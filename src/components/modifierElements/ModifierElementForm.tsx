@@ -7,6 +7,7 @@ import { ModifierElement } from '../../types/ModifierElement'
 import CustomInputNumber from '../generics/CustomInputNumber'
 import { Product } from '../../types/Product'
 import CustomInputCheck from '../generics/CustomInputChecbox'
+import { regexOptions } from '../../enums/regexOptions'
 
 interface Props {
   currentModifierElement: ModifierElement
@@ -55,7 +56,7 @@ const ModifierElementForm = ({ currentModifierElement, action, errors }: Props) 
           customInputText={
             {
               label: 'Nombre de elemento', name: 'name',
-              handleChange: handleChange, pattern: '[a-zA-Z0-9\\u00E0-\\u00FC\\s?]*',
+              handleChange: handleChange, pattern: regexOptions.text,
               validationMessage: 'Ingrese un nombre válido'
             }
           } />
@@ -63,14 +64,14 @@ const ModifierElementForm = ({ currentModifierElement, action, errors }: Props) 
         <CustomInputNumber value={modifierElement.price} customInputNumber={
           {
             label: 'Precio', name: 'price',
-            handleChange: handleChange, pattern: '[0-9]*', validationMessage: 'Ingrese un precio válido'
+            handleChange: handleChange, pattern: regexOptions.integer, validationMessage: 'Ingrese un precio válido'
           }
         } />
 
         <CustomInputNumber value={modifierElement.quantity} customInputNumber={
           {
             label: 'Cantidad', name: 'quantity',
-            handleChange: handleChange, pattern: '[0-9]*', validationMessage: 'Ingrese una cantidad válida'
+            handleChange: handleChange, pattern: regexOptions.integer, validationMessage: 'Ingrese una cantidad válida'
           }
         } />
 

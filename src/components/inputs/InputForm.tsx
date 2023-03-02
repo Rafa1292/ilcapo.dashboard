@@ -8,6 +8,7 @@ import { Input } from '../../types/Input'
 import CustomInputNumber from '../generics/CustomInputNumber'
 import { InputCategory } from '../../types/InputCategory'
 import { Magnitude } from '../../types/Magnitude'
+import { regexOptions } from '../../enums/regexOptions'
 
 interface Props {
   currentInput: Input
@@ -62,7 +63,7 @@ const InputForm = ({ currentInput, action, errors }: Props) => {
           customInputText={
             {
               label: 'Nombre de insumo', name: 'name',
-              handleChange: handleChange, pattern: '[a-zA-Z0-9\\u00E0-\\u00FC\\s?]*',
+              handleChange: handleChange, pattern: regexOptions.text,
               validationMessage: 'Ingrese un nombre válido'
             }
           } />
@@ -70,21 +71,21 @@ const InputForm = ({ currentInput, action, errors }: Props) => {
         <CustomInputNumber value={input.expectedPrice} customInputNumber={
           {
             label: 'Precio esperado', name: 'expectedPrice',
-            handleChange: handleChange, pattern: '[0-9]*', validationMessage: 'Ingrese un precio válido'
+            handleChange: handleChange, pattern: regexOptions.integer, validationMessage: 'Ingrese un precio válido'
           }
         } />
 
         <CustomInputNumber value={input.stock} customInputNumber={
           {
             label: 'Stock', name: 'stock',
-            handleChange: handleChange, pattern: '^[0-9]+(.[0-9]+)?$', validationMessage: 'Ingrese un stock válido'
+            handleChange: handleChange, pattern: regexOptions.decimal, validationMessage: 'Ingrese un stock válido'
           }
         } />
 
         <CustomInputNumber value={input.presentation} customInputNumber={
           {
             label: 'Presentación', name: 'presentation',
-            handleChange: handleChange, pattern: '^[0-9]+(.[0-9]+)?$', validationMessage: 'Ingrese una presentación válida'
+            handleChange: handleChange, pattern: regexOptions.decimal, validationMessage: 'Ingrese una presentación válida'
           }
         } />
 

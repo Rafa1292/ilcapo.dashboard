@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { ModifierGroup } from '../../types/ModifierGroup'
+import { regexOptions } from '../../enums/regexOptions'
 import CustomInputText from '../generics/CustomInputText'
 import GenericForm from '../generics/GenericForm'
 
@@ -29,7 +30,7 @@ const ModifierGroupForm = ({ currentModifierGroup: currentModifierGroup, action,
           customInputText={
             {
               label: 'Nombre de grupo', name: 'name',
-              handleChange: handleChange, pattern: '[a-zA-Z0-9()\\u00E0-\\u00FC\\s?]*',
+              handleChange: handleChange, pattern: regexOptions.text,
               validationMessage: 'Ingrese un nombre válido'
             }
           } />

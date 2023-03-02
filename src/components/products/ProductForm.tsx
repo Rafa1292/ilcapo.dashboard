@@ -7,6 +7,7 @@ import { Product } from '../../types/Product'
 import CustomInputNumber from '../generics/CustomInputNumber'
 import { Recipe } from '../../types/Recipe'
 import CustomInputCheck from '../generics/CustomInputChecbox'
+import { regexOptions } from '../../enums/regexOptions'
 
 interface Props {
   currentProduct: Product
@@ -49,7 +50,7 @@ const productForm = ({ currentProduct, action, errors }: Props) => {
           customInputText={
             {
               label: 'Nombre de producto', name: 'name',
-              handleChange: handleChange, pattern: '[a-zA-Z0-9\\u00E0-\\u00FC\\s?]*',
+              handleChange: handleChange, pattern: regexOptions.text,
               validationMessage: 'Ingrese un nombre válido'
             }
           } />
@@ -58,7 +59,7 @@ const productForm = ({ currentProduct, action, errors }: Props) => {
           customInputText={
             {
               label: 'Description de producto', name: 'description',
-              handleChange: handleChange, pattern: '[a-zA-Z0-9\\u00E0-\\u00FC\\s?]*',
+              handleChange: handleChange, pattern: regexOptions.text,
               validationMessage: 'Ingrese una descripcion'
             }
           } />
@@ -66,7 +67,7 @@ const productForm = ({ currentProduct, action, errors }: Props) => {
         <CustomInputNumber value={product.price} customInputNumber={
           {
             label: 'Precio', name: 'price',
-            handleChange: handleChange, pattern: '[0-9]*', validationMessage: 'Ingrese un precio válido'
+            handleChange: handleChange, pattern: regexOptions.integer, validationMessage: 'Ingrese un precio válido'
           }
         } />
 

@@ -8,6 +8,7 @@ import { Measure } from '../../types/Measure'
 import { Ingredient } from '../../types/Ingredient'
 import { IngredientCategory } from '../../types/IngredientCategory'
 import { Magnitude } from '../../types/Magnitude'
+import { regexOptions } from '../../enums/regexOptions'
 
 interface Props {
   currentIngredient: Ingredient
@@ -61,7 +62,7 @@ const IngredientForm = ({ currentIngredient, action, errors }: Props) => {
           customInputText={
             {
               label: 'Nombre de ingrediente', name: 'name',
-              handleChange: handleChange, pattern: '[a-zA-Z0-9\\u00E0-\\u00FC\\s?]*',
+              handleChange: handleChange, pattern: regexOptions.text,
               validationMessage: 'Ingrese un nombre válido'
             }
           } />
@@ -69,14 +70,14 @@ const IngredientForm = ({ currentIngredient, action, errors }: Props) => {
         <CustomInputNumber value={ingredient.cost} customInputNumber={
           {
             label: 'Costo', name: 'cost',
-            handleChange: handleChange, pattern: '^[0-9]+(.[0-9]+)?$', validationMessage: 'Ingrese un precio válido'
+            handleChange: handleChange, pattern: regexOptions.decimal, validationMessage: 'Ingrese un precio válido'
           }
         } />
 
         <CustomInputNumber value={ingredient.presentation} customInputNumber={
           {
             label: 'Presentacion', name: 'presentation',
-            handleChange: handleChange, pattern: '^[0-9]+(.[0-9]+)?$', validationMessage: 'Ingrese una presentacion válida'
+            handleChange: handleChange, pattern: regexOptions.decimal, validationMessage: 'Ingrese una presentacion válida'
           }
         } />
 

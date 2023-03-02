@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { SaleItemCategory } from '../../types/SaleItemCategory'
+import { regexOptions } from '../../enums/regexOptions'
 import CustomInputText from '../generics/CustomInputText'
 import GenericForm from '../generics/GenericForm'
 
@@ -29,7 +30,7 @@ const SaleItemCategoryForm = ({ currentSaleItemCategory, action, errors }: Props
           customInputText={
             {
               label: 'Nombre de categoria', name: 'name',
-              handleChange: handleChange, pattern: '[a-zA-Z0-9\\u00E0-\\u00FC\\s?]*',
+              handleChange: handleChange, pattern: regexOptions.text,
               validationMessage: 'Ingrese un nombre válido'
             }
           } />

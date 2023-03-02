@@ -9,6 +9,7 @@ import { ProviderInput } from '../../types/ProviderInput'
 import { Provider } from '../../types/Provider'
 import { Input } from '../../types/Input'
 import { Magnitude } from '../../types/Magnitude'
+import { regexOptions } from '../../enums/regexOptions'
 
 interface Props {
   currentProviderInput: ProviderInput
@@ -112,7 +113,7 @@ const ProviderInputForm = ({ currentProviderInput, cancelAction, action, errors,
         <CustomInputNumber value={providerInput.presentation} customInputNumber={
           {
             label: 'Presentacion', name: 'presentation',
-            handleChange: handleChange, pattern: '^[0-9]+(.[0-9]+)?$', validationMessage: 'Ingrese una presentacion valida'
+            handleChange: handleChange, pattern: regexOptions.decimal, validationMessage: 'Ingrese una presentacion valida'
           }
         } />
 
@@ -152,7 +153,7 @@ const ProviderInputForm = ({ currentProviderInput, cancelAction, action, errors,
         <CustomInputNumber value={providerInput.expectedPrice} customInputNumber={
           {
             label: 'Precio esperado', name: 'expectedPrice',
-            handleChange: handleChange, pattern: '[0-9]*', validationMessage: 'Ingrese un precio válido'
+            handleChange: handleChange, pattern: regexOptions.decimal, validationMessage: 'Ingrese un precio válido'
           }
         } />
 

@@ -3,6 +3,7 @@ import GenericForm from '../generics/GenericForm'
 import CustomInputText from '../generics/CustomInputText'
 import CustomInputNumber from '../generics/CustomInputNumber'
 import { Recipe } from '../../types/Recipe'
+import { regexOptions } from '../../enums/regexOptions'
 
 interface Props {
   currentRecipe: Recipe
@@ -30,7 +31,7 @@ const RecipeForm = ({ currentRecipe, action, errors }: Props) => {
           customInputText={
             {
               label: 'Nombre de receta', name: 'name',
-              handleChange: handleChange, pattern: '[a-zA-Z0-9\\u00E0-\\u00FC\\s?]*',
+              handleChange: handleChange, pattern: regexOptions.text,
               validationMessage: 'Ingrese un nombre válido'
             }
           } />
@@ -38,7 +39,7 @@ const RecipeForm = ({ currentRecipe, action, errors }: Props) => {
         <CustomInputNumber value={recipe.cost} customInputNumber={
           {
             label: 'Costo', name: 'cost',
-            handleChange: handleChange, pattern: '^[0-9]+([,][0-9]+)?$', validationMessage: 'Ingrese un precio válido'
+            handleChange: handleChange, pattern: regexOptions.decimal, validationMessage: 'Ingrese un precio válido'
           }
         } />
       </GenericForm>

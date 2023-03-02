@@ -6,6 +6,7 @@ import { PreparationStep } from '../../types/PreparationStep'
 import PreparationStepInputFormContainer from '../../containers/preparationStepInputs/PreparationStepInputFormContainer'
 import { PreparationStepInput } from '../../types/PreparationStepInput'
 import * as validator from '../../utils/errorValidation'
+import { regexOptions } from '../../enums/regexOptions'
 interface Props {
   preparationStep: PreparationStep
   action: (preparationStep: PreparationStep) => void
@@ -49,14 +50,14 @@ const PreparationStepForm = ({ preparationStep, action, deletePreparationStepInp
         <CustomInputNumber value={currentPreparationStep.stepNumber} customInputNumber={
           {
             label: 'Numero de paso', name: 'stepNumber',
-            handleChange: handleChange, pattern: '[0-9]*', validationMessage: 'Ingrese un numero válido'
+            handleChange: handleChange, pattern: regexOptions.integer, validationMessage: 'Ingrese un numero válido'
           }
         } />
         <CustomInputText value={currentPreparationStep.description}
           customInputText={
             {
               label: 'Descripcion', name: 'description',
-              handleChange: handleChange, pattern: '[a-zA-Z0-9\\u00E0-\\u00FC\\s?]*',
+              handleChange: handleChange, pattern: regexOptions.text,
               validationMessage: 'Ingrese una descripcion valida'
             }
           } />
@@ -65,7 +66,7 @@ const PreparationStepForm = ({ preparationStep, action, deletePreparationStepInp
         <CustomInputNumber value={currentPreparationStep.minutesOfPreparation} customInputNumber={
           {
             label: 'Duracion en minutos', name: 'minutesOfPreparation',
-            handleChange: handleChange, pattern: '[0-9]*', validationMessage: 'Ingrese una duracion válida'
+            handleChange: handleChange, pattern: regexOptions.integer, validationMessage: 'Ingrese una duracion válida'
           }
         } />
         <h5 className='col-12 text-secondary my-1 fw-bold'>Insumos</h5>

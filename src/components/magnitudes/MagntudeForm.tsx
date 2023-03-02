@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import CustomInputText from '../generics/CustomInputText'
 import GenericForm from '../generics/GenericForm'
 import { Magnitude } from '../../types/Magnitude'
+import { regexOptions } from '../../enums/regexOptions'
 
 interface Props {
   currentMagnitude: Magnitude
@@ -29,7 +30,7 @@ const MagnitudeForm = ({ currentMagnitude, action, errors }: Props) => {
           customInputText={
             {
               label: 'Nombre de magnitud', name: 'name',
-              handleChange: handleChange, pattern: '[a-zA-Z0-9\\u00E0-\\u00FC\\s?]*',
+              handleChange: handleChange, pattern: regexOptions.text,
               validationMessage: 'Ingrese un nombre válido'
             }
           } />

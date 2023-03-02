@@ -7,6 +7,7 @@ import CustomBtn from '../generics/CustomBtn'
 import { buttonTypes } from '../../enums/buttonTypes'
 import * as validator from '../../utils/errorValidation'
 import { Product } from '../../types/Product'
+import { regexOptions } from '../../enums/regexOptions'
 
 interface Props {
   currentSaleItemProduct: SaleItemProduct
@@ -100,7 +101,7 @@ const SaleItemProductForm = ({ currentSaleItemProduct, errors, action, cancelAct
           <CustomInputNumber showLabel={true} value={saleItemProduct.quantity} customInputNumber={
             {
               label: 'Cantidad', name: 'quantity',
-              handleChange: handleChange, pattern: '[0-9]*', validationMessage: 'Ingrese una cantidad válida'
+              handleChange: handleChange, pattern: regexOptions.integer, validationMessage: 'Ingrese una cantidad válida'
             }
           } />
         </div>
@@ -109,7 +110,7 @@ const SaleItemProductForm = ({ currentSaleItemProduct, errors, action, cancelAct
           <CustomInputNumber showLabel={true} value={saleItemProduct.discount} customInputNumber={
             {
               label: 'Descuento', name: 'discount',
-              handleChange: handleChange, pattern: '[0-9]{2}', validationMessage: 'Ingrese un descuento válido'
+              handleChange: handleChange, pattern: regexOptions.integerLengthTwo, validationMessage: 'Ingrese un descuento válido'
             }
           } />
         </div>

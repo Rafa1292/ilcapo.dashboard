@@ -6,6 +6,7 @@ import { SaleItem } from '../../types/SaleItem'
 import CustomInputSelect from '../generics/CustomInputSelect'
 import { SaleItemCategory } from '../../types/SaleItemCategory'
 import { useGetList } from '../../hooks/useAPI'
+import { regexOptions } from '../../enums/regexOptions'
 
 interface Props {
   currentSaleItem: SaleItem
@@ -45,7 +46,7 @@ const SaleItemForm = ({ currentSaleItem, action, errors }: Props) => {
           customInputText={
             {
               label: 'Nombre', name: 'name',
-              handleChange: handleChange, pattern: '[a-zA-Z0-9\\u00E0-\\u00FC\\s?]*',
+              handleChange: handleChange, pattern: regexOptions.text,
               validationMessage: 'Ingrese un nombre válido'
             }
           } />
@@ -54,7 +55,7 @@ const SaleItemForm = ({ currentSaleItem, action, errors }: Props) => {
           customInputText={
             {
               label: 'Descripcion', name: 'description',
-              handleChange: handleChange, pattern: '[a-zA-Z0-9\\u00E0-\\u00FC\\s?]*',
+              handleChange: handleChange, pattern: regexOptions.text,
               validationMessage: 'Ingrese una descripcion válida'
             }
           } />
@@ -62,7 +63,7 @@ const SaleItemForm = ({ currentSaleItem, action, errors }: Props) => {
         <CustomInputNumber value={saleItem.price} customInputNumber={
           {
             label: 'Precio', name: 'price',
-            handleChange: handleChange, pattern: '^[0-9]+([,][0-9]+)?$', validationMessage: 'Ingrese un precio válido'
+            handleChange: handleChange, pattern: regexOptions.decimal, validationMessage: 'Ingrese un precio válido'
           }
         } />
 

@@ -7,6 +7,7 @@ import CustomInputSelect from '../generics/CustomInputSelect'
 import { useGetList } from '../../hooks/useAPI'
 import { Magnitude } from '../../types/Magnitude'
 import CustomInputNumber from '../generics/CustomInputNumber'
+import { regexOptions } from '../../enums/regexOptions'
 
 interface Props {
   currentMeasure: Measure
@@ -50,7 +51,7 @@ const MeasureForm = ({ currentMeasure, action, errors }: Props) => {
           customInputText={
             {
               label: 'Nombre de medida', name: 'name',
-              handleChange: handleChange, pattern: '[a-zA-Z0-9\\u00E0-\\u00FC\\s?]*',
+              handleChange: handleChange, pattern: regexOptions.text,
               validationMessage: 'Ingrese un nombre válido'
             }
           } />
@@ -66,7 +67,7 @@ const MeasureForm = ({ currentMeasure, action, errors }: Props) => {
         <CustomInputNumber value={measure.value} customInputNumber={
           {
             label: 'Valor', name: 'value',
-            handleChange: handleChange, pattern: '^[0-9]+(.[0-9]+)?$', validationMessage: 'Debe asignar un valor entre 0 y 1 con dos decimales ej: 0.01'
+            handleChange: handleChange, pattern: regexOptions.decimal, validationMessage: 'Debe asignar un valor entre 0 y 1 con dos decimales ej: 0.01'
           }
         } />
 
@@ -74,7 +75,7 @@ const MeasureForm = ({ currentMeasure, action, errors }: Props) => {
           customInputText={
             {
               label: 'Abreviatura', name: 'abbreviation',
-              handleChange: handleChange, pattern: '[a-zA-Z0-9\\u00E0-\\u00FC\\s?]{1,3}',
+              handleChange: handleChange, pattern: regexOptions.text,
               validationMessage: 'Ingrese una abreviatura válida'
             }
           } />

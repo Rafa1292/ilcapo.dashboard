@@ -10,6 +10,7 @@ import { buttonTypes } from '../../enums/buttonTypes'
 import * as validator from '../../utils/errorValidation'
 import { Input } from '../../types/Input'
 import { Magnitude } from '../../types/Magnitude'
+import { regexOptions } from '../../enums/regexOptions'
 
 interface Props {
   currentPreparationStepInput: PreparationStepInput
@@ -137,7 +138,7 @@ const PreparationStepInputForm = ({ currentPreparationStepInput, errors, action,
           <CustomInputNumber showLabel={false} value={preparationStepInput.quantity} customInputNumber={
             {
               label: 'Cantidad', name: 'quantity',
-              handleChange: handleChange, pattern: '[0-9]*', validationMessage: 'Ingrese una cantidad válida'
+              handleChange: handleChange, pattern: regexOptions.integer, validationMessage: 'Ingrese una cantidad válida'
             }
           } />
         </div>

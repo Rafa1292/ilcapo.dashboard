@@ -11,6 +11,7 @@ import * as validator from '../../utils/errorValidation'
 import { Ingredient } from '../../types/Ingredient'
 import CustomInputCheck from '../generics/CustomInputChecbox'
 import { Magnitude } from '../../types/Magnitude'
+import { regexOptions } from '../../enums/regexOptions'
 
 interface Props {
   currentRecipeStepIngredient: RecipeStepIngredient
@@ -144,7 +145,7 @@ const RecipeStepIngredientForm = ({ currentRecipeStepIngredient, errors, action,
           <CustomInputNumber showLabel={false} value={recipeStepIngredient.quantity} customInputNumber={
             {
               label: 'Cantidad', name: 'quantity',
-              handleChange: handleChange, pattern: '[0-9]*', validationMessage: 'Ingrese una cantidad válida'
+              handleChange: handleChange, pattern: regexOptions.integer, validationMessage: 'Ingrese una cantidad válida'
             }
           } />
         </div>
