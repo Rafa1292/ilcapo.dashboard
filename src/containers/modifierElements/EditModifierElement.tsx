@@ -1,0 +1,64 @@
+import React, { useEffect, useState } from 'react'
+import CustomBtn from '../../components/generics/CustomBtn'
+import ModifierElementForm from '../../components/modifierElements/ModifierElementForm'
+import { buttonTypes } from '../../enums/buttonTypes'
+import { useDelete, usePatch } from '../../hooks/useAPI'
+import { ModifierElement } from '../../types/ModifierElement'
+
+interface Props {
+  modifierElement: ModifierElement
+  refreshModifierGroups: () => void
+}
+
+const EditModifierElement = ({ modifierElement, refreshModifierGroups }: Props) => {
+  const [errors, setErrors] = useState<string[]>([])
+  const [editMode, setEditMode] = useState<boolean>(false)
+
+  const action = async (modifierElement: ModifierElement) => {
+    const response = await usePatch(`modifierElements/${modifierElement.id}`, modifierElement)
+    if (response.error) {
+      setErrors(response.message)
+    } else {
+      setEditMode(false)
+      refreshModifierGroups()
+    }
+  }
+
+  const deletePreparationStepInput = async (id: number) => {
+    const response = await useDelete(`modifierElements/${id}`)
+    if (response.error) {
+      setErrors(response.message)
+    }
+    else {
+      refreshModifierGroups()
+    }
+  }
+
+  return (
+    <>
+      {
+        editMode ?
+          <ModifierElementForm action={action} errors={errors} currentModifierElement={modifierElement} /> :
+          <div className="col-12 d-flex flex-wrap justify-content-center">
+            <div className="col-1 d-flex justify-content-center align-items-center">
+              {modifierElement?.name}
+            </div>
+            <div className="col-1 d-flex justify-content-center align-items-center">
+              {modifierElement?.quantity}
+            </div>
+            <div className="col-1 d-flex justify-content-center align-items-center">
+              {modifierElement?.price}
+            </div>
+            <div className="py-1 px-1 d-flex justify-content-center align-items-center">
+              <CustomBtn height='30px' buttonType={buttonTypes.edit} action={(() => setEditMode(true))} />
+            </div>
+            <div className="py-1 px-1 d-flex justify-content-center align-items-center">
+              <CustomBtn height='30px' buttonType={buttonTypes.delete} action={(() => deletePreparationStepInput(modifierElement?.id))} />
+            </div>
+          </div>
+      }
+    </>
+  )
+}
+
+export default EditModifierElement

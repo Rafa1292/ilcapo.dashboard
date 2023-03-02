@@ -19,6 +19,7 @@ import AddInputs from './pages/providers/AddInputs'
 import SaleItemCategories from './pages/SaleItemCategories'
 import Products from './pages/Products'
 import SaleItems from './pages/SaleItems'
+import ModifierGroups from './pages/ModifierGroups'
 
 function App() {
   const { state } = useInitialState()
@@ -43,6 +44,7 @@ function App() {
             <Route path="/Products" element={<Products />} />
             <Route path="/SaleItemCategories" element={<SaleItemCategories />} />
             <Route path="/SaleItems" element={<SaleItems />} />
+            <Route path="/ModifierGroups" element={<ModifierGroups />} />
           </Routes>
         </Layout>
       </BrowserRouter>
