@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 
 interface Props {
@@ -14,7 +13,7 @@ function CustomModal({ children, title, show, handleClose }: Props) {
     <>
       <Modal dialogClassName="w-80" fullscreen='fullscreen' centered show={show}  onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>{title}</Modal.Title>
+          <Modal.Title className='w-100 fw-bold text-center'>{title}</Modal.Title>
         </Modal.Header>
         <Modal.Body className='p-4'>
           {children}

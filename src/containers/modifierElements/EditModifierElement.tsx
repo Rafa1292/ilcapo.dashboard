@@ -4,17 +4,20 @@ import ModifierElementForm from '../../components/modifierElements/ModifierEleme
 import { buttonTypes } from '../../enums/buttonTypes'
 import { useDelete, usePatch } from '../../hooks/useAPI'
 import { ModifierElement } from '../../types/ModifierElement'
+import { ModifierGroup } from '../../types/ModifierGroup'
 
 interface Props {
   modifierElement: ModifierElement
   refreshModifierGroups: () => void
+  modifierGroups: ModifierGroup[]
 }
 
-const EditModifierElement = ({ modifierElement, refreshModifierGroups }: Props) => {
+const EditModifierElement = ({ modifierElement, modifierGroups, refreshModifierGroups }: Props) => {
   const [errors, setErrors] = useState<string[]>([])
   const [editMode, setEditMode] = useState<boolean>(false)
 
   const action = async (modifierElement: ModifierElement) => {
+    console.log(modifierElement)
     const response = await usePatch(`modifierElements/${modifierElement.id}`, modifierElement)
     if (response.error) {
       setErrors(response.message)
@@ -38,7 +41,7 @@ const EditModifierElement = ({ modifierElement, refreshModifierGroups }: Props) 
     <>
       {
         editMode ?
-          <ModifierElementForm action={action} errors={errors} currentModifierElement={modifierElement} /> :
+          <ModifierElementForm modifierGroups={modifierGroups} action={action} errors={errors} currentModifierElement={modifierElement} /> :
           <div className="col-12 d-flex flex-wrap justify-content-center">
             <div className="col-1 d-flex justify-content-center align-items-center">
               {modifierElement?.name}

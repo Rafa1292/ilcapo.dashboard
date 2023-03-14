@@ -11,10 +11,11 @@ interface Props {
   show: boolean
   setShow: (show: boolean) => void
   refreshModifierGroups: () => void
+  modifierGroups: ModifierGroup[]
 }
 
-const ModifierGroupFormContainer = ({ refreshModifierGroups, modifierGroup, addModifierGroup, show, setShow }: Props) => {
-  const title = modifierGroup.id === 0 ? 'Agregar categoria' : 'Editar categoria'
+const ModifierGroupFormContainer = ({ refreshModifierGroups, modifierGroups, modifierGroup, addModifierGroup, show, setShow }: Props) => {
+  const title = modifierGroup.id === 0 ? 'Agregar grupo' : 'Editar grupo'
   return (
     <>
       <Button variant={'outline-dark'} className='my-2' onClick={addModifierGroup}>
@@ -22,8 +23,8 @@ const ModifierGroupFormContainer = ({ refreshModifierGroups, modifierGroup, addM
       </Button>
       <CustomModal title={title} show={show} handleClose={(() => setShow(false))}>
         {modifierGroup.id === 0 ?
-          <CreateModifierGroup refreshModifierGroups={refreshModifierGroups} modifierGroup={modifierGroup} /> :
-          <EditModifierGroup refreshModifierGroups={refreshModifierGroups} modifierGroup={modifierGroup} />}
+          <CreateModifierGroup modifierGroups={modifierGroups} refreshModifierGroups={refreshModifierGroups} modifierGroup={modifierGroup} /> :
+          <EditModifierGroup modifierGroups={modifierGroups} refreshModifierGroups={refreshModifierGroups} modifierGroup={modifierGroup} />}
       </CustomModal>
     </>
   )

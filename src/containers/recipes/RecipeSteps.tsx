@@ -67,7 +67,7 @@ const RecipeSteps = ({ recipe, refreshRecipes }: Props) => {
   return (
     <>
       <Button variant={'outline-success'} className='m-2' onClick={(() => setShow(true))}>
-        Receta
+        Pasos
       </Button>
       <CustomModal title='Agregar receta' show={show} handleClose={(() => setShow(false))}>
         <div className="col-12 d-flex flex-wrap justify-content-center">

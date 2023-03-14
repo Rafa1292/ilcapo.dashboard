@@ -57,7 +57,7 @@ const ModifierGroups = () => {
   return (
     <div className='col-lg-6 justify-content-center d-flex  flex-wrap'>
       <h1 className='my-2 col-12 text-center'>Grupos modificadores</h1>
-      <ModifierGroupFormContainer refreshModifierGroups={refreshModifierGroups} modifierGroup={modifierGroup}
+      <ModifierGroupFormContainer modifierGroups={modifierGroups} refreshModifierGroups={refreshModifierGroups} modifierGroup={modifierGroup}
         addModifierGroup={addModifierGroup} show={show} setShow={setShow} />
       {
         modifierGroups.length > 0 &&
@@ -67,7 +67,7 @@ const ModifierGroups = () => {
               <TableRow key={index} tableData={[modifierGroup.id.toString(), modifierGroup.name]}>
                 <button className="btn btn-outline-secondary m-2" onClick={(() => editModifierGroup(modifierGroup.id))}>Editar</button>
                 <DeleteModifierGroup id={modifierGroup.id} refreshModifierGroups={refreshModifierGroups} />
-                <ModifierElements refreshModifierGroups={refreshModifierGroups} modifierGroup={modifierGroup} />
+                <ModifierElements modifierGroups={modifierGroups.filter(x => x.id !== modifierGroup.id)} refreshModifierGroups={refreshModifierGroups} modifierGroup={modifierGroup} />
               </TableRow>
             ))
           }

@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Col, Form, InputGroup } from 'react-bootstrap'
 import { CustomInputAttributes } from '../../types/customInputAttributes'
 
 interface Props {
   customInputNumber: CustomInputAttributes
-  value: number
+  value: number | string
   showLabel?: boolean
   isRequired?: boolean
 }
@@ -22,7 +22,7 @@ const CustomInputNumber = ({ customInputNumber, value, showLabel = true, isRequi
             type="string"
             placeholder={customInputNumber.label}
             name={customInputNumber.name}
-            value={value}
+            value={value === 0 ? '' : value}
             onChange={customInputNumber.handleChange}
             required={isRequired}
             pattern={customInputNumber.pattern}

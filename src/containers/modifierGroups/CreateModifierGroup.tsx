@@ -6,9 +6,10 @@ import { ModifierGroup } from '../../types/ModifierGroup'
 interface Props {
   modifierGroup: ModifierGroup
   refreshModifierGroups: () => void
+  modifierGroups: ModifierGroup[]
 }
 
-const CreateModifierGroup = ({ modifierGroup, refreshModifierGroups }: Props) => {
+const CreateModifierGroup = ({ modifierGroup, modifierGroups, refreshModifierGroups }: Props) => {
   const [errors, setErrors] = useState<string[]>([])
 
   const handleSubmit = async (newModifierGroup: ModifierGroup) => {
@@ -22,7 +23,7 @@ const CreateModifierGroup = ({ modifierGroup, refreshModifierGroups }: Props) =>
   }
 
   return (
-    <ModifierGroupForm errors={errors} currentModifierGroup={modifierGroup} action={handleSubmit} />
+    <ModifierGroupForm modifierGroups={modifierGroups} errors={errors} currentModifierGroup={modifierGroup} action={handleSubmit} />
   )
 }
 

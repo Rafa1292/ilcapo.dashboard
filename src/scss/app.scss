@@ -219,3 +219,11 @@ main {
 .modal::-webkit-scrollbar-track {
   border-radius: 10px;
 }
+
+.react-datalist-input__label {
+  display: none;
+}
+
+.react-datalist-input__textbox{
+  height: 38px;
+}

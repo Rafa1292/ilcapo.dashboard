@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import CustomInputText from '../generics/CustomInputText'
 import GenericForm from '../generics/GenericForm'
-import CustomInputSelect from '../generics/CustomInputSelect'
 import { useGetList } from '../../hooks/useAPI'
 import { Product } from '../../types/Product'
 import CustomInputNumber from '../generics/CustomInputNumber'
@@ -17,7 +16,6 @@ interface Props {
 
 const productForm = ({ currentProduct, action, errors }: Props) => {
   const [product, setProduct] = useState<Product>(currentProduct)
-  const [recipes, setRecipes] = useState<Recipe[]>([])
   const submitText = currentProduct?.id === 0 ? 'Agregar' : 'Editar'
 
   const handleChange = (event: any) => {
@@ -32,16 +30,7 @@ const productForm = ({ currentProduct, action, errors }: Props) => {
 
   const handleSubmit = () => {
     action(product)
-  }
-
-  useEffect(() => {
-    const getRecipes = async () => {
-      const response = await useGetList<Recipe[]>('recipes')
-      setRecipes(response.data)
-    }
-    getRecipes()
-  }, [])
-  
+  }  
 
   return (
     <>
@@ -70,16 +59,6 @@ const productForm = ({ currentProduct, action, errors }: Props) => {
             handleChange: handleChange, pattern: regexOptions.integer, validationMessage: 'Ingrese un precio válido'
           }
         } />
-
-        <CustomInputSelect value={product.recipeId}
-          customInputSelect={
-            {
-              label: 'Receta', name: 'recipeId',
-              handleChange: handleChange, pattern: '', validationMessage: 'Seleccione una receta'
-            }}
-          data={recipes.map(recipe => { return { value: recipe.id, label: recipe.name } })}
-          defaultLegend={'Seleccione una receta'}
-        />
 
         <CustomInputCheck value={product.allowsModify} customInputCheck={
           {

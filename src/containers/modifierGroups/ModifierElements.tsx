@@ -11,9 +11,10 @@ import { ModifierGroup } from '../../types/ModifierGroup'
 interface Props {
   modifierGroup: ModifierGroup
   refreshModifierGroups: () => void
+  modifierGroups: ModifierGroup[]
 }
 
-const ModifierGroups = ({ modifierGroup, refreshModifierGroups }: Props) => {
+const ModifierGroups = ({ modifierGroup, modifierGroups, refreshModifierGroups }: Props) => {
   const [show, setShow] = useState<boolean>(false)
   const [showForm, setShowForm] = useState<boolean>(false)
 
@@ -35,12 +36,12 @@ const ModifierGroups = ({ modifierGroup, refreshModifierGroups }: Props) => {
           }
         </div>
         <div className={`col-12 step-form_container ${!showForm ? '' : 'step-form_containerOpen'}`}>
-          <CreateModifierElement refreshModifierGroups={refreshModifierGroups} modifierGroupId={modifierGroup.id}/>
+          <CreateModifierElement modifierGroups={modifierGroups} refreshModifierGroups={refreshModifierGroups} modifierGroupId={modifierGroup.id}/>
         </div>
 
         {modifierGroup.elements.sort(function (a, b) { return a.id - b.id }).map((groupElement, index) => (
           <div className='col-12' key={index}>
-            <EditModifierElement refreshModifierGroups={refreshModifierGroups} modifierElement={groupElement.modifierElement}
+            <EditModifierElement modifierGroups={modifierGroups} refreshModifierGroups={refreshModifierGroups} modifierElement={groupElement.modifierElement}
             />
           </div>
         ))}

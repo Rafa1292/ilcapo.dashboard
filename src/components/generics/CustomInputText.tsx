@@ -5,14 +5,18 @@ import { CustomInputAttributes } from '../../types/customInputAttributes'
 interface Props {
   customInputText: CustomInputAttributes
   value: string
+  showLabel?: boolean
 }
 
-const CustomInputText = ({customInputText, value}: Props) => {
-  
+const CustomInputText = ({ customInputText, value, showLabel }: Props) => {
+
   return (
     <>
       <Form.Group className='my-2' as={Col} md="12" controlId="validationCustomUsername">
-        <Form.Label className='m-0'>{customInputText.label}</Form.Label>
+        {
+          showLabel &&
+          <Form.Label className='m-0'>{customInputText.label}</Form.Label>
+        }
         <InputGroup hasValidation>
           <Form.Control
             type="text"

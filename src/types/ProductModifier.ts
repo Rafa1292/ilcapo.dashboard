@@ -1,11 +1,11 @@
 import { ModifierGroup } from './ModifierGroup'
 
-export interface ProductModifierAttributes {
+export interface ProductModifier {
   id: number
   productId: number
   modifierGroupId: number
-  modifierGroup: ModifierGroup
+  modifierGroup?: ModifierGroup
   delete: boolean
-  createdAt?: Date
   createdBy?: number
+  updatedBy?: number
 }

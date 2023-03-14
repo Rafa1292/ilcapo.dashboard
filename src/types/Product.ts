@@ -1,3 +1,5 @@
+import { ProductModifier } from './ProductModifier'
+
 export interface Product {
   id: number
   name: string
@@ -5,7 +7,7 @@ export interface Product {
   description: string
   pictureUrl: string
   allowsModify: boolean
-  recipeId: number
+  productModifiers: ProductModifier[]
   delete: boolean
   createdAt?: Date
   updatedAt?: Date

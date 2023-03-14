@@ -3,6 +3,7 @@ import Table from '../components/generics/Table'
 import TableRow from '../components/generics/TableRow'
 import DeleteProduct from '../containers/products/DeleteProduct'
 import ProductFormContainer from '../containers/products/ProductFormContainer'
+import ProductRecipes from '../containers/products/ProductRecipes'
 import { useGetList } from '../hooks/useAPI'
 import { Product } from '../types/Product'
 
@@ -12,8 +13,8 @@ const Products = () => {
     name: '',
     description: '',
     price: 0,
-    recipeId: 0,
     pictureUrl: '',
+    productModifiers: [],
     allowsModify: false,
     delete: false,
     createdBy: 0,
@@ -64,6 +65,7 @@ const Products = () => {
           {
             products.map((product, index) => (
               <TableRow key={index} tableData={[product.name, product.price.toString(), product.allowsModify ? 'Si': 'No']}>
+                <ProductRecipes refreshProducts={refreshProducts} product={product}/>
                 <button className="btn btn-outline-secondary m-2" onClick={(() => editProduct(product.id))}>Editar</button>
                 <DeleteProduct id={product.id} refreshProducts={refreshProducts} />
               </TableRow>
