@@ -1,36 +1,31 @@
 import React, { useState } from 'react'
 import { regexOptions } from '../../enums/regexOptions'
 import { ModifierGroup } from '../../types/ModifierGroup'
-import { UpgradeModifierGroup } from '../../types/UpgradeModifierGroup'
+import { ModifierGroupUpgrade } from '../../types/ModifierGroupUpgrade'
 import CustomInputNumber from '../generics/CustomInputNumber'
 import CustomInputSelect from '../generics/CustomInputSelect'
 import CustomInputText from '../generics/CustomInputText'
 
 interface Props {
-  upgradeModifierGroup: UpgradeModifierGroup
+  upgradeModifierGroup: ModifierGroupUpgrade
   modifierGroups: ModifierGroup[]
+  handleChange : (event: any) => void
 }
 
-const ModifierGroupUpgrdeForm = ({ upgradeModifierGroup, modifierGroups }: Props) => {
-  const [currentUpgradeModifierGroup, setUpgradeModifierGroup] = useState<UpgradeModifierGroup>(upgradeModifierGroup)
-
-  const handleChange = (event: any) => {
-    const { name, value } = event.target
-    setUpgradeModifierGroup({ ...currentUpgradeModifierGroup, [name]: value })
-  }
+const ModifierGroupUpgrdeForm = ({ upgradeModifierGroup, modifierGroups, handleChange }: Props) => {
 
   return (
     <div className='col-12 p-0 d-flex flex-wrap'>
       <div className="col-4 p-1">
-        <CustomInputNumber showLabel={false} value={currentUpgradeModifierGroup.price} customInputNumber={
+        <CustomInputNumber showLabel={false} value={upgradeModifierGroup.price} customInputNumber={
           {
-            label: 'Precio esperado', name: 'price',
+            label: 'Precio', name: 'price',
             handleChange: handleChange, pattern: regexOptions.integer, validationMessage: 'Ingrese un precio válido'
           }
         } />
       </div>
       <div className="col-4 p-1">
-        <CustomInputText showLabel={false} value={currentUpgradeModifierGroup.label}
+        <CustomInputText showLabel={false} value={upgradeModifierGroup.label}
           customInputText={
             {
               label: 'Etiqueta', name: 'label',
@@ -40,7 +35,7 @@ const ModifierGroupUpgrdeForm = ({ upgradeModifierGroup, modifierGroups }: Props
           } />
       </div>
       <div className="col-4 p-1">
-        <CustomInputSelect showLabel={false} value={currentUpgradeModifierGroup.newModifierGroupId}
+        <CustomInputSelect showLabel={false} value={upgradeModifierGroup.newModifierGroupId}
           customInputSelect={
             {
               label: 'Modificadores', name: 'newModifierGroupId',

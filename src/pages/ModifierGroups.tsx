@@ -6,6 +6,7 @@ import ModifierElements from '../containers/modifierGroups/ModifierElements'
 import ModifierGroupFormContainer from '../containers/modifierGroups/ModifierGroupFormContainer'
 import { useGetList } from '../hooks/useAPI'
 import { ModifierGroup } from '../types/ModifierGroup'
+import { ModifierGroupUpgrade } from '../types/ModifierGroupUpgrade'
 
 const ModifierGroups = () => {
   const initialModifierGroup: ModifierGroup = {
@@ -16,6 +17,7 @@ const ModifierGroups = () => {
     isRequired: false,
     label: '',
     elements: [],
+    modifierGroupUpgrade: {} as ModifierGroupUpgrade,
     delete: false,
     createdBy: 0,
     updatedBy: 0

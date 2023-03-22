@@ -3,11 +3,11 @@ import { buttonTypes } from '../../enums/buttonTypes'
 import { useGetList } from '../../hooks/useAPI'
 import { ModifierGroup } from '../../types/ModifierGroup'
 import { ProductModifier } from '../../types/ProductModifier'
-import { UpgradeModifierGroup } from '../../types/UpgradeModifierGroup'
+import { ModifierGroupUpgrade } from '../../types/ModifierGroupUpgrade'
 import CustomBtn from '../generics/CustomBtn'
 import CustomInputCheck from '../generics/CustomInputChecbox'
 import CustomInputSelect from '../generics/CustomInputSelect'
-import ModifierGroupUpgrdeForm from '../modifierGroupUpgrades/ModifierGroupUpgrdeForm'
+import ModifierGroupUpgrdeForm from '../modifierGroupUpgrades/ModifierGroupUpgradeForm'
 
 interface Props {
   action: (productModifier: ProductModifier) => void

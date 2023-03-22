@@ -227,3 +227,7 @@ main {
 .react-datalist-input__textbox{
   height: 38px;
 }
+
+label {
+  user-select: none;
+}

@@ -1,5 +1,5 @@
 
-export interface UpgradeModifierGroup {
+export interface ModifierGroupUpgrade {
   id: number
   price: number
   label: string
