@@ -39,10 +39,18 @@ const InputForm = ({ currentInput, action, errors }: Props) => {
     action(input)
   }
 
+  const setMeasuresForEdit = (tmpMagnitudes: Magnitude[]) => {
+    if (input.measure) {
+      const magnitude = tmpMagnitudes.find(magnitude => magnitude.id === input.measure.magnitudeId)
+      setMagnitude(magnitude)
+    }
+  }
+
   useEffect(() => {
     const getMagnitudes = async () => {
       const response = await useGetList<Magnitude[]>('magnitudes')
       if (!response.error) {
+        setMeasuresForEdit(response.data)
         setMagnitudes(response.data)
       }
     }
@@ -89,7 +97,7 @@ const InputForm = ({ currentInput, action, errors }: Props) => {
           }
         } />
 
-        <CustomInputSelect value={input.measure.magnitudeId}
+        <CustomInputSelect value={input.measure?.magnitudeId}
           customInputSelect={
             {
               label: 'Magnitud', name: 'measureId',

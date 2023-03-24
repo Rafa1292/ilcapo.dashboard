@@ -52,10 +52,19 @@ const ProviderInputForm = ({ currentProviderInput, cancelAction, action, errors,
     const allowedBrands = brands.filter(brand => !restringedBrandsId.includes(brand.id))
     setTempBrands(allowedBrands)
   }
+
+  const setMeasuresForEdit = (magnitudes: Magnitude[]) => {
+    if (providerInput.measureId) {
+      const magnitude = magnitudes.find(input => input.id === providerInput.measure?.magnitudeId)
+      setMagnitude(magnitude)
+    }
+  }
+
   useEffect(() => {
     const getMagnitudes = async () => {
       const response = await useGetList<Magnitude[]>('magnitudes')
       if (!response.error) {
+        setMeasuresForEdit(response.data)
         setMagnitudes(response.data)
       }
     }
@@ -124,7 +133,7 @@ const ProviderInputForm = ({ currentProviderInput, cancelAction, action, errors,
               handleChange: handleChangeMagnitude, pattern: '', validationMessage: 'Seleccione una magnitud'
             }}
           data={magnitudes.map(magnitud => { return { value: magnitud.id, label: magnitud.name } })}
-          defaultLegend={'Seleccione una magnitud'}
+          defaultLegend={'Magnitudes...'}
         />
 
         {
@@ -136,7 +145,7 @@ const ProviderInputForm = ({ currentProviderInput, cancelAction, action, errors,
                 handleChange: handleChange, pattern: '', validationMessage: 'Seleccione una medida'
               }}
             data={magnitude.measures.map(measure => { return { value: measure.id, label: measure.name } })}
-            defaultLegend={'Seleccione una medida'}
+            defaultLegend={'Medidas...'}
           />
         }
 
@@ -147,7 +156,7 @@ const ProviderInputForm = ({ currentProviderInput, cancelAction, action, errors,
               handleChange: handleChange, pattern: '', validationMessage: 'Seleccione una marca'
             }}
           data={tempBrands.map(brand => { return { value: brand.id, label: brand.name } })}
-          defaultLegend={'Seleccione una marca'}
+          defaultLegend={'Marcas...'}
         />
 
         <CustomInputNumber value={providerInput.expectedPrice} customInputNumber={

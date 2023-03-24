@@ -3,6 +3,8 @@ import { Col, Form, InputGroup } from 'react-bootstrap'
 import DatalistInput from 'react-datalist-input'
 import { CustomInputAttributes } from '../../types/customInputAttributes'
 import 'react-datalist-input/dist/styles.css'
+import CustomBtn from './CustomBtn'
+import { buttonTypes } from '../../enums/buttonTypes'
 
 interface option {
   value: number
@@ -42,14 +44,9 @@ const CustomInputSelect = ({ defaultLegend, customInputSelect, value, data, show
               return { id: item.value, value: item.label }
             })}
           />
-          {/* <Form.Select name={customInputSelect.name} onChange={customInputSelect.handleChange} value={value} required>
-            <option value={''}>{defaultLegend}</option>
-            {data.map((item) => (
-              <option key={item.value} value={item.value}>
-                {item.label}
-              </option>
-            ))}
-          </Form.Select> */}
+          <div className="datalist_clean" onClick={(() => setCurrentValue(''))}>
+            x
+          </div>
           <Form.Control.Feedback id={customInputSelect.name} type="invalid">
             {customInputSelect.validationMessage}
           </Form.Control.Feedback>

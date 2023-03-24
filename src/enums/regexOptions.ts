@@ -5,4 +5,5 @@ export enum regexOptions {
   integer = '[0-9]*',
   integerLengthTwo = '[0-9]{2}*',
   phone = '[0-9]{8}',
+  textWithSpaceAndComma = '[a-zA-Z0-9\\u00E0-\\u00FC\\s?,]*',
 }

@@ -231,3 +231,15 @@ main {
 label {
   user-select: none;
 }
+
+.datalist_clean{
+  padding: 0.5rem;
+  position: absolute;
+  opacity: 0.5;
+  right: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  font-weight: bolder;
+  cursor: pointer;
+}

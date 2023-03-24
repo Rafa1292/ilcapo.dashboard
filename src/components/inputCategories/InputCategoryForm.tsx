@@ -30,7 +30,7 @@ const InputCategoryForm = ({ currentInputCategory, action, errors }: Props) => {
           customInputText={
             {
               label: 'Nombre de categoria', name: 'name',
-              handleChange: handleChange, pattern: regexOptions.text,
+              handleChange: handleChange, pattern: regexOptions.textWithSpaceAndComma,
               validationMessage: 'Ingrese un nombre válido'
             }
           } />
