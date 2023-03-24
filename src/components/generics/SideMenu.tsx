@@ -54,6 +54,12 @@ const Navbar = () => {
               </Link>
             </li>
             <li className="nav-item">
+              <Link className="nav-link" aria-current="page" to='/IngredientCategories'>
+                <span data-feather="home" className="align-text-bottom" />
+                Categorias de ingrediente
+              </Link>
+            </li>
+            <li className="nav-item">
               <Link className="nav-link" aria-current="page" to='/Ingredients'>
                 <span data-feather="home" className="align-text-bottom" />
                 Ingredientes

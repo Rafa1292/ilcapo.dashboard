@@ -41,7 +41,7 @@ const ModifierGroups = ({ modifierGroup, modifierGroups, refreshModifierGroups }
 
         {modifierGroup.elements.sort(function (a, b) { return a.id - b.id }).map((groupElement, index) => (
           <div className='col-12' key={index}>
-            <EditModifierElement modifierGroups={modifierGroups} refreshModifierGroups={refreshModifierGroups} modifierElement={groupElement.modifierElement}
+            <EditModifierElement modifierGroupId={modifierGroup.id} modifierGroups={modifierGroups} refreshModifierGroups={refreshModifierGroups} modifierElement={groupElement.modifierElement}
             />
           </div>
         ))}

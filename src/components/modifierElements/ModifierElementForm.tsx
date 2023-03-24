@@ -59,6 +59,9 @@ const ModifierElementForm = ({ currentModifierElement, modifierGroups, action, e
     if (checked) {
       setModifierElement({ ...modifierElement, productReference: initialProductReference})
     }
+    else {
+      setModifierElement({ ...modifierElement, productReference: undefined })
+    }
   }
 
 

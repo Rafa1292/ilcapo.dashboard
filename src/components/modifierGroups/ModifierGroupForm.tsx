@@ -27,7 +27,7 @@ const initialModifierGroupUpgrade: ModifierGroupUpgrade = {
 }
 
 const ModifierGroupForm = ({ currentModifierGroup: currentModifierGroup, action, errors, modifierGroups }: Props) => {
-  const [modifierGroup, setModifierGroup] = useState<ModifierGroup>({...currentModifierGroup, modifierGroupUpgrade: currentModifierGroup.modifierGroupUpgrade?.id > 0 ? currentModifierGroup.modifierGroupUpgrade : initialModifierGroupUpgrade})
+  const [modifierGroup, setModifierGroup] = useState<ModifierGroup>({ ...currentModifierGroup, modifierGroupUpgrade: currentModifierGroup.modifierGroupUpgrade?.id > 0 ? currentModifierGroup.modifierGroupUpgrade : initialModifierGroupUpgrade })
   const submitText = currentModifierGroup?.id === 0 ? 'Agregar' : 'Editar'
   const [upgradable, setUpgradable] = useState<boolean>(modifierGroup?.modifierGroupUpgrade.id > 0 ? true : false)
 
@@ -50,7 +50,15 @@ const ModifierGroupForm = ({ currentModifierGroup: currentModifierGroup, action,
     setModifierGroup({ ...modifierGroup, modifierGroupUpgrade: { ...modifierGroup.modifierGroupUpgrade, [name]: value } })
   }
 
-  
+  const handleUpgradableCheck = (event: any) => {
+    const { checked } = event.target
+    setUpgradable(checked)
+    if (!checked) {
+      setModifierGroup({ ...modifierGroup, modifierGroupUpgrade: {} as ModifierGroupUpgrade })
+    }
+  }
+
+
   return (
     <>
       <GenericForm errors={errors} submitText={submitText} handleSubmit={handleSubmit}>
@@ -91,14 +99,14 @@ const ModifierGroupForm = ({ currentModifierGroup: currentModifierGroup, action,
         < CustomInputCheck value={upgradable}
           customInputCheck={{
             label: '¿Es mejorable?', pattern: '', validationMessage: '',
-            name: 'upgradable', handleChange: () => setUpgradable(!upgradable)
+            name: 'upgradable', handleChange: handleUpgradableCheck
           }
           } />
 
         {
-          upgradable && 
+          upgradable &&
           <div className="col-10 p-2">
-            <ModifierGroupUpgradeContainer  handleChange={handleModifierGroupUpgradeChange} modifierGroups={modifierGroups} modifierGroupUpgrade={modifierGroup.modifierGroupUpgrade}/>
+            <ModifierGroupUpgradeContainer handleChange={handleModifierGroupUpgradeChange} modifierGroups={modifierGroups} modifierGroupUpgrade={modifierGroup.modifierGroupUpgrade} />
           </div>
         }
 

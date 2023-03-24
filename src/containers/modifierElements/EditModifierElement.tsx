@@ -10,15 +10,16 @@ interface Props {
   modifierElement: ModifierElement
   refreshModifierGroups: () => void
   modifierGroups: ModifierGroup[]
+  modifierGroupId: number
 }
 
-const EditModifierElement = ({ modifierElement, modifierGroups, refreshModifierGroups }: Props) => {
+const EditModifierElement = ({ modifierElement, modifierGroups, modifierGroupId, refreshModifierGroups }: Props) => {
   const [errors, setErrors] = useState<string[]>([])
   const [editMode, setEditMode] = useState<boolean>(false)
 
   const action = async (modifierElement: ModifierElement) => {
     console.log(modifierElement)
-    const response = await usePatch(`modifierElements/${modifierElement.id}`, modifierElement)
+    const response = await usePatch(`modifierElements/${modifierElement.id}/${modifierGroupId}`, modifierElement)
     if (response.error) {
       setErrors(response.message)
     } else {
