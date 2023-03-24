@@ -3,26 +3,17 @@ import ModifierGroupUpgradeForm from '../../components/modifierGroupUpgrades/Mod
 import { ModifierGroup } from '../../types/ModifierGroup'
 import { ModifierGroupUpgrade } from '../../types/ModifierGroupUpgrade'
 
-const initialUpgradeModifierGroup: ModifierGroupUpgrade = {
-  id: 0,
-  modifierGroupId: 0,
-  newModifierGroupId: 0,
-  price: 0,
-  label: '',
-  updatedBy: 1,
-  createdBy: 1
-}
-
 interface Props {
   modifierGroups: ModifierGroup[],
   handleChange: (event: any) => void
+  modifierGroupUpgrade: ModifierGroupUpgrade
 }
 
 
-const CreateModifierGroupUpgrade = ({modifierGroups, handleChange}: Props) => {
+const CreateModifierGroupUpgrade = ({modifierGroups, handleChange, modifierGroupUpgrade}: Props) => {
   return (
     <>
-      <ModifierGroupUpgradeForm handleChange={handleChange} upgradeModifierGroup={initialUpgradeModifierGroup} modifierGroups={modifierGroups}/>
+      <ModifierGroupUpgradeForm handleChange={handleChange} modifierGroupUpgrade={modifierGroupUpgrade} modifierGroups={modifierGroups}/>
     </>
   )
 }

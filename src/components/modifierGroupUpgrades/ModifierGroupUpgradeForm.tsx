@@ -7,17 +7,17 @@ import CustomInputSelect from '../generics/CustomInputSelect'
 import CustomInputText from '../generics/CustomInputText'
 
 interface Props {
-  upgradeModifierGroup: ModifierGroupUpgrade
+  modifierGroupUpgrade: ModifierGroupUpgrade
   modifierGroups: ModifierGroup[]
   handleChange : (event: any) => void
 }
 
-const ModifierGroupUpgrdeForm = ({ upgradeModifierGroup, modifierGroups, handleChange }: Props) => {
+const ModifierGroupUpgrdeForm = ({ modifierGroupUpgrade, modifierGroups, handleChange }: Props) => {
 
   return (
     <div className='col-12 p-0 d-flex flex-wrap'>
       <div className="col-4 p-1">
-        <CustomInputNumber showLabel={false} value={upgradeModifierGroup.price} customInputNumber={
+        <CustomInputNumber showLabel={false} value={modifierGroupUpgrade.price} customInputNumber={
           {
             label: 'Precio', name: 'price',
             handleChange: handleChange, pattern: regexOptions.integer, validationMessage: 'Ingrese un precio válido'
@@ -25,7 +25,7 @@ const ModifierGroupUpgrdeForm = ({ upgradeModifierGroup, modifierGroups, handleC
         } />
       </div>
       <div className="col-4 p-1">
-        <CustomInputText showLabel={false} value={upgradeModifierGroup.label}
+        <CustomInputText showLabel={false} value={modifierGroupUpgrade.label}
           customInputText={
             {
               label: 'Etiqueta', name: 'label',
@@ -35,7 +35,7 @@ const ModifierGroupUpgrdeForm = ({ upgradeModifierGroup, modifierGroups, handleC
           } />
       </div>
       <div className="col-4 p-1">
-        <CustomInputSelect showLabel={false} value={upgradeModifierGroup.newModifierGroupId}
+        <CustomInputSelect showLabel={false} value={modifierGroupUpgrade.newModifierGroupId}
           customInputSelect={
             {
               label: 'Modificadores', name: 'newModifierGroupId',

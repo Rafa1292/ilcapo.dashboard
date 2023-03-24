@@ -7,6 +7,7 @@ import ModifierGroupUpgrdeForm from '../modifierGroupUpgrades/ModifierGroupUpgra
 import CustomInputCheck from '../generics/CustomInputChecbox'
 import { ModifierGroupUpgrade } from '../../types/ModifierGroupUpgrade'
 import CustomInputNumber from '../generics/CustomInputNumber'
+import ModifierGroupUpgradeContainer from '../../containers/modifierGroupUpgrades/ModifierGroupUpgradeContainer'
 
 interface Props {
   currentModifierGroup: ModifierGroup
@@ -28,7 +29,7 @@ const initialModifierGroupUpgrade: ModifierGroupUpgrade = {
 const ModifierGroupForm = ({ currentModifierGroup: currentModifierGroup, action, errors, modifierGroups }: Props) => {
   const [modifierGroup, setModifierGroup] = useState<ModifierGroup>({...currentModifierGroup, modifierGroupUpgrade: currentModifierGroup.modifierGroupUpgrade?.id > 0 ? currentModifierGroup.modifierGroupUpgrade : initialModifierGroupUpgrade})
   const submitText = currentModifierGroup?.id === 0 ? 'Agregar' : 'Editar'
-  const [upgradable, setUpgradable] = useState<boolean>(false)
+  const [upgradable, setUpgradable] = useState<boolean>(modifierGroup?.modifierGroupUpgrade.id > 0 ? true : false)
 
   const handleChange = (event: any) => {
     const { name, value } = event.target
@@ -48,6 +49,7 @@ const ModifierGroupForm = ({ currentModifierGroup: currentModifierGroup, action,
     const { name, value } = event.target
     setModifierGroup({ ...modifierGroup, modifierGroupUpgrade: { ...modifierGroup.modifierGroupUpgrade, [name]: value } })
   }
+
   
   return (
     <>
@@ -96,7 +98,7 @@ const ModifierGroupForm = ({ currentModifierGroup: currentModifierGroup, action,
         {
           upgradable && 
           <div className="col-10 p-2">
-            <ModifierGroupUpgrdeForm handleChange={handleModifierGroupUpgradeChange} modifierGroups={modifierGroups} upgradeModifierGroup={modifierGroup.modifierGroupUpgrade} />
+            <ModifierGroupUpgradeContainer  handleChange={handleModifierGroupUpgradeChange} modifierGroups={modifierGroups} modifierGroupUpgrade={modifierGroup.modifierGroupUpgrade}/>
           </div>
         }
 
