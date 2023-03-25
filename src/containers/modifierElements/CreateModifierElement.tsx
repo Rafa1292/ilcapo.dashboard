@@ -3,6 +3,7 @@ import Loader from '../../components/generics/loader'
 import ModifierElementForm from '../../components/modifierElements/ModifierElementForm'
 import { usePost } from '../../hooks/useAPI'
 import { ModifierElement } from '../../types/ModifierElement'
+import { ModifierElementUpgrade } from '../../types/ModifierElementUpgrade'
 import { ModifierGroup } from '../../types/ModifierGroup'
 
 
@@ -15,6 +16,7 @@ const initialModifierElement: ModifierElement = {
   combinable: false,
   combinableModifierGroupId: 0,
   numberOfParts: 0,
+  modifierElementUpgrade: {} as ModifierElementUpgrade,
   delete: false,
   createdBy: 0,
   updatedBy: 0

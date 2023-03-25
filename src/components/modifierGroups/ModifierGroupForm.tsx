@@ -3,11 +3,11 @@ import { ModifierGroup } from '../../types/ModifierGroup'
 import { regexOptions } from '../../enums/regexOptions'
 import CustomInputText from '../generics/CustomInputText'
 import GenericForm from '../generics/GenericForm'
-import ModifierGroupUpgrdeForm from '../modifierGroupUpgrades/ModifierGroupUpgradeForm'
+import ModifierElementUpgrdeForm from '../modifierElementUpgrades/ModifierElementUpgradeForm'
 import CustomInputCheck from '../generics/CustomInputChecbox'
-import { ModifierGroupUpgrade } from '../../types/ModifierGroupUpgrade'
+import { ModifierElementUpgrade } from '../../types/ModifierElementUpgrade'
 import CustomInputNumber from '../generics/CustomInputNumber'
-import ModifierGroupUpgradeContainer from '../../containers/modifierGroupUpgrades/ModifierGroupUpgradeContainer'
+import ModifierElementUpgradeContainer from '../../containers/modifierGroupUpgrades/ModifierElementUpgradeContainer'
 
 interface Props {
   currentModifierGroup: ModifierGroup
@@ -16,20 +16,9 @@ interface Props {
   modifierGroups: ModifierGroup[]
 }
 
-const initialModifierGroupUpgrade: ModifierGroupUpgrade = {
-  id: 0,
-  modifierGroupId: 0,
-  newModifierGroupId: 0,
-  price: 0,
-  label: '',
-  updatedBy: 1,
-  createdBy: 1
-}
-
 const ModifierGroupForm = ({ currentModifierGroup: currentModifierGroup, action, errors, modifierGroups }: Props) => {
-  const [modifierGroup, setModifierGroup] = useState<ModifierGroup>({ ...currentModifierGroup, modifierGroupUpgrade: currentModifierGroup.modifierGroupUpgrade?.id > 0 ? currentModifierGroup.modifierGroupUpgrade : initialModifierGroupUpgrade })
+  const [modifierGroup, setModifierGroup] = useState<ModifierGroup>({ ...currentModifierGroup })
   const submitText = currentModifierGroup?.id === 0 ? 'Agregar' : 'Editar'
-  const [upgradable, setUpgradable] = useState<boolean>(modifierGroup?.modifierGroupUpgrade.id > 0 ? true : false)
 
   const handleChange = (event: any) => {
     const { name, value } = event.target
@@ -44,20 +33,6 @@ const ModifierGroupForm = ({ currentModifierGroup: currentModifierGroup, action,
   const handleSubmit = () => {
     action(modifierGroup)
   }
-
-  const handleModifierGroupUpgradeChange = (event: any) => {
-    const { name, value } = event.target
-    setModifierGroup({ ...modifierGroup, modifierGroupUpgrade: { ...modifierGroup.modifierGroupUpgrade, [name]: value } })
-  }
-
-  const handleUpgradableCheck = (event: any) => {
-    const { checked } = event.target
-    setUpgradable(checked)
-    if (!checked) {
-      setModifierGroup({ ...modifierGroup, modifierGroupUpgrade: {} as ModifierGroupUpgrade })
-    }
-  }
-
 
   return (
     <>
@@ -95,20 +70,6 @@ const ModifierGroupForm = ({ currentModifierGroup: currentModifierGroup, action,
             name: 'isRequired', handleChange: handleIsRequiredCheck
           }
           } />
-
-        < CustomInputCheck value={upgradable}
-          customInputCheck={{
-            label: '¿Es mejorable?', pattern: '', validationMessage: '',
-            name: 'upgradable', handleChange: handleUpgradableCheck
-          }
-          } />
-
-        {
-          upgradable &&
-          <div className="col-10 p-2">
-            <ModifierGroupUpgradeContainer handleChange={handleModifierGroupUpgradeChange} modifierGroups={modifierGroups} modifierGroupUpgrade={modifierGroup.modifierGroupUpgrade} />
-          </div>
-        }
 
       </GenericForm>
     </>

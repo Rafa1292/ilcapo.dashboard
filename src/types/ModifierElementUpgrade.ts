@@ -1,9 +1,9 @@
 
-export interface ModifierGroupUpgrade {
+export interface ModifierElementUpgrade {
   id: number
   price: number
   label: string
-  modifierGroupId: number
+  modifierElementId: number
   newModifierGroupId: number
   updatedBy?: number
   createdBy?: number

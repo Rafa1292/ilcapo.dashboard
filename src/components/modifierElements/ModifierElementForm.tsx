@@ -11,6 +11,8 @@ import CustomInputCheck from '../generics/CustomInputChecbox'
 import { ModifierGroup } from '../../types/ModifierGroup'
 import { Product } from '../../types/Product'
 import { ProductReference } from '../../types/ProductReference'
+import ModifierElementUpgradeContainer from '../../containers/modifierGroupUpgrades/ModifierElementUpgradeContainer'
+import { ModifierElementUpgrade } from '../../types/ModifierElementUpgrade'
 
 interface Props {
   currentModifierElement: ModifierElement
@@ -19,21 +21,32 @@ interface Props {
   modifierGroups: ModifierGroup[]
 }
 
-const initialProductReference: ProductReference = 
-  {
-    id:0,
-    productId: 0,
-    modifierElementId: 0,
-    createdBy: 1,
-    updatedBy: 1
-  }
+const initialProductReference: ProductReference =
+{
+  id: 0,
+  productId: 0,
+  modifierElementId: 0,
+  createdBy: 1,
+  updatedBy: 1
+}
 
+const initialModifierElementUpgrade: ModifierElementUpgrade = {
+  id: 0,
+  modifierElementId: 0,
+  newModifierGroupId: 0,
+  price: 0,
+  label: '',
+  updatedBy: 1,
+  createdBy: 1
+}
 
 const ModifierElementForm = ({ currentModifierElement, modifierGroups, action, errors }: Props) => {
-  const [modifierElement, setModifierElement] = useState<ModifierElement>({ ...currentModifierElement })
+  const [modifierElement, setModifierElement] = useState<ModifierElement>({ ...currentModifierElement, modifierElementUpgrade: currentModifierElement.modifierElementUpgrade?.id > 0 ? currentModifierElement.modifierElementUpgrade : initialModifierElementUpgrade })
+
   const [recipes, setRecipes] = useState<Recipe[]>([])
   const [isProduct, setIsProduct] = useState<boolean>(false)
   const [products, setProducts] = useState<Product[]>([])
+  const [upgradable, setUpgradable] = useState<boolean>(modifierElement?.modifierElementUpgrade.id > 0 ? true : false)
 
   const submitText = currentModifierElement?.id === 0 ? 'Agregar' : 'Editar'
 
@@ -57,14 +70,25 @@ const ModifierElementForm = ({ currentModifierElement, modifierGroups, action, e
     const { checked } = event.target
     setIsProduct(checked)
     if (checked) {
-      setModifierElement({ ...modifierElement, productReference: initialProductReference})
+      setModifierElement({ ...modifierElement, productReference: initialProductReference })
     }
     else {
       setModifierElement({ ...modifierElement, productReference: undefined })
     }
   }
 
+  const handleUpgradableCheck = (event: any) => {
+    const { checked } = event.target
+    setUpgradable(checked)
+    if (!checked) {
+      setModifierElement({ ...modifierElement, modifierElementUpgrade: {} as ModifierElementUpgrade })
+    }
+  }
 
+  const handleModifierElementUpgradeChange = (event: any) => {
+    const { name, value } = event.target
+    setModifierElement({ ...modifierElement, modifierElementUpgrade: { ...modifierElement.modifierElementUpgrade, [name]: value } })
+  }
 
   const handleSubmit = () => {
     action(modifierElement)
@@ -174,6 +198,20 @@ const ModifierElementForm = ({ currentModifierElement, modifierGroups, action, e
             data={products.map(product => { return { value: product.id, label: product.name } })}
             defaultLegend={'Productos...'}
           />
+        }
+
+        <CustomInputCheck value={upgradable}
+          customInputCheck={{
+            label: '¿Es mejorable?', pattern: '', validationMessage: '',
+            name: 'upgradable', handleChange: handleUpgradableCheck
+          }
+          } />
+
+        {
+          upgradable &&
+          <div className="col-10 p-2">
+            <ModifierElementUpgradeContainer handleChange={handleModifierElementUpgradeChange} modifierGroups={modifierGroups} modifierElementUpgrade={modifierElement.modifierElementUpgrade} />
+          </div>
         }
 
       </GenericForm>
