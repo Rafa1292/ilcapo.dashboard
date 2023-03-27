@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ProductRecipeForm from '../../components/productRecipes/ProductRecipeForm'
 import { ProductModifier } from '../../types/ProductModifier'
 import { Recipe } from '../../types/Recipe'
@@ -10,6 +10,7 @@ interface Props {
 }
 
 const EditProductModifier = ({ productModifier, productId, recipes }: Props) => {
+
   return (
     <>
       {
@@ -20,7 +21,9 @@ const EditProductModifier = ({ productModifier, productId, recipes }: Props) => 
             <div className=' modifierGroup-elementContainer'>
               {
                 productModifier.modifierGroup.elements.map((element, indexModifier) => (
-                  <ProductRecipeForm key={indexModifier} productId={productId} recipes={recipes} modifierElementName={element.modifierElement.name} />
+                  <ProductRecipeForm upgradeElementLabel={element.modifierElement.modifierElementUpgrade != null ? element.modifierElement.modifierElementUpgrade.label : ''}
+                    key={indexModifier} productId={productId} recipes={recipes} modifierElementName={element.modifierElement.name} 
+                    modifierElementId={element.modifierElementId} defaultRecipeId={element.modifierElement?.defaultRecipeId}/>
                 ))
               }
             </div>

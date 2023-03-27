@@ -11,7 +11,7 @@ export interface ModifierElement {
   numberOfParts: number
   combinableModifierGroupId: number
   modifierElementUpgrade: ModifierElementUpgrade
-  productReference?: ProductReference
+  productReference: ProductReference
   delete: boolean
   updatedBy?: number
   createdBy?: number

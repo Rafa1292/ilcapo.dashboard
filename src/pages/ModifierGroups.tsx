@@ -42,6 +42,7 @@ const ModifierGroups = () => {
     const response = await useGetList<ModifierGroup[]>('modifierGroups')
     if (!response.error) {
       setModifierGroups(response.data)
+      console.log(response.data)
       setShow(false)
     }
   }

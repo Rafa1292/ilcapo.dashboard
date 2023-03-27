@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import CustomInputText from '../generics/CustomInputText'
 import GenericForm from '../generics/GenericForm'
 import CustomInputSelect from '../generics/CustomInputSelect'
-import { useGetList } from '../../hooks/useAPI'
+import { useDelete, useGetList } from '../../hooks/useAPI'
 import { ModifierElement } from '../../types/ModifierElement'
 import CustomInputNumber from '../generics/CustomInputNumber'
 import { regexOptions } from '../../enums/regexOptions'
@@ -41,10 +41,10 @@ const initialModifierElementUpgrade: ModifierElementUpgrade = {
 }
 
 const ModifierElementForm = ({ currentModifierElement, modifierGroups, action, errors }: Props) => {
-  const [modifierElement, setModifierElement] = useState<ModifierElement>({ ...currentModifierElement, modifierElementUpgrade: currentModifierElement.modifierElementUpgrade?.id > 0 ? currentModifierElement.modifierElementUpgrade : initialModifierElementUpgrade })
+  const [modifierElement, setModifierElement] = useState<ModifierElement>({ ...currentModifierElement, modifierElementUpgrade: currentModifierElement.modifierElementUpgrade?.id > 0 ? currentModifierElement.modifierElementUpgrade : {} as ModifierElementUpgrade })
 
   const [recipes, setRecipes] = useState<Recipe[]>([])
-  const [isProduct, setIsProduct] = useState<boolean>(false)
+  const [isProduct, setIsProduct] = useState<boolean>(currentModifierElement.productReference !== null && currentModifierElement.productReference?.id ? true : false)
   const [products, setProducts] = useState<Product[]>([])
   const [upgradable, setUpgradable] = useState<boolean>(modifierElement?.modifierElementUpgrade.id > 0 ? true : false)
 
@@ -63,17 +63,18 @@ const ModifierElementForm = ({ currentModifierElement, modifierGroups, action, e
   const handleProduct = (event: any) => {
     const { value } = event.target
     const productName = products.find(product => product.id === parseInt(value))?.name
-    setModifierElement({ ...modifierElement, name: productName ? productName : modifierElement.name, productReference: { ...initialProductReference, productId: value } })
+    setModifierElement({ ...modifierElement, name: productName ? productName : modifierElement.name, productReference: { ...modifierElement.productReference, productId: value } })
   }
 
-  const handleIsProduct = (event: any) => {
+  const handleIsProduct = async (event: any) => {
     const { checked } = event.target
     setIsProduct(checked)
     if (checked) {
       setModifierElement({ ...modifierElement, productReference: initialProductReference })
     }
     else {
-      setModifierElement({ ...modifierElement, productReference: undefined })
+      setModifierElement({ ...modifierElement, productReference: {} as ProductReference })
+      await useDelete(`productReferences/${modifierElement.id}`)
     }
   }
 
@@ -105,7 +106,6 @@ const ModifierElementForm = ({ currentModifierElement, modifierGroups, action, e
     }
     getProducts()
     getRecipes()
-    currentModifierElement.productReference && setIsProduct(true)
   }, [])
 
 

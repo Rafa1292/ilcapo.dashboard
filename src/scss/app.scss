@@ -150,9 +150,15 @@ body {
 }
 
 .btn{
-  height: 40px ;
+  font-size: 13px;
+  padding: 0 0.5rem;
+  font-weight: bolder;
+  height: 30px;
 }
 
+.react-datalist-input__textbox{
+  height: 28px !important;
+}
 
 
 .custom-center {

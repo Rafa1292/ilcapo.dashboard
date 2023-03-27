@@ -38,10 +38,6 @@ const EditModifierElement = ({ modifierElement, modifierGroups, modifierGroupId,
     }
   }
 
-  useEffect(() => {
-    console.log(modifierElement)
-  }, [modifierElement])
-
   return (
     <>
       {

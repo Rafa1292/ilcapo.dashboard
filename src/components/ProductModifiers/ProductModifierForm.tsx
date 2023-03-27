@@ -8,6 +8,7 @@ import CustomBtn from '../generics/CustomBtn'
 import CustomInputCheck from '../generics/CustomInputChecbox'
 import CustomInputSelect from '../generics/CustomInputSelect'
 import ModifierElementUpgrdeForm from '../modifierElementUpgrades/ModifierElementUpgradeForm'
+import { Button } from 'react-bootstrap'
 
 interface Props {
   action: (productModifier: ProductModifier) => void
@@ -57,9 +58,11 @@ const ProductModifierForm = ({ action, productId, error }: Props) => {
           />
         </div>
 
-        <CustomBtn action={(() => action(productModifier))} buttonType={buttonTypes.success} height='30px' />
+        <Button variant='success' onClick={(() => action(productModifier))} >
+          Agregar
+        </Button>
         {
-          error && <div className='mx-3 text-danger'>{error}</div>
+          error && <div className='mx-3 text-danger col-12 text-center'>{error}</div>
         }
       </div>
     </>

@@ -5,6 +5,7 @@ import { usePost } from '../../hooks/useAPI'
 import { ModifierElement } from '../../types/ModifierElement'
 import { ModifierElementUpgrade } from '../../types/ModifierElementUpgrade'
 import { ModifierGroup } from '../../types/ModifierGroup'
+import { ProductReference } from '../../types/ProductReference'
 
 
 const initialModifierElement: ModifierElement = {
@@ -17,6 +18,7 @@ const initialModifierElement: ModifierElement = {
   combinableModifierGroupId: 0,
   numberOfParts: 0,
   modifierElementUpgrade: {} as ModifierElementUpgrade,
+  productReference: {} as ProductReference,
   delete: false,
   createdBy: 0,
   updatedBy: 0
