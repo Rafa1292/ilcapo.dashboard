@@ -1,4 +1,4 @@
-import { GroupElement } from './GroupElement'
+import { ModifierElement } from './ModifierElement'
 
 export interface ModifierGroup {
   id: number
@@ -7,7 +7,7 @@ export interface ModifierGroup {
   maxSelectable: number
   isRequired: boolean
   label: string
-  elements: GroupElement[]
+  elements: ModifierElement[]
   delete: boolean
   updatedBy?: number
   createdBy?: number

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { regexOptions } from '../../enums/regexOptions'
 import { ModifierGroup } from '../../types/ModifierGroup'
 import { ModifierElementUpgrade } from '../../types/ModifierElementUpgrade'
@@ -9,10 +9,14 @@ import CustomInputText from '../generics/CustomInputText'
 interface Props {
   modifierElementUpgrade: ModifierElementUpgrade
   modifierGroups: ModifierGroup[]
-  handleChange : (event: any) => void
+  handleChange: (event: any) => void
 }
 
 const ModifierElementUpgrdeForm = ({ modifierElementUpgrade, modifierGroups, handleChange }: Props) => {
+
+  useEffect(() => {
+    console.log('modifierElementUpgrade', modifierElementUpgrade)
+  }, [])
 
   return (
     <div className='col-12 p-0 d-flex flex-wrap'>

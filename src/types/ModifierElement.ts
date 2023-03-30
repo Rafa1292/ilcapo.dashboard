@@ -9,6 +9,7 @@ export interface ModifierElement {
   quantity: number
   combinable: boolean
   numberOfParts: number
+  modifierGroupId: number
   combinableModifierGroupId: number
   modifierElementUpgrade: ModifierElementUpgrade
   productReference: ProductReference

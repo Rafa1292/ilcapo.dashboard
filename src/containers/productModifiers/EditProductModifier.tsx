@@ -21,9 +21,9 @@ const EditProductModifier = ({ productModifier, productId, recipes }: Props) => 
             <div className=' modifierGroup-elementContainer'>
               {
                 productModifier.modifierGroup.elements.map((element, indexModifier) => (
-                  <ProductRecipeForm upgradeElementLabel={element.modifierElement.modifierElementUpgrade != null ? element.modifierElement.modifierElementUpgrade.label : ''}
-                    key={indexModifier} productId={productId} recipes={recipes} modifierElementName={element.modifierElement.name} 
-                    modifierElementId={element.modifierElementId} defaultRecipeId={element.modifierElement?.defaultRecipeId}/>
+                  <ProductRecipeForm upgradeElementLabel={element.modifierElementUpgrade != null ? element.modifierElementUpgrade.label : ''}
+                    key={indexModifier} productId={productId} recipes={recipes} modifierElementName={element.name} 
+                    modifierElementId={element.id} defaultRecipeId={element?.defaultRecipeId}/>
                 ))
               }
             </div>

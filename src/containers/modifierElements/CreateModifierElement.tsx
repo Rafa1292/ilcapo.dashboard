@@ -16,8 +16,9 @@ const initialModifierElement: ModifierElement = {
   defaultRecipeId: 0,
   combinable: false,
   combinableModifierGroupId: 0,
+  modifierGroupId: 0,
   numberOfParts: 0,
-  modifierElementUpgrade: {} as ModifierElementUpgrade,
+  modifierElementUpgrade: { } as ModifierElementUpgrade,
   productReference: {} as ProductReference,
   delete: false,
   createdBy: 0,
@@ -33,10 +34,11 @@ interface Props {
 const CreateModifierElement = ({ modifierGroupId, modifierGroups, refreshModifierGroups }: Props) => {
   const [errors, setErrors] = useState<string[]>([])
   const [loading, setLoading] = useState<boolean>(false)
-  const [modifierElement, setModifierElement] = useState<ModifierElement>(initialModifierElement)
+  const [modifierElement, setModifierElement] = useState<ModifierElement>({...initialModifierElement, modifierGroupId})
 
   const addModifierElement = async (modifierElement: ModifierElement) => {
     setLoading(true)
+    console.log(modifierElement)
     const response = await usePost<ModifierElement>(`modifierElements/${modifierGroupId}`, modifierElement)
     if (response.error) {
       setErrors(response.message)

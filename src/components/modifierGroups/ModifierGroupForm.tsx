@@ -7,7 +7,7 @@ import ModifierElementUpgrdeForm from '../modifierElementUpgrades/ModifierElemen
 import CustomInputCheck from '../generics/CustomInputChecbox'
 import { ModifierElementUpgrade } from '../../types/ModifierElementUpgrade'
 import CustomInputNumber from '../generics/CustomInputNumber'
-import ModifierElementUpgradeContainer from '../../containers/modifierGroupUpgrades/ModifierElementUpgradeContainer'
+import ModifierElementUpgradeContainer from '../../containers/modifierElementUpgrades/ModifierElementUpgradeContainer'
 
 interface Props {
   currentModifierGroup: ModifierGroup

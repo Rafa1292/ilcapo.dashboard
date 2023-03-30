@@ -11,7 +11,7 @@ import CustomInputCheck from '../generics/CustomInputChecbox'
 import { ModifierGroup } from '../../types/ModifierGroup'
 import { Product } from '../../types/Product'
 import { ProductReference } from '../../types/ProductReference'
-import ModifierElementUpgradeContainer from '../../containers/modifierGroupUpgrades/ModifierElementUpgradeContainer'
+import ModifierElementUpgradeContainer from '../../containers/modifierElementUpgrades/ModifierElementUpgradeContainer'
 import { ModifierElementUpgrade } from '../../types/ModifierElementUpgrade'
 
 interface Props {
@@ -30,14 +30,15 @@ const initialProductReference: ProductReference =
   updatedBy: 1
 }
 
-const initialModifierElementUpgrade: ModifierElementUpgrade = {
+const initialModifierElementUpgrade: ModifierElementUpgrade =
+{
   id: 0,
   modifierElementId: 0,
+  label: '',
   newModifierGroupId: 0,
   price: 0,
-  label: '',
-  updatedBy: 1,
-  createdBy: 1
+  createdBy: 1,
+  updatedBy: 1
 }
 
 const ModifierElementForm = ({ currentModifierElement, modifierGroups, action, errors }: Props) => {
@@ -81,7 +82,10 @@ const ModifierElementForm = ({ currentModifierElement, modifierGroups, action, e
   const handleUpgradableCheck = (event: any) => {
     const { checked } = event.target
     setUpgradable(checked)
-    if (!checked) {
+    if (checked) {
+      setModifierElement({ ...modifierElement, modifierElementUpgrade: { ...initialModifierElementUpgrade } })
+    }
+    else {
       setModifierElement({ ...modifierElement, modifierElementUpgrade: {} as ModifierElementUpgrade })
     }
   }
@@ -178,7 +182,7 @@ const ModifierElementForm = ({ currentModifierElement, modifierGroups, action, e
         }
 
         {
-          !modifierElement.combinable &&
+          !modifierElement.combinable && !upgradable &&
           < CustomInputCheck value={isProduct}
             customInputCheck={{
               label: '¿Es producto?', pattern: '', validationMessage: '',
@@ -199,13 +203,15 @@ const ModifierElementForm = ({ currentModifierElement, modifierGroups, action, e
             defaultLegend={'Productos...'}
           />
         }
-
-        <CustomInputCheck value={upgradable}
-          customInputCheck={{
-            label: '¿Es mejorable?', pattern: '', validationMessage: '',
-            name: 'upgradable', handleChange: handleUpgradableCheck
-          }
-          } />
+        {
+          !isProduct &&
+          < CustomInputCheck value={upgradable}
+            customInputCheck={{
+              label: '¿Es mejorable?', pattern: '', validationMessage: '',
+              name: 'upgradable', handleChange: handleUpgradableCheck
+            }
+            } />
+        }
 
         {
           upgradable &&

@@ -18,7 +18,6 @@ const EditModifierElement = ({ modifierElement, modifierGroups, modifierGroupId,
   const [editMode, setEditMode] = useState<boolean>(false)
 
   const action = async (modifierElement: ModifierElement) => {
-    console.log(modifierElement)
     const response = await usePatch(`modifierElements/${modifierElement.id}/${modifierGroupId}`, modifierElement)
     if (response.error) {
       setErrors(response.message)
