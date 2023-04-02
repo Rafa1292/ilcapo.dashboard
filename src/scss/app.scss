@@ -130,6 +130,16 @@ body {
   }
 }
 
+.form-control {
+  height: 28px;
+  font-size: 0.875rem;
+}
+
+.form-control:focus {
+  box-shadow: none;
+  border: 2px solid black;
+}
+
 .user-select-none {
   user-select: none;
 }
