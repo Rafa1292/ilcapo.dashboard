@@ -43,6 +43,8 @@ const IngredientForm = ({ currentIngredient, action, errors }: Props) => {
       const response = await useGetList<Magnitude[]>('magnitudes')
       if (!response.error) {
         setMagnitudes(response.data)
+        const currentMagnitude = response.data.find(magnitude => magnitude.id === ingredient.measure?.magnitudeId)
+        setMagnitude(currentMagnitude)
       }
     }
     const getIngredientCategories = async () => {
@@ -81,7 +83,7 @@ const IngredientForm = ({ currentIngredient, action, errors }: Props) => {
           }
         } />
 
-        <CustomInputSelect value={ingredient.measure.magnitudeId}
+        <CustomInputSelect value={ingredient.measure?.magnitudeId}
           customInputSelect={
             {
               label: 'Magnitud', name: 'measureId',
