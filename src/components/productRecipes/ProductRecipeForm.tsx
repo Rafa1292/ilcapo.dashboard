@@ -6,13 +6,13 @@ import { useGet, usePatch, usePost } from '../../hooks/useAPI'
 import { ProductRecipe } from '../../types/ProductRecipe'
 import { Recipe } from '../../types/Recipe'
 import CustomInputSelect from '../generics/CustomInputSelect'
+import { ModifierElementUpgrade } from '../../types/ModifierElementUpgrade'
 
 interface Props {
   productId: number
   modifierElementId: number
   recipes: Recipe[]
   modifierElementName: string
-  upgradeElementLabel?: string
   defaultRecipeId: number
 }
 
@@ -26,8 +26,9 @@ const initialProductRecipe: ProductRecipe = {
   updatedBy: 0
 }
 
-const ProductRecipeForm = ({ productId, recipes, modifierElementName, upgradeElementLabel, modifierElementId, defaultRecipeId }: Props) => {
+const ProductRecipeForm = ({ productId, recipes, modifierElementName, modifierElementId, defaultRecipeId }: Props) => {
   const [currentProductRecipe, setCurrentProductRecipe] = useState<ProductRecipe>(initialProductRecipe)
+  const [upgradeElementLabel, setUpgradeElementLabel] = useState<string>('')
 
   const handleChange = (event: any) => {
     const { name, value } = event.target
@@ -46,7 +47,14 @@ const ProductRecipeForm = ({ productId, recipes, modifierElementName, upgradeEle
         }
       }
     }
+    const getUpgradeElementLabel = async () => {
+      const response = await useGet<ModifierElementUpgrade>(`modifierelementUpgrades/elementUpgrade/${modifierElementId}`)
+      if (!response.error && response.data !== null) {
+        setUpgradeElementLabel(response.data.label)
+      }
+    }
     getProductRecipe()
+    getUpgradeElementLabel()
   }, [])
 
   const saveProductRecipe = async () => {

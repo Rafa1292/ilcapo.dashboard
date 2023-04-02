@@ -10,7 +10,6 @@ interface Props {
 }
 
 const EditProductModifier = ({ productModifier, productId, recipes }: Props) => {
-
   return (
     <>
       {
@@ -21,7 +20,7 @@ const EditProductModifier = ({ productModifier, productId, recipes }: Props) => 
             <div className=' modifierGroup-elementContainer'>
               {
                 productModifier.modifierGroup.elements.map((element, indexModifier) => (
-                  <ProductRecipeForm upgradeElementLabel={element.modifierElementUpgrade != null ? element.modifierElementUpgrade.label : ''}
+                  <ProductRecipeForm
                     key={indexModifier} productId={productId} recipes={recipes} modifierElementName={element.name} 
                     modifierElementId={element.id} defaultRecipeId={element?.defaultRecipeId}/>
                 ))

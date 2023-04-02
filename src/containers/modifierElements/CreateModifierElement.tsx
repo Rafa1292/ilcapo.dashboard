@@ -47,7 +47,7 @@ const CreateModifierElement = ({ modifierGroupId, modifierGroups, refreshModifie
     else{
       refreshModifierGroups()
       setErrors([])
-      setModifierElement(initialModifierElement)
+      setModifierElement({...initialModifierElement, modifierGroupId})
     }
     setLoading(false)
   }
