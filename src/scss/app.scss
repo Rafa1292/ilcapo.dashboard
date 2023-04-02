@@ -145,18 +145,22 @@ body {
   color: black;
 }
 
-.modal{
+.modal {
   box-sizing: content-box;
 }
 
-.btn{
+.btn {
   font-size: 13px;
   padding: 0 0.5rem;
   font-weight: bolder;
   height: 30px;
+  align-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.react-datalist-input__textbox{
+.react-datalist-input__textbox {
   height: 28px !important;
 }
 
@@ -230,7 +234,7 @@ main {
   display: none;
 }
 
-.react-datalist-input__textbox{
+.react-datalist-input__textbox {
   height: 38px;
 }
 
@@ -238,7 +242,7 @@ label {
   user-select: none;
 }
 
-.datalist_clean{
+.datalist_clean {
   padding: 0.5rem;
   position: absolute;
   opacity: 0.5;
