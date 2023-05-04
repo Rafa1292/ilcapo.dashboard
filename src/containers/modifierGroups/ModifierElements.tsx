@@ -14,7 +14,7 @@ interface Props {
   modifierGroups: ModifierGroup[]
 }
 
-const ModifierGroups = ({ modifierGroup, modifierGroups, refreshModifierGroups }: Props) => {
+const ModifierElements = ({ modifierGroup, modifierGroups, refreshModifierGroups }: Props) => {
   const [show, setShow] = useState<boolean>(false)
   const [showForm, setShowForm] = useState<boolean>(false)
 
@@ -50,4 +50,4 @@ const ModifierGroups = ({ modifierGroup, modifierGroups, refreshModifierGroups }
   )
 }
 
-export default ModifierGroups
+export default ModifierElements

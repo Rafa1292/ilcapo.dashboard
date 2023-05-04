@@ -38,7 +38,6 @@ const CreateModifierElement = ({ modifierGroupId, modifierGroups, refreshModifie
 
   const addModifierElement = async (modifierElement: ModifierElement) => {
     setLoading(true)
-    console.log(modifierElement)
     const response = await usePost<ModifierElement>(`modifierElements/${modifierGroupId}`, modifierElement)
     if (response.error) {
       setErrors(response.message)

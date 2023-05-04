@@ -68,7 +68,7 @@ const ModifierGroups = () => {
               <TableRow key={index} tableData={[modifierGroup.id.toString(), modifierGroup.name]}>
                 <button className="btn btn-outline-secondary m-2" onClick={(() => editModifierGroup(modifierGroup.id))}>Editar</button>
                 <DeleteModifierGroup id={modifierGroup.id} refreshModifierGroups={refreshModifierGroups} />
-                <ModifierElements modifierGroups={modifierGroups.filter(x => x.id !== modifierGroup.id)} refreshModifierGroups={refreshModifierGroups} modifierGroup={modifierGroup} />
+                <ModifierElements modifierGroups={modifierGroups} refreshModifierGroups={refreshModifierGroups} modifierGroup={modifierGroup} />
               </TableRow>
             ))
           }
