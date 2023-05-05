@@ -148,16 +148,12 @@ const ModifierElementForm = ({ currentModifierElement, modifierGroups, action, e
           data={recipes.map(recipe => { return { value: recipe.id, label: recipe.name } })}
           defaultLegend={'Recetas...'}
         />
-
-        {
-          !isProduct &&
-          < CustomInputCheck value={modifierElement.combinable}
-            customInputCheck={{
-              label: '¿Es combinable?', pattern: '', validationMessage: '',
-              name: 'combinable', handleChange: handleCheck
-            }
-            } />
-        }
+        < CustomInputCheck value={modifierElement.combinable}
+          customInputCheck={{
+            label: '¿Es combinable?', pattern: '', validationMessage: '',
+            name: 'combinable', handleChange: handleCheck
+          }
+          } />
 
         {
           modifierElement.combinable &&
@@ -180,16 +176,12 @@ const ModifierElementForm = ({ currentModifierElement, modifierGroups, action, e
             />
           </>
         }
-
-        {
-          !modifierElement.combinable && !upgradable &&
-          < CustomInputCheck value={isProduct}
-            customInputCheck={{
-              label: '¿Es producto?', pattern: '', validationMessage: '',
-              name: 'isProduct', handleChange: handleIsProduct
-            }
-            } />
-        }
+        < CustomInputCheck value={isProduct}
+          customInputCheck={{
+            label: '¿Es producto?', pattern: '', validationMessage: '',
+            name: 'isProduct', handleChange: handleIsProduct
+          }
+          } />
 
         {
           isProduct && modifierElement.productReference &&
@@ -203,15 +195,12 @@ const ModifierElementForm = ({ currentModifierElement, modifierGroups, action, e
             defaultLegend={'Productos...'}
           />
         }
-        {
-          !isProduct &&
-          < CustomInputCheck value={upgradable}
-            customInputCheck={{
-              label: '¿Es mejorable?', pattern: '', validationMessage: '',
-              name: 'upgradable', handleChange: handleUpgradableCheck
-            }
-            } />
-        }
+        < CustomInputCheck value={upgradable}
+          customInputCheck={{
+            label: '¿Es mejorable?', pattern: '', validationMessage: '',
+            name: 'upgradable', handleChange: handleUpgradableCheck
+          }
+          } />
 
         {
           upgradable &&

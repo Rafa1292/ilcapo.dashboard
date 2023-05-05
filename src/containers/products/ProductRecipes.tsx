@@ -38,7 +38,7 @@ const ProductRecipes = ({ product, refreshProducts }: Props) => {
           {
             product.productModifiers.map((productModifier, indexGroup) => (
               <div key={indexGroup} className='col-lg-6 col-12 p-4 my-2'>
-                <EditProductModifier productModifier={productModifier} productId={product.id} recipes={recipes} />
+                <EditProductModifier refreshProducts={refreshProducts} productModifier={productModifier} productId={product.id} recipes={recipes} />
               </div>
             ))
           }
