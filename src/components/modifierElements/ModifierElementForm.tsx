@@ -134,7 +134,7 @@ const ModifierElementForm = ({ currentModifierElement, modifierGroups, action, e
 
         <CustomInputNumber value={modifierElement.quantity} customInputNumber={
           {
-            label: 'Cantidad', name: 'quantity',
+            label: 'Cantidad seleccionable', name: 'quantity',
             handleChange: handleChange, pattern: regexOptions.integer, validationMessage: 'Ingrese una cantidad válida'
           }
         } />
