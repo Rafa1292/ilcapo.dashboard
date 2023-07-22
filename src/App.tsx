@@ -20,6 +20,8 @@ import SaleItemCategories from './pages/SaleItemCategories'
 import Products from './pages/Products'
 import SaleItems from './pages/SaleItems'
 import ModifierGroups from './pages/ModifierGroups'
+import Users from './pages/Users'
+import Menus from './pages/Menus'
 
 function App() {
   const { state } = useInitialState()
@@ -45,6 +47,8 @@ function App() {
             <Route path="/SaleItemCategories" element={<SaleItemCategories />} />
             <Route path="/SaleItems" element={<SaleItems />} />
             <Route path="/ModifierGroups" element={<ModifierGroups />} />
+            <Route path="/users" element={<Users />} />
+            <Route path="/menus" element={<Menus />} />
           </Routes>
         </Layout>
       </BrowserRouter>

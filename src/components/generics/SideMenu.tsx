@@ -95,6 +95,18 @@ const Navbar = () => {
                 Grupos modificadores
               </Link>
             </li>
+            <li className="nav-item">
+              <Link className="nav-link" aria-current="page" to='/Users'>
+                <span data-feather="home" className="align-text-bottom" />
+                Usuarios
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" aria-current="page" to='/Menus'>
+                <span data-feather="home" className="align-text-bottom" />
+                Menús
+              </Link>
+            </li>
           </ul>
         </div>
         <div className="bg-dark d-flex d-md-none justify-content-center align-items-center text-white d-flex col-12"
