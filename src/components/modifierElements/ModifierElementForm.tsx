@@ -13,6 +13,8 @@ import { Product } from '../../types/Product'
 import { ProductReference } from '../../types/ProductReference'
 import ModifierElementUpgradeContainer from '../../containers/modifierElementUpgrades/ModifierElementUpgradeContainer'
 import { ModifierElementUpgrade } from '../../types/ModifierElementUpgrade'
+import ElementPriceContainer from '../../containers/elementPrice/ElementPriceContainer'
+import { ElementPrice } from '../../types/ElementPrice'
 
 interface Props {
   currentModifierElement: ModifierElement
@@ -21,33 +23,49 @@ interface Props {
   modifierGroups: ModifierGroup[]
 }
 
-const initialProductReference: ProductReference =
-{
+const initialProductReference: ProductReference = {
   id: 0,
   productId: 0,
   modifierElementId: 0,
   createdBy: 1,
-  updatedBy: 1
+  updatedBy: 1,
 }
 
-const initialModifierElementUpgrade: ModifierElementUpgrade =
-{
+const initialModifierElementUpgrade: ModifierElementUpgrade = {
   id: 0,
   modifierElementId: 0,
   label: '',
   newModifierGroupId: 0,
   price: 0,
   createdBy: 1,
-  updatedBy: 1
+  updatedBy: 1,
 }
 
-const ModifierElementForm = ({ currentModifierElement, modifierGroups, action, errors }: Props) => {
-  const [modifierElement, setModifierElement] = useState<ModifierElement>({ ...currentModifierElement, modifierElementUpgrade: currentModifierElement.modifierElementUpgrade?.id > 0 ? currentModifierElement.modifierElementUpgrade : {} as ModifierElementUpgrade })
+const ModifierElementForm = ({
+  currentModifierElement,
+  modifierGroups,
+  action,
+  errors,
+}: Props) => {
+  const [modifierElement, setModifierElement] = useState<ModifierElement>({
+    ...currentModifierElement,
+    modifierElementUpgrade:
+      currentModifierElement.modifierElementUpgrade?.id > 0
+        ? currentModifierElement.modifierElementUpgrade
+        : ({} as ModifierElementUpgrade),
+  })
 
   const [recipes, setRecipes] = useState<Recipe[]>([])
-  const [isProduct, setIsProduct] = useState<boolean>(currentModifierElement.productReference !== null && currentModifierElement.productReference?.id ? true : false)
+  const [isProduct, setIsProduct] = useState<boolean>(
+    currentModifierElement.productReference !== null &&
+      currentModifierElement.productReference?.id
+      ? true
+      : false
+  )
   const [products, setProducts] = useState<Product[]>([])
-  const [upgradable, setUpgradable] = useState<boolean>(modifierElement?.modifierElementUpgrade.id > 0 ? true : false)
+  const [upgradable, setUpgradable] = useState<boolean>(
+    modifierElement?.modifierElementUpgrade.id > 0 ? true : false
+  )
 
   const submitText = currentModifierElement?.id === 0 ? 'Agregar' : 'Editar'
 
@@ -63,18 +81,32 @@ const ModifierElementForm = ({ currentModifierElement, modifierGroups, action, e
 
   const handleProduct = (event: any) => {
     const { value } = event.target
-    const productName = products.find(product => product.id === parseInt(value))?.name
-    setModifierElement({ ...modifierElement, name: productName ? productName : modifierElement.name, productReference: { ...modifierElement.productReference, productId: value } })
+    const productName = products.find(
+      (product) => product.id === parseInt(value)
+    )?.name
+    setModifierElement({
+      ...modifierElement,
+      name: productName ? productName : modifierElement.name,
+      productReference: {
+        ...modifierElement.productReference,
+        productId: value,
+      },
+    })
   }
 
   const handleIsProduct = async (event: any) => {
     const { checked } = event.target
     setIsProduct(checked)
     if (checked) {
-      setModifierElement({ ...modifierElement, productReference: initialProductReference })
-    }
-    else {
-      setModifierElement({ ...modifierElement, productReference: {} as ProductReference })
+      setModifierElement({
+        ...modifierElement,
+        productReference: initialProductReference,
+      })
+    } else {
+      setModifierElement({
+        ...modifierElement,
+        productReference: {} as ProductReference,
+      })
       await useDelete(`productReferences/${modifierElement.id}`)
     }
   }
@@ -83,20 +115,48 @@ const ModifierElementForm = ({ currentModifierElement, modifierGroups, action, e
     const { checked } = event.target
     setUpgradable(checked)
     if (checked) {
-      setModifierElement({ ...modifierElement, modifierElementUpgrade: { ...initialModifierElementUpgrade } })
-    }
-    else {
-      setModifierElement({ ...modifierElement, modifierElementUpgrade: {} as ModifierElementUpgrade })
+      setModifierElement({
+        ...modifierElement,
+        modifierElementUpgrade: { ...initialModifierElementUpgrade },
+      })
+    } else {
+      setModifierElement({
+        ...modifierElement,
+        modifierElementUpgrade: {} as ModifierElementUpgrade,
+      })
     }
   }
 
   const handleModifierElementUpgradeChange = (event: any) => {
     const { name, value } = event.target
-    setModifierElement({ ...modifierElement, modifierElementUpgrade: { ...modifierElement.modifierElementUpgrade, [name]: value } })
+    setModifierElement({
+      ...modifierElement,
+      modifierElementUpgrade: {
+        ...modifierElement.modifierElementUpgrade,
+        [name]: value,
+      },
+    })
   }
 
   const handleSubmit = () => {
     action(modifierElement)
+  }
+
+  const addElementPrice = (elementPrice: ElementPrice) => {
+    setModifierElement({
+      ...modifierElement,
+      elementPrices: [...modifierElement.elementPrices, elementPrice],
+    })
+  }
+
+  const removeElementPrice = (elementPrice: ElementPrice) => {
+    setModifierElement({
+      ...modifierElement,
+      elementPrices: modifierElement.elementPrices.filter(
+        (elementPriceItem: ElementPrice) =>
+          elementPriceItem.menuId !== elementPrice.menuId
+      ),
+    })
   }
 
   useEffect(() => {
@@ -112,103 +172,151 @@ const ModifierElementForm = ({ currentModifierElement, modifierGroups, action, e
     getRecipes()
   }, [])
 
-
   return (
     <>
-      <GenericForm errors={errors} submitText={submitText} handleSubmit={handleSubmit}>
-        <CustomInputText value={modifierElement.name}
-          customInputText={
-            {
-              label: 'Nombre de elemento', name: 'name',
-              handleChange: handleChange, pattern: regexOptions.text,
-              validationMessage: 'Ingrese un nombre válido'
-            }
-          } />
+      <GenericForm
+        errors={errors}
+        submitText={submitText}
+        handleSubmit={handleSubmit}
+      >
+        <ElementPriceContainer
+          addElementPrice={addElementPrice}
+          elementPrices={modifierElement.elementPrices}
+          removeElementPrice={removeElementPrice}
+        />
 
-        <CustomInputNumber value={modifierElement.price} customInputNumber={
+        <CustomInputText
+          value={modifierElement.name}
+          customInputText={{
+            label: 'Nombre de elemento',
+            name: 'name',
+            handleChange: handleChange,
+            pattern: regexOptions.text,
+            validationMessage: 'Ingrese un nombre válido',
+          }}
+        />
+        {/* <CustomInputNumber value={modifierElement.price} customInputNumber={
           {
             label: 'Precio', name: 'price',
             handleChange: handleChange, pattern: regexOptions.decimal, validationMessage: 'Ingrese un precio válido'
           }
-        } />
+        } /> */}
 
-        <CustomInputNumber value={modifierElement.quantity} customInputNumber={
-          {
-            label: 'Cantidad seleccionable', name: 'quantity',
-            handleChange: handleChange, pattern: regexOptions.integer, validationMessage: 'Ingrese una cantidad válida'
-          }
-        } />
+        <CustomInputNumber
+          value={modifierElement.quantity}
+          customInputNumber={{
+            label: 'Cantidad seleccionable',
+            name: 'quantity',
+            handleChange: handleChange,
+            pattern: regexOptions.integer,
+            validationMessage: 'Ingrese una cantidad válida',
+          }}
+        />
 
-        <CustomInputSelect value={modifierElement.defaultRecipeId}
-          customInputSelect={
-            {
-              label: 'Receta predeterminada', name: 'defaultRecipeId',
-              handleChange: handleChange, pattern: '', validationMessage: 'Receta predeterminada'
-            }}
-          data={recipes.map(recipe => { return { value: recipe.id, label: recipe.name } })}
+        <CustomInputSelect
+          value={modifierElement.defaultRecipeId}
+          customInputSelect={{
+            label: 'Receta predeterminada',
+            name: 'defaultRecipeId',
+            handleChange: handleChange,
+            pattern: '',
+            validationMessage: 'Receta predeterminada',
+          }}
+          data={recipes.map((recipe) => {
+            return { value: recipe.id, label: recipe.name }
+          })}
           defaultLegend={'Recetas...'}
         />
-        < CustomInputCheck value={modifierElement.combinable}
+
+        <CustomInputCheck
+          value={modifierElement.combinable}
           customInputCheck={{
-            label: '¿Es combinable?', pattern: '', validationMessage: '',
-            name: 'combinable', handleChange: handleCheck
-          }
-          } />
+            label: '¿Es combinable?',
+            pattern: '',
+            validationMessage: '',
+            name: 'combinable',
+            handleChange: handleCheck,
+          }}
+        />
 
-        {
-          modifierElement.combinable &&
+        {modifierElement.combinable && (
           <>
-            <CustomInputNumber value={modifierElement.numberOfParts} customInputNumber={
-              {
-                label: 'Cantidad de partes', name: 'numberOfParts',
-                handleChange: handleChange, pattern: regexOptions.integer, validationMessage: 'Ingrese una cantidad válida'
-              }
-            } />
+            <CustomInputNumber
+              value={modifierElement.numberOfParts}
+              customInputNumber={{
+                label: 'Cantidad de partes',
+                name: 'numberOfParts',
+                handleChange: handleChange,
+                pattern: regexOptions.integer,
+                validationMessage: 'Ingrese una cantidad válida',
+              }}
+            />
 
-            <CustomInputSelect showLabel={false} value={modifierElement.combinableModifierGroupId}
-              customInputSelect={
-                {
-                  label: 'Modificadores', name: 'combinableModifierGroupId',
-                  handleChange: handleChange, pattern: '', validationMessage: 'Seleccione un grupo'
-                }}
-              data={modifierGroups.map(modifierGroup => { return { value: modifierGroup.id, label: modifierGroup.name } })}
+            <CustomInputSelect
+              showLabel={false}
+              value={modifierElement.combinableModifierGroupId}
+              customInputSelect={{
+                label: 'Modificadores',
+                name: 'combinableModifierGroupId',
+                handleChange: handleChange,
+                pattern: '',
+                validationMessage: 'Seleccione un grupo',
+              }}
+              data={modifierGroups.map((modifierGroup) => {
+                return { value: modifierGroup.id, label: modifierGroup.name }
+              })}
               defaultLegend={'Modificadores'}
             />
           </>
-        }
-        < CustomInputCheck value={isProduct}
+        )}
+        <CustomInputCheck
+          value={isProduct}
           customInputCheck={{
-            label: '¿Es producto?', pattern: '', validationMessage: '',
-            name: 'isProduct', handleChange: handleIsProduct
-          }
-          } />
+            label: '¿Es producto?',
+            pattern: '',
+            validationMessage: '',
+            name: 'isProduct',
+            handleChange: handleIsProduct,
+          }}
+        />
 
-        {
-          isProduct && modifierElement.productReference &&
-          <CustomInputSelect showLabel={false} value={modifierElement?.productReference?.productId}
-            customInputSelect={
-              {
-                label: 'Productos', name: 'productId',
-                handleChange: handleProduct, pattern: '', validationMessage: 'Seleccione un producto'
-              }}
-            data={products.map(product => { return { value: product.id, label: product.name } })}
+        {isProduct && modifierElement.productReference && (
+          <CustomInputSelect
+            showLabel={false}
+            value={modifierElement?.productReference?.productId}
+            customInputSelect={{
+              label: 'Productos',
+              name: 'productId',
+              handleChange: handleProduct,
+              pattern: '',
+              validationMessage: 'Seleccione un producto',
+            }}
+            data={products.map((product) => {
+              return { value: product.id, label: product.name }
+            })}
             defaultLegend={'Productos...'}
           />
-        }
-        < CustomInputCheck value={upgradable}
+        )}
+        <CustomInputCheck
+          value={upgradable}
           customInputCheck={{
-            label: '¿Es mejorable?', pattern: '', validationMessage: '',
-            name: 'upgradable', handleChange: handleUpgradableCheck
-          }
-          } />
+            label: '¿Es mejorable?',
+            pattern: '',
+            validationMessage: '',
+            name: 'upgradable',
+            handleChange: handleUpgradableCheck,
+          }}
+        />
 
-        {
-          upgradable &&
-          <div className="col-10 p-2">
-            <ModifierElementUpgradeContainer handleChange={handleModifierElementUpgradeChange} modifierGroups={modifierGroups} modifierElementUpgrade={modifierElement.modifierElementUpgrade} />
+        {upgradable && (
+          <div className='col-10 p-2'>
+            <ModifierElementUpgradeContainer
+              handleChange={handleModifierElementUpgradeChange}
+              modifierGroups={modifierGroups}
+              modifierElementUpgrade={modifierElement.modifierElementUpgrade}
+            />
           </div>
-        }
-
+        )}
       </GenericForm>
     </>
   )

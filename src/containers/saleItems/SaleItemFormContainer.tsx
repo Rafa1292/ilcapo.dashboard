@@ -14,7 +14,7 @@ interface Props {
 }
 
 const SaleItemFormContainer = ({ refreshSaleItems, saleItem, addSaleItem, show, setShow }: Props) => {
-  const title = saleItem.id === 0 ? 'Agregar categoria' : 'Editar categoria'
+  const title = saleItem.id === 0 ? 'Agregar item' : 'Editar item'
   return (
     <>
       <Button variant={'outline-dark'} className='my-2' onClick={addSaleItem}>

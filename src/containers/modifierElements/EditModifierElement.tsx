@@ -49,9 +49,9 @@ const EditModifierElement = ({ modifierElement, modifierGroups, modifierGroupId,
             <div className="col-1 d-flex justify-content-center align-items-center">
               {modifierElement?.quantity}
             </div>
-            <div className="col-1 d-flex justify-content-center align-items-center">
+            {/* <div className="col-1 d-flex justify-content-center align-items-center">
               {modifierElement?.price}
-            </div>
+            </div> */}
             <div className="py-1 px-1 d-flex justify-content-center align-items-center">
               <CustomBtn height='30px' buttonType={buttonTypes.edit} action={(() => setEditMode(true))} />
             </div>

@@ -14,8 +14,8 @@ const SaleItems = () => {
     name: '',
     description: '',
     pictureUrl: '',
-    price: 0,
     saleItemCategoryId: 0,
+    itemPrices: [],
     saleItemCategory: { id: 0 } as SaleItemCategory,
     saleItemProducts: [],
     delete: false,
@@ -63,13 +63,12 @@ const SaleItems = () => {
         addSaleItem={addSaleItem} show={show} setShow={setShow} />
       {
         saleItems.length > 0 &&
-        <Table headers={['#', 'Nombre', 'Precio', 'Categoria', '']}>
+        <Table headers={['#', 'Nombre', 'Categoria', '']}>
           {
             saleItems.map((saleItem, index) => (
               <TableRow key={index} tableData={[
                 saleItem.id.toString(), 
                 saleItem.name, 
-                saleItem.price.toString(),
                 saleItem.saleItemCategory?.name]}>
                 <button className="btn btn-outline-secondary m-2" onClick={(() => editSaleItem(saleItem.id))}>Editar</button>
                 <DeleteSaleItem id={saleItem.id} refreshSaleItems={refreshSaleItems} />

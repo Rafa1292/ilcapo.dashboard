@@ -11,7 +11,7 @@ import { ProductReference } from '../../types/ProductReference'
 const initialModifierElement: ModifierElement = {
   id: 0,
   name: '',
-  price: 0,
+  elementPrices: [],
   quantity: 0,
   defaultRecipeId: 0,
   combinable: false,
