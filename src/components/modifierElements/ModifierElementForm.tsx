@@ -13,8 +13,9 @@ import { Product } from '../../types/Product'
 import { ProductReference } from '../../types/ProductReference'
 import ModifierElementUpgradeContainer from '../../containers/modifierElementUpgrades/ModifierElementUpgradeContainer'
 import { ModifierElementUpgrade } from '../../types/ModifierElementUpgrade'
-import ElementPriceContainer from '../../containers/elementPrice/ElementPriceContainer'
+import ElementPriceContainer from '../../containers/elementPrices/ElementPriceContainer'
 import { ElementPrice } from '../../types/ElementPrice'
+import { UpgradeElementPrice } from '../../types/UpgradeElementPrice'
 
 interface Props {
   currentModifierElement: ModifierElement
@@ -36,7 +37,7 @@ const initialModifierElementUpgrade: ModifierElementUpgrade = {
   modifierElementId: 0,
   label: '',
   newModifierGroupId: 0,
-  price: 0,
+  prices: [],
   createdBy: 1,
   updatedBy: 1,
 }
@@ -138,6 +139,34 @@ const ModifierElementForm = ({
     })
   }
 
+  const addUpgradeElementPrice = (upgradeElementPrice: UpgradeElementPrice) => {
+    setModifierElement({
+      ...modifierElement,
+      modifierElementUpgrade: {
+        ...modifierElement.modifierElementUpgrade,
+        prices: [
+          ...modifierElement.modifierElementUpgrade.prices,
+          upgradeElementPrice,
+        ],
+      },
+    })
+  }
+
+  const removeUpgradeElementPrice = (
+    upgradeElementPrice: UpgradeElementPrice
+  ) => {
+    setModifierElement({
+      ...modifierElement,
+      modifierElementUpgrade: {
+        ...modifierElement.modifierElementUpgrade,
+        prices: modifierElement.modifierElementUpgrade.prices.filter(
+          (upgradeElementPriceItem: UpgradeElementPrice) =>
+            upgradeElementPriceItem.menuId !== upgradeElementPrice.menuId
+        ),
+      },
+    })
+  }
+
   const handleSubmit = () => {
     action(modifierElement)
   }
@@ -195,12 +224,6 @@ const ModifierElementForm = ({
             validationMessage: 'Ingrese un nombre válido',
           }}
         />
-        {/* <CustomInputNumber value={modifierElement.price} customInputNumber={
-          {
-            label: 'Precio', name: 'price',
-            handleChange: handleChange, pattern: regexOptions.decimal, validationMessage: 'Ingrese un precio válido'
-          }
-        } /> */}
 
         <CustomInputNumber
           value={modifierElement.quantity}
@@ -311,6 +334,8 @@ const ModifierElementForm = ({
         {upgradable && (
           <div className='col-10 p-2'>
             <ModifierElementUpgradeContainer
+              addUpgradeElementPrice={addUpgradeElementPrice}
+              removeUpgradeElementPrice={removeUpgradeElementPrice}
               handleChange={handleModifierElementUpgradeChange}
               modifierGroups={modifierGroups}
               modifierElementUpgrade={modifierElement.modifierElementUpgrade}

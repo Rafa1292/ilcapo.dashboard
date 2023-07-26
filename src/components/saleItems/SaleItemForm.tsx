@@ -7,8 +7,8 @@ import CustomInputSelect from '../generics/CustomInputSelect'
 import { SaleItemCategory } from '../../types/SaleItemCategory'
 import { useGetList } from '../../hooks/useAPI'
 import { regexOptions } from '../../enums/regexOptions'
-import ItemPriceComponent from '../itemPrice/ItemPriceComponent'
-import ItemPriceContainer from '../../containers/itemPrice/ItemPriceContainer'
+import ItemPriceComponent from '../itemPrices/ItemPriceComponent'
+import ItemPriceContainer from '../../containers/itemPrices/ItemPriceContainer'
 import { ItemPrice } from '../../types/ItemPrice'
 
 interface Props {

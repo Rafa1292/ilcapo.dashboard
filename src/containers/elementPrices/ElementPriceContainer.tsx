@@ -2,15 +2,16 @@ import React, { useEffect, useState } from 'react'
 import { Menu } from '../../types/Menu'
 import { useGetList } from '../../hooks/useAPI'
 import { ItemPrice } from '../../types/ItemPrice'
-import ItemPriceComponent from '../../components/itemPrice/ItemPriceComponent'
+import { ElementPrice } from '../../types/ElementPrice'
+import ElementPriceComponent from '../../components/elementPrices/ElementPriceComponent'
 
 interface Props {
-  addItemPrice: (itemPrice: ItemPrice) => void
-  itemPrices: ItemPrice[]
-  removeItemPrice: (itemPrice: ItemPrice) => void
+  addElementPrice: (elementPrice: ElementPrice) => void
+  elementPrices: ElementPrice[]
+  removeElementPrice: (elementPrice: ElementPrice) => void
 }
 
-const ItemPriceContainer = ({ addItemPrice, removeItemPrice, itemPrices }: Props) => {
+const ElementPriceContainer = ({ addElementPrice, removeElementPrice, elementPrices }: Props) => {
   const [menus, setMenus] = useState<Menu[]>([])
   const [loading, setLoading] = useState<boolean>(true)
 
@@ -28,20 +29,20 @@ const ItemPriceContainer = ({ addItemPrice, removeItemPrice, itemPrices }: Props
     <div className='col-12  d-flex flex-wrap'>
       { !loading &&
       menus.map((menu: Menu) => (
-        <ItemPriceComponent
+        <ElementPriceComponent
           key={menu.id}
           menu={menu}
-          addItemPrice={addItemPrice}
-          currentItemPrice={
-            itemPrices.find(
-              (itemPrice: ItemPrice) => itemPrice.menuId === menu.id
+          addElementPrice={addElementPrice}
+          currentElementPrice={
+            elementPrices.find(
+              (elementPrice: ElementPrice) => elementPrice.menuId === menu.id
             ) || null
           }
-          removeItemPrice={removeItemPrice}
+          removeElementPrice={removeElementPrice}
         />
       ))}
     </div>
   )
 }
 
-export default ItemPriceContainer
+export default ElementPriceContainer
