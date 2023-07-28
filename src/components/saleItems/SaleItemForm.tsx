@@ -30,20 +30,34 @@ const SaleItemForm = ({ currentSaleItem, action, errors }: Props) => {
   }
 
   const handleSubmit = () => {
+    console.log(saleItem)
     action(saleItem)
   }
 
   const addItemPrice = (itemPrice: ItemPrice) => {
-    setSaleItem({
-      ...saleItem,
-      itemPrices: [...saleItem.itemPrices, itemPrice],
-    })
+    console.log(saleItem)
+    const currentItemPrice = saleItem.prices.find(
+      (ip: ItemPrice) => ip.menuId === itemPrice.menuId
+    )
+    if (currentItemPrice) {
+      setSaleItem({
+        ...saleItem,
+        prices: saleItem.prices.map((ip: ItemPrice) =>
+          ip.menuId === itemPrice.menuId ? itemPrice : ip
+        ),
+      })
+    } else {
+      setSaleItem({
+        ...saleItem,
+        prices: [...saleItem.prices, itemPrice],
+      })
+    }
   }
 
   const removeItemPrice = (itemPrice: ItemPrice) => {
     setSaleItem({
       ...saleItem,
-      itemPrices: saleItem.itemPrices.filter(
+      prices: saleItem.prices.filter(
         (ip: ItemPrice) => ip.menuId !== itemPrice.menuId
       ),
     })
@@ -108,7 +122,7 @@ const SaleItemForm = ({ currentSaleItem, action, errors }: Props) => {
         <ItemPriceContainer
           addItemPrice={addItemPrice}
           removeItemPrice={removeItemPrice}
-          itemPrices={saleItem.itemPrices}
+          itemPrices={saleItem.prices}
         />
       </GenericForm>
     </>

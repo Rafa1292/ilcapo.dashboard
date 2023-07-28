@@ -15,7 +15,7 @@ const SaleItems = () => {
     description: '',
     pictureUrl: '',
     saleItemCategoryId: 0,
-    itemPrices: [],
+    prices: [],
     saleItemCategory: { id: 0 } as SaleItemCategory,
     saleItemProducts: [],
     delete: false,

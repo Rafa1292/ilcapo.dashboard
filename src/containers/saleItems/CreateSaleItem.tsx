@@ -12,6 +12,7 @@ const CreateSaleItem = ({ saleItem, refreshSaleItems }: Props) => {
   const [errors, setErrors] = useState<string[]>([])
 
   const handleSubmit = async (newSaleItem: SaleItem) => {
+    console.log(newSaleItem)
     const response = await usePost<SaleItem>('saleItems', newSaleItem)
     if (!response.error) {
       refreshSaleItems()

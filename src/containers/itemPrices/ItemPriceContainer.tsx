@@ -33,7 +33,7 @@ const ItemPriceContainer = ({ addItemPrice, removeItemPrice, itemPrices }: Props
           menu={menu}
           addItemPrice={addItemPrice}
           currentItemPrice={
-            itemPrices.find(
+            itemPrices?.find(
               (itemPrice: ItemPrice) => itemPrice.menuId === menu.id
             ) || null
           }

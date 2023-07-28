@@ -10,7 +10,7 @@ export interface SaleItem {
   description: string
   pictureUrl: string
   delete: boolean
-  itemPrices: ItemPrice[]
+  prices: ItemPrice[]
   saleItemProducts: SaleItemProduct[],
   createdAt?: Date
   updatedAt?: Date

@@ -72,13 +72,14 @@ const ItemPriceComponent = ({
           <div className='col-12'>
             {currentItemPrice !== null && (
               <CustomInputNumber
+                isRequired={false}
                 showLabel={false}
                 value={itemPrice.price}
                 customInputNumber={{
                   label: 'Precio',
                   name: 'price',
                   handleChange: (ev) =>
-                    addItemPrice({ ...itemPrice, price: ev.target.value }),
+                    addItemPrice({ ...itemPrice, price: Number(ev.target.value) }),
                   pattern: regexOptions.decimal,
                   validationMessage: 'Ingrese un precio válido',
                 }}
