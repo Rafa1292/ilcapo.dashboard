@@ -22,6 +22,7 @@ const EditModifierElement = ({ modifierElement, modifierGroups, modifierGroupId,
     if (response.error) {
       setErrors(response.message)
     } else {
+      setErrors([])
       setEditMode(false)
       refreshModifierGroups()
     }

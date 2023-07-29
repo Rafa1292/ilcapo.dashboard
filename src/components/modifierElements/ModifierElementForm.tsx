@@ -50,9 +50,9 @@ const ModifierElementForm = ({
 }: Props) => {
   const [modifierElement, setModifierElement] = useState<ModifierElement>({
     ...currentModifierElement,
-    modifierElementUpgrade:
-      currentModifierElement.modifierElementUpgrade?.id > 0
-        ? currentModifierElement.modifierElementUpgrade
+    modifierUpgrade:
+      currentModifierElement.modifierUpgrade?.id > 0
+        ? currentModifierElement.modifierUpgrade
         : ({} as ModifierElementUpgrade),
   })
 
@@ -65,7 +65,7 @@ const ModifierElementForm = ({
   )
   const [products, setProducts] = useState<Product[]>([])
   const [upgradable, setUpgradable] = useState<boolean>(
-    modifierElement?.modifierElementUpgrade.id > 0 ? true : false
+    modifierElement?.modifierUpgrade.id > 0 ? true : false
   )
 
   const submitText = currentModifierElement?.id === 0 ? 'Agregar' : 'Editar'
@@ -118,12 +118,12 @@ const ModifierElementForm = ({
     if (checked) {
       setModifierElement({
         ...modifierElement,
-        modifierElementUpgrade: { ...initialModifierElementUpgrade },
+        modifierUpgrade: { ...initialModifierElementUpgrade },
       })
     } else {
       setModifierElement({
         ...modifierElement,
-        modifierElementUpgrade: {} as ModifierElementUpgrade,
+        modifierUpgrade: {} as ModifierElementUpgrade,
       })
     }
   }
@@ -132,24 +132,44 @@ const ModifierElementForm = ({
     const { name, value } = event.target
     setModifierElement({
       ...modifierElement,
-      modifierElementUpgrade: {
-        ...modifierElement.modifierElementUpgrade,
+      modifierUpgrade: {
+        ...modifierElement.modifierUpgrade,
         [name]: value,
       },
     })
   }
 
   const addUpgradeElementPrice = (upgradeElementPrice: UpgradeElementPrice) => {
-    setModifierElement({
-      ...modifierElement,
-      modifierElementUpgrade: {
-        ...modifierElement.modifierElementUpgrade,
-        prices: [
-          ...modifierElement.modifierElementUpgrade.prices,
-          upgradeElementPrice,
-        ],
-      },
-    })
+    const currentUpgradeElementPrice =
+      modifierElement.modifierUpgrade.prices.find(
+        (upgradeElementPriceItem: UpgradeElementPrice) =>
+          upgradeElementPriceItem.menuId === upgradeElementPrice.menuId
+      )
+    if (currentUpgradeElementPrice) {
+      setModifierElement({
+        ...modifierElement,
+        modifierUpgrade: {
+          ...modifierElement.modifierUpgrade,
+          prices: modifierElement.modifierUpgrade.prices.map(
+            (upgradeElementPriceItem: UpgradeElementPrice) =>
+              upgradeElementPriceItem.menuId === upgradeElementPrice.menuId
+                ? upgradeElementPrice
+                : upgradeElementPriceItem
+          ),
+        },
+      })
+    } else {
+      setModifierElement({
+        ...modifierElement,
+        modifierUpgrade: {
+          ...modifierElement.modifierUpgrade,
+          prices: [
+            ...modifierElement.modifierUpgrade.prices,
+            upgradeElementPrice,
+          ],
+        },
+      })
+    }
   }
 
   const removeUpgradeElementPrice = (
@@ -157,9 +177,9 @@ const ModifierElementForm = ({
   ) => {
     setModifierElement({
       ...modifierElement,
-      modifierElementUpgrade: {
-        ...modifierElement.modifierElementUpgrade,
-        prices: modifierElement.modifierElementUpgrade.prices.filter(
+      modifierUpgrade: {
+        ...modifierElement.modifierUpgrade,
+        prices: modifierElement.modifierUpgrade.prices.filter(
           (upgradeElementPriceItem: UpgradeElementPrice) =>
             upgradeElementPriceItem.menuId !== upgradeElementPrice.menuId
         ),
@@ -353,7 +373,7 @@ const ModifierElementForm = ({
               removeUpgradeElementPrice={removeUpgradeElementPrice}
               handleChange={handleModifierElementUpgradeChange}
               modifierGroups={modifierGroups}
-              modifierElementUpgrade={modifierElement.modifierElementUpgrade}
+              modifierElementUpgrade={modifierElement.modifierUpgrade}
             />
           </div>
         )}

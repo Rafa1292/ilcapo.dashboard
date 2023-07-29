@@ -18,7 +18,7 @@ const initialModifierElement: ModifierElement = {
   combinableModifierGroupId: 0,
   modifierGroupId: 0,
   numberOfParts: 0,
-  modifierElementUpgrade: { } as ModifierElementUpgrade,
+  modifierUpgrade: { } as ModifierElementUpgrade,
   productReference: {} as ProductReference,
   delete: false,
   createdBy: 0,
