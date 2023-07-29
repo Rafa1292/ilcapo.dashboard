@@ -6,7 +6,7 @@ export interface ModifierElement {
   id: number
   name: string
   defaultRecipeId: number
-  elementPrices: ElementPrice[]
+  prices: ElementPrice[]
   quantity: number
   combinable: boolean
   numberOfParts: number

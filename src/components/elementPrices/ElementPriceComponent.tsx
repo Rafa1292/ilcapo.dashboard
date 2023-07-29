@@ -31,7 +31,8 @@ const ElementPriceComponent = ({
   addElementPrice,
   removeElementPrice: removeElementPrice,
 }: Props) => {
-  const [elementPrice, setElementPrice] = useState<ElementPrice>(initialElementPrice)
+  const [elementPrice, setElementPrice] =
+    useState<ElementPrice>(initialElementPrice)
   const [show, setShow] = useState<boolean>(false)
 
   const handleCheck = (event: any) => {
@@ -72,13 +73,17 @@ const ElementPriceComponent = ({
           <div className='col-12'>
             {currentElementPrice !== null && (
               <CustomInputNumber
+                isRequired={false}
                 showLabel={false}
                 value={elementPrice.price}
                 customInputNumber={{
                   label: 'Precio',
                   name: 'price',
                   handleChange: (ev) =>
-                    addElementPrice({ ...elementPrice, price: ev.target.value }),
+                    addElementPrice({
+                      ...elementPrice,
+                      price: ev.target.value,
+                    }),
                   pattern: regexOptions.decimal,
                   validationMessage: 'Ingrese un precio válido',
                 }}

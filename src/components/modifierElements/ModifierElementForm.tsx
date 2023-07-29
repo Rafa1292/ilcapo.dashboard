@@ -172,16 +172,31 @@ const ModifierElementForm = ({
   }
 
   const addElementPrice = (elementPrice: ElementPrice) => {
-    setModifierElement({
-      ...modifierElement,
-      elementPrices: [...modifierElement.elementPrices, elementPrice],
-    })
+    const currentElementPrice = modifierElement.prices?.find(
+      (elementPriceItem: ElementPrice) =>
+        elementPriceItem.menuId === elementPrice.menuId
+    )
+    if (currentElementPrice) {
+      setModifierElement({
+        ...modifierElement,
+        prices: modifierElement.prices?.map((elementPriceItem: ElementPrice) =>
+          elementPriceItem.menuId === elementPrice.menuId
+            ? elementPrice
+            : elementPriceItem
+        ),
+      })
+    } else {
+      setModifierElement({
+        ...modifierElement,
+        prices: [...modifierElement.prices, elementPrice],
+      })
+    }
   }
 
   const removeElementPrice = (elementPrice: ElementPrice) => {
     setModifierElement({
       ...modifierElement,
-      elementPrices: modifierElement.elementPrices.filter(
+      prices: modifierElement.prices?.filter(
         (elementPriceItem: ElementPrice) =>
           elementPriceItem.menuId !== elementPrice.menuId
       ),
@@ -210,7 +225,7 @@ const ModifierElementForm = ({
       >
         <ElementPriceContainer
           addElementPrice={addElementPrice}
-          elementPrices={modifierElement.elementPrices}
+          elementPrices={modifierElement.prices}
           removeElementPrice={removeElementPrice}
         />
 

@@ -34,7 +34,7 @@ const ElementPriceContainer = ({ addElementPrice, removeElementPrice, elementPri
           menu={menu}
           addElementPrice={addElementPrice}
           currentElementPrice={
-            elementPrices.find(
+            elementPrices?.find(
               (elementPrice: ElementPrice) => elementPrice.menuId === menu.id
             ) || null
           }
