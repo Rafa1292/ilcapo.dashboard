@@ -45,7 +45,7 @@ const UserForm = () => {
   }
 
   const handleSubmit = async () => {
-    const response = await usePost<User>('users', { ...user, password: '123456' })
+    const response = await usePost<User>('users', { ...user, password: '123456' }, true)
     if (!response.error) {
       setUser(initialUser)
     }
