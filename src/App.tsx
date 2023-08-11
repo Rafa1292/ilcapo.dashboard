@@ -23,6 +23,7 @@ import ModifierGroups from './pages/ModifierGroups'
 import Users from './pages/Users'
 import Menus from './pages/Menus'
 import Accounts from './pages/Accounts'
+import PayMethods from './pages/PayMethods'
 
 function App() {
   const { state } = useInitialState()
@@ -49,6 +50,7 @@ function App() {
             <Route path="/SaleItemCategories" element={<SaleItemCategories />} />
             <Route path="/SaleItems" element={<SaleItems />} />
             <Route path="/ModifierGroups" element={<ModifierGroups />} />
+            <Route path="/PayMethods" element={<PayMethods />} />
             <Route path="/users" element={<Users />} />
             <Route path="/menus" element={<Menus />} />
           </Routes>
