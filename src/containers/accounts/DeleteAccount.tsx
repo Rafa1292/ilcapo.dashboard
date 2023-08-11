@@ -20,7 +20,7 @@ const DeleteAccount = ({ refreshAccounts, id }: Props) => {
   }
 
   const deleteAccount = async () => {
-    const response = await useDelete<Account>(`accounts/${id}`)
+    const response = await useDelete<Account>(`accounts/${id}`,true)
     if (!response.error) {
       refreshAccounts()
     }

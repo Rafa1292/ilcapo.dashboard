@@ -13,7 +13,7 @@ const EditAccount = ({ account, refreshAccounts }: Props) => {
   const [errors, setErrors] = useState<string[]>([])
 
   const handleSubmit = async (editAccount: Account) => {
-    const response = await usePatch<Account>(`accounts/${editAccount.id}`, editAccount)
+    const response = await usePatch<Account>(`accounts/${editAccount.id}`, editAccount, true)
     if (!response.error) {
       refreshAccounts()
     }

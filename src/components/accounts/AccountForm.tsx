@@ -3,6 +3,7 @@ import CustomInputText from '../generics/CustomInputText'
 import GenericForm from '../generics/GenericForm'
 import { regexOptions } from '../../enums/regexOptions'
 import { Account } from '../../types/Account'
+import CustomInputCheck from '../generics/CustomInputChecbox'
 
 interface Props {
   currentAccount: Account
@@ -17,6 +18,11 @@ const BrandForm = ({ currentAccount, action, errors }: Props) => {
   const handleChange = (event: any) => {
     const { name, value } = event.target
     setAccount({ ...account, [name]: value })
+  }
+
+  const handleCheck = (event: any) => {
+    const { name, checked } = event.target
+    setAccount({ ...account, [name]: checked })
   }
 
   const handleSubmit = () => {
@@ -34,6 +40,20 @@ const BrandForm = ({ currentAccount, action, errors }: Props) => {
               validationMessage: 'Ingrese un nombre válido'
             }
           } />
+        <CustomInputCheck value={account.active}
+          customInputCheck={
+            {
+              label: 'Activa', name: 'active',
+              handleChange: handleCheck, pattern: '', validationMessage: ''
+            }
+          } />          
+        <CustomInputCheck value={account.cash}
+          customInputCheck={
+            {
+              label: 'Efectivo', name: 'cash',
+              handleChange: handleCheck, pattern: '', validationMessage: ''
+            }
+          } />          
       </GenericForm>
     </>
   )

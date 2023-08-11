@@ -22,6 +22,7 @@ import SaleItems from './pages/SaleItems'
 import ModifierGroups from './pages/ModifierGroups'
 import Users from './pages/Users'
 import Menus from './pages/Menus'
+import Accounts from './pages/Accounts'
 
 function App() {
   const { state } = useInitialState()
@@ -33,6 +34,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/Providers" element={<Providers />} />
             <Route path="/Magnitudes" element={<Magnitudes />} />
+            <Route path="/Accounts" element={<Accounts />} />
             <Route path="/Measures" element={<Measures />} />
             <Route path="/Inputs/AddProvider/:id" element={<AddProviders />} />
             <Route path="/Providers/AddInput/:id" element={<AddInputs />} />

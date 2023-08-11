@@ -13,7 +13,7 @@ const CreateAccount = ({ account, refreshAccounts }: Props) => {
   const [errors, setErrors] = useState<string[]>([])
 
   const handleSubmit = async (newAccount: Account) => {
-    const response = await usePost<Account>('accounts', newAccount)
+    const response = await usePost<Account>('accounts', newAccount, true)
     if (!response.error) {
       refreshAccounts()
     }

@@ -38,7 +38,7 @@ const Accounts = () => {
   }
 
   const refreshAccounts = async () => {
-    const response = await useGetList<Account[]>('accounts')
+    const response = await useGetList<Account[]>('accounts',true)
     if (!response.error) {
       setAccounts(response.data)
       setShow(false)
