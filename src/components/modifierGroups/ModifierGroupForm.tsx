@@ -46,6 +46,15 @@ const ModifierGroupForm = ({ currentModifierGroup: currentModifierGroup, action,
             }
           } />
 
+        <CustomInputText isRequired={false} value={modifierGroup.label}
+          customInputText={
+            {
+              label: 'Etiqueta', name: 'label',
+              handleChange: handleChange, pattern: regexOptions.text,
+              validationMessage: 'Ingrese un nombre válido'
+            }
+          } />
+
         <CustomInputNumber value={modifierGroup.minSelectable}
           customInputNumber={
             {

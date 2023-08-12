@@ -44,7 +44,7 @@ const productForm = ({ currentProduct, action, errors }: Props) => {
             }
           } />
 
-        <CustomInputText value={product.description}
+        <CustomInputText isRequired={false} value={product.description}
           customInputText={
             {
               label: 'Description de producto', name: 'description',
@@ -52,13 +52,6 @@ const productForm = ({ currentProduct, action, errors }: Props) => {
               validationMessage: 'Ingrese una descripcion'
             }
           } />
-
-        <CustomInputNumber value={product.price} customInputNumber={
-          {
-            label: 'Precio', name: 'price',
-            handleChange: handleChange, pattern: regexOptions.integer, validationMessage: 'Ingrese un precio válido'
-          }
-        } />
 
         <CustomInputCheck value={product.allowsModify} customInputCheck={
           {
