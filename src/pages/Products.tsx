@@ -15,6 +15,7 @@ const Products = () => {
     price: 0,
     pictureUrl: '',
     productModifiers: [],
+    needsCommand: true,
     allowsModify: false,
     delete: false,
     createdBy: 0,

@@ -60,6 +60,13 @@ const productForm = ({ currentProduct, action, errors }: Props) => {
           }
         } />
 
+        <CustomInputCheck value={product.needsCommand} customInputCheck={
+          {
+            label: 'Comanda', name: 'needsCommand',
+            handleChange: handleCheck, pattern: '', validationMessage: ''
+          }
+        } />
+
       </GenericForm>
     </>
   )
