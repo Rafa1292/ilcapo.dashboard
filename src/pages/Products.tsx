@@ -18,7 +18,7 @@ const Products = () => {
     allowsModify: false,
     delete: false,
     createdBy: 0,
-    updatedBy: 0
+    updatedBy: 0,
   }
   const [show, setShow] = useState<boolean>(false)
   const [products, setProducts] = useState<Product[]>([])
@@ -30,7 +30,7 @@ const Products = () => {
   }
 
   const editProduct = (id: number) => {
-    const editProduct = products.find(product => product.id === id)
+    const editProduct = products.find((product) => product.id === id)
     if (editProduct) {
       setProduct(editProduct)
       setShow(true)
@@ -52,27 +52,47 @@ const Products = () => {
     getProducts()
   }, [])
 
-
-
   return (
     <div className='col-lg-6 justify-content-center d-flex  flex-wrap'>
       <h1 className='my-2 col-12 text-center'>Productos</h1>
-      <ProductFormContainer refreshProducts={refreshProducts} product={product}
-        addProduct={addProduct} show={show} setShow={setShow} />
-      {
-        products.length > 0 &&
+      <ProductFormContainer
+        refreshProducts={refreshProducts}
+        product={product}
+        addProduct={addProduct}
+        show={show}
+        setShow={setShow}
+      />
+      {products.length > 0 && (
         <Table headers={['Nombre', 'Precio', 'Modificable', '']}>
-          {
-            products.map((product, index) => (
-              <TableRow key={index} tableData={[product.name, product.price?.toString(), product.allowsModify ? 'Si': 'No']}>
-                <ProductRecipes refreshProducts={refreshProducts} product={product}/>
-                <button className="btn btn-outline-secondary m-2" onClick={(() => editProduct(product.id))}>Editar</button>
-                <DeleteProduct id={product.id} refreshProducts={refreshProducts} />
+          {products
+            .sort((a, b) => a.id - b.id)
+            .map((product, index) => (
+              <TableRow
+                key={index}
+                tableData={[
+                  product.name,
+                  product.price?.toString(),
+                  product.allowsModify ? 'Si' : 'No',
+                ]}
+              >
+                <ProductRecipes
+                  refreshProducts={refreshProducts}
+                  product={product}
+                />
+                <button
+                  className='btn btn-outline-secondary m-2'
+                  onClick={() => editProduct(product.id)}
+                >
+                  Editar
+                </button>
+                <DeleteProduct
+                  id={product.id}
+                  refreshProducts={refreshProducts}
+                />
               </TableRow>
-            ))
-          }
+            ))}
         </Table>
-      }
+      )}
     </div>
   )
 }

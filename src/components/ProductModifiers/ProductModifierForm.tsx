@@ -20,6 +20,7 @@ const initialProductModifier: ProductModifier = {
   modifierGroupId: 0,
   modifierGroup: undefined,
   productId: 0,
+  order: 0,
   createdBy: 1,
   updatedBy: 1,
   delete: false

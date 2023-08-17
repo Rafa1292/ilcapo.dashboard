@@ -36,7 +36,7 @@ const ProductRecipes = ({ product, refreshProducts }: Props) => {
         <CreateProductModifier refreshProducts={refreshProducts} productId={product.id}/>
         <div className='col-12 d-flex flex-wrap'>
           {
-            product.productModifiers.map((productModifier, indexGroup) => (
+            product.productModifiers.sort((a,b)=> a.order - b.order).map((productModifier, indexGroup) => (
               <div key={indexGroup} className='col-lg-6 col-12 p-4 my-2'>
                 <EditProductModifier refreshProducts={refreshProducts} productModifier={productModifier} productId={product.id} recipes={recipes} />
               </div>
