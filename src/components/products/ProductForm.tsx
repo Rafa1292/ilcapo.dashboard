@@ -30,43 +30,70 @@ const productForm = ({ currentProduct, action, errors }: Props) => {
 
   const handleSubmit = () => {
     action(product)
-  }  
+  }
 
   return (
     <>
-      <GenericForm errors={errors} submitText={submitText} handleSubmit={handleSubmit}>
-        <CustomInputText value={product.name}
-          customInputText={
-            {
-              label: 'Nombre de producto', name: 'name',
-              handleChange: handleChange, pattern: regexOptions.text,
-              validationMessage: 'Ingrese un nombre válido'
-            }
-          } />
+      <GenericForm
+        errors={errors}
+        submitText={submitText}
+        handleSubmit={handleSubmit}
+      >
+        <CustomInputText
+          value={product.name}
+          customInputText={{
+            label: 'Nombre de producto',
+            name: 'name',
+            handleChange: handleChange,
+            pattern: regexOptions.text,
+            validationMessage: 'Ingrese un nombre válido',
+          }}
+        />
 
-        <CustomInputText isRequired={false} value={product.description}
-          customInputText={
-            {
-              label: 'Description de producto', name: 'description',
-              handleChange: handleChange, pattern: regexOptions.text,
-              validationMessage: 'Ingrese una descripcion'
-            }
-          } />
+        <CustomInputText
+          isRequired={false}
+          value={product.description}
+          customInputText={{
+            label: 'Description de producto',
+            name: 'description',
+            handleChange: handleChange,
+            pattern: regexOptions.text,
+            validationMessage: 'Ingrese una descripcion',
+          }}
+        />
 
-        <CustomInputCheck value={product.allowsModify} customInputCheck={
-          {
-            label: 'Permite modificar', name: 'allowsModify',
-            handleChange: handleCheck, pattern: '', validationMessage: ''
-          }
-        } />
+        <CustomInputCheck
+          value={product.allowsModify}
+          customInputCheck={{
+            label: 'Permite modificar',
+            name: 'allowsModify',
+            handleChange: handleCheck,
+            pattern: '',
+            validationMessage: '',
+          }}
+        />
 
-        <CustomInputCheck value={product.needsCommand} customInputCheck={
-          {
-            label: 'Comanda', name: 'needsCommand',
-            handleChange: handleCheck, pattern: '', validationMessage: ''
-          }
-        } />
+        <CustomInputCheck
+          value={product.active}
+          customInputCheck={{
+            label: 'Activo',
+            name: 'active',
+            handleChange: handleCheck,
+            pattern: '',
+            validationMessage: '',
+          }}
+        />
 
+        <CustomInputCheck
+          value={product.needsCommand}
+          customInputCheck={{
+            label: 'Comanda',
+            name: 'needsCommand',
+            handleChange: handleCheck,
+            pattern: '',
+            validationMessage: '',
+          }}
+        />
       </GenericForm>
     </>
   )
