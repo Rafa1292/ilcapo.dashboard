@@ -24,6 +24,7 @@ import Users from './pages/Users'
 import Menus from './pages/Menus'
 import Accounts from './pages/Accounts'
 import PayMethods from './pages/PayMethods'
+import Budgets from './pages/Budgets'
 
 function App() {
   const { state } = useInitialState()
@@ -53,6 +54,7 @@ function App() {
             <Route path="/PayMethods" element={<PayMethods />} />
             <Route path="/users" element={<Users />} />
             <Route path="/menus" element={<Menus />} />
+            <Route path="/budgets" element={<Budgets />} />
           </Routes>
         </Layout>
       </BrowserRouter>
