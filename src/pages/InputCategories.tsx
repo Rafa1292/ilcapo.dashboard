@@ -34,7 +34,7 @@ const InputCategories = () => {
   const refreshInputCategories = async () => {
     const response = await useGetList<InputCategory[]>('inputCategories')
     if (!response.error) {
-      setInputCategories(response.data)
+      setInputCategories(response.data.sort((a, b) => a.id - b.id))
       setShow(false)
     }
   }

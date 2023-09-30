@@ -17,7 +17,7 @@ const InputCategoryFormContainer = ({ refreshInputCategories, inputCategory, add
   const title = inputCategory.id === 0 ? 'Agregar categoria' : 'Editar categoria'
   return (
     <>
-      <Button variant={'outline-dark'} className='my-2' onClick={addInputCategory}>
+      <Button variant={'outline-light'} className='my-2' onClick={addInputCategory}>
         Agregar
       </Button>
       <CustomModal title={title} show={show} handleClose={(() => setShow(false))}>

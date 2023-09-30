@@ -17,7 +17,7 @@ const InputBrandFormContainer = ({ refreshBrands, brand, addBrand, show, setShow
   const title = brand.id === 0 ? 'Agregar marca' : 'Editar marca'
   return (
     <>
-      <Button variant={'outline-dark'} className='my-2' onClick={addBrand}>
+      <Button variant={'outline-light'} className='my-2' onClick={addBrand}>
         Agregar
       </Button>
       <CustomModal title={title} show={show} handleClose={(() => setShow(false))}>

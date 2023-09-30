@@ -34,7 +34,7 @@ const Brands = () => {
   const refreshBrands = async () => {
     const response = await useGetList<Brand[]>('brands')
     if (!response.error) {
-      setBrands(response.data)
+      setBrands(response.data.sort((a, b) => a.id - b.id))
       setShow(false)
     }
   }

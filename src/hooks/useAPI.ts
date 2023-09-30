@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { Toast } from 'react-bootstrap'
 import Swal from 'sweetalert2'
 
 class CustomResponse<T> {
@@ -62,7 +63,17 @@ const useCustom = async<T>(route: string, method: string, data: T, apiSales: boo
     })
 
     if (response?.data?.error) {
-      Swal.fire('Error', response.data.message.toString(), 'error')
+      Swal.fire({
+        icon: 'error',
+        text: response.data.message.toString(),
+        title: 'Error',
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        background: '#dc3545',
+        color: '#fff',
+        timer: 3000,
+      })
       return customResponse.badResponse(response.data.message)
     }
 

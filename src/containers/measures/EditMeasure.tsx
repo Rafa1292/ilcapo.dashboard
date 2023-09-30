@@ -2,13 +2,15 @@ import React, { useState } from 'react'
 import MeasureForm from '../../components/measures/MeasureForm'
 import { usePatch } from '../../hooks/useAPI'
 import { Measure } from '../../types/Measure'
+import { Magnitude } from '../../types/Magnitude'
 
 interface Props {
   measure: Measure
   refreshMeasures: () => void
+  magnitudes: Magnitude[]
 }
 
-const CreateMeasure = ({ measure, refreshMeasures }: Props) => {
+const CreateMeasure = ({ measure, refreshMeasures, magnitudes }: Props) => {
   const [errors, setErrors] = useState<string[]>([])
 
   const handleSubmit = async (editMeasure: Measure) => {
@@ -22,7 +24,7 @@ const CreateMeasure = ({ measure, refreshMeasures }: Props) => {
   }
 
   return (
-    <MeasureForm errors={errors} currentMeasure={measure} action={handleSubmit} />
+    <MeasureForm magnitudes={magnitudes} errors={errors} currentMeasure={measure} action={handleSubmit} />
   )
 }
 

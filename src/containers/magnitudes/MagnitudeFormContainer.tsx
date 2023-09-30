@@ -17,7 +17,7 @@ const MagnitudeFormContainer = ({ refreshMagnitudes, magnitude, addMagnitude, sh
   const title = magnitude.id === 0 ? 'Agregar magnitud' : 'Editar magnitud'
   return (
     <>
-      <Button variant={'outline-dark'} className='my-2' onClick={addMagnitude}>
+      <Button variant={'outline-light'} className='my-2' onClick={addMagnitude}>
         Agregar
       </Button>
       <CustomModal title={title} show={show} handleClose={(() => setShow(false))}>

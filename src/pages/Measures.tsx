@@ -5,6 +5,7 @@ import DeleteMeasure from '../containers/measures/DeleteMeasure'
 import MeasureFormContainer from '../containers/measures/MeasureFormContainer'
 import { useGetList } from '../hooks/useAPI'
 import { Measure } from '../types/Measure'
+import { Magnitude } from '../types/Magnitude'
 
 const initialMeasure: Measure = {
   id: 0,
@@ -22,6 +23,7 @@ const Measures = () => {
   const [show, setShow] = useState<boolean>(false)
   const [measures, setMeasures] = useState<Measure[]>([])
   const [measure, setMeasure] = useState<Measure>(initialMeasure)
+  const [magnitudes, setMagnitudes] = useState<Magnitude[]>([])
 
   const addMeasure = () => {
     setMeasure(initialMeasure)
@@ -44,10 +46,25 @@ const Measures = () => {
     }
   }
 
+  const getMagnitudeNameById = (id: number) => {
+    const magnitude = magnitudes.find(magnitude => magnitude.id === id)
+    if (magnitude) {
+      return magnitude.name
+    }
+    return ''
+  }
+
   useEffect(() => {
     const getMeasures = async () => {
       await refreshMeasures()
     }
+    const getMagnitudes = async () => {
+      const response = await useGetList<Magnitude[]>('magnitudes')
+      if (!response.error) {
+        setMagnitudes(response.data)
+      }
+    }
+    getMagnitudes()
     getMeasures()
   }, [])
 
@@ -56,14 +73,14 @@ const Measures = () => {
   return (
     <div className='col-lg-8 justify-content-center d-flex  flex-wrap'>
       <h1 className='my-2 col-12 text-center'>Medidas</h1>
-      <MeasureFormContainer refreshMeasures={refreshMeasures} measure={measure} addMeasure={addMeasure} show={show} setShow={setShow} />
+      <MeasureFormContainer magnitudes={magnitudes} refreshMeasures={refreshMeasures} measure={measure} addMeasure={addMeasure} show={show} setShow={setShow} />
       {
         measures.length > 0 &&
         <Table headers={['#', 'Nombre', 'Medida principal', 'Valor', 'Magnitud', 'Abreviatura', '']}>
           {
             measures.sort(function (a, b) { return (a.id + (a.magnitudeId * 10)) - (b.id + (b.magnitudeId * 10)) }).map((measure, index) => (
               <TableRow key={index} tableData={[measure.id.toString(), measure.name,
-                measure.principalMeasure ? 'Si' : 'No', measure.value.toString(), measure.magnitude ? measure.magnitude.name : '' , measure.abbreviation
+                measure.principalMeasure ? 'Si' : 'No', measure.value.toString(), getMagnitudeNameById(measure.magnitudeId) , measure.abbreviation
               ]}>
                 <button className="btn btn-outline-secondary m-2" onClick={(() => editMeasure(measure.id))}>Editar</button>
                 <DeleteMeasure id={measure.id} refreshMeasures={refreshMeasures} />

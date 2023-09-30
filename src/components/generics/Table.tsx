@@ -23,7 +23,7 @@ const Table = ({ headers, children }: Props) => {
               {
                 headers.map((header, index) => (
                   <th key={index} scope="col" className={`${index === 0 ? 'top-left-radius' : ''} ${index === (headers.length - 1) ? 'top-right-radius' : ''}`}>
-                    <span className={'d-flex justify-content-center col-12'}>
+                    <span className={'d-flex justify-content-center col-12 text-center'}>
                       {header}
                     </span>
                   </th>

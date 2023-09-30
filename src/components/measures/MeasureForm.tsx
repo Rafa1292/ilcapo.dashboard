@@ -13,11 +13,11 @@ interface Props {
   currentMeasure: Measure
   action: (measure: Measure) => void
   errors?: string[]
+  magnitudes: Magnitude[]
 }
 
-const MeasureForm = ({ currentMeasure, action, errors }: Props) => {
+const MeasureForm = ({ currentMeasure, action, errors, magnitudes }: Props) => {
   const [measure, setMeasure] = useState<Measure>(currentMeasure)
-  const [magnitudes, setMagnitudes] = useState<Magnitude[]>([])
   const submitText = currentMeasure?.id === 0 ? 'Agregar' : 'Editar'
 
   const handleChange = (event: any) => {
@@ -33,16 +33,6 @@ const MeasureForm = ({ currentMeasure, action, errors }: Props) => {
   const handleSubmit = () => {
     action(measure)
   }
-
-  useEffect(() => {
-    const getMagnitudes = async () => {
-      const response = await useGetList<Magnitude[]>('magnitudes')
-      if (!response.error) {
-        setMagnitudes(response.data)
-      }
-    }
-    getMagnitudes()
-  }, [])
 
   return (
     <>

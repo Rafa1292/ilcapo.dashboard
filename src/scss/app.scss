@@ -34,6 +34,8 @@ body {
 }
 
 
+
+
 .bd-placeholder-img {
   font-size: 1.125rem;
   text-anchor: middle;
@@ -264,4 +266,31 @@ label {
   align-items: center;
   font-weight: bolder;
   cursor: pointer;
+}
+
+.scroll::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+.scroll::-webkit-scrollbar:vertical {
+  width: 5px;
+}
+
+.scroll::-webkit-scrollbar-button:increment,
+.contenedor::-webkit-scrollbar-button {
+  display: none;
+}
+
+.scroll::-webkit-scrollbar:horizontal {
+  height: 5px;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+  background-color: #797979;
+  border-radius: 20px;
+  border: none;
+}
+
+.scroll::-webkit-scrollbar-track {
+  border-radius: 10px;
 }
