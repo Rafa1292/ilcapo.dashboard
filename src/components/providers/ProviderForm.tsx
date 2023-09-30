@@ -16,9 +16,14 @@ const ProviderForm = ({ currentProvider, action, errors }: Props) => {
   const [provider, setProvider] = useState<Provider>(currentProvider)
   const submitText = currentProvider?.id === 0 ? 'Agregar' : 'Editar'
   
-  const handleChange = (event: any) => {
+  const handleChangeName = (event: any) => {
     const { name, value } = event.target
     setProvider({ ...provider, [name]: value })
+  }
+
+  const handleChangePhone = (event: any) => {
+    const { name, value } = event.target
+    setProvider({ ...provider, [name]: Number(value) })
   }
 
   const handleCheck = (event: any) => {
@@ -37,7 +42,7 @@ const ProviderForm = ({ currentProvider, action, errors }: Props) => {
           customInputText={
             {
               label: 'Nombre del proveedor', name: 'name',
-              handleChange: handleChange, pattern: regexOptions.text,
+              handleChange: handleChangeName, pattern: regexOptions.text,
               validationMessage: 'Ingrese un nombre válido'
             }
           } />
@@ -45,7 +50,7 @@ const ProviderForm = ({ currentProvider, action, errors }: Props) => {
         <CustomInputNumber value={provider.phone} customInputNumber={
           {
             label: 'Teléfono', name: 'phone',
-            handleChange: handleChange, pattern: regexOptions.phone,
+            handleChange: handleChangePhone, pattern: regexOptions.phone,
             validationMessage: 'Ingrese un teléfono válido'
           }
         } />

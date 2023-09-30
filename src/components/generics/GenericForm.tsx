@@ -48,7 +48,7 @@ const GenericForm = ({ children, submitText, handleSubmit, errors, cancel, formN
       }
       <Form noValidate onSubmit={validateForm} validated={validated} className='col-12 rounded p-4 shadow'>
         {children}
-        <Button className='btn btn-dark col-12 mt-2' type="submit">{submitText}</Button>
+        <Button style={{'opacity': '0.8'}} className='btn btn-success col-12 mt-3' type="submit">{submitText}</Button>
         {
           cancel &&
           <button className='btn btn-outline-secondary col-12 my-2' onClick={cancel} type="button">Cancelar</button>

@@ -37,7 +37,7 @@ const Providers = () => {
   const refreshProviders = async () => {
     const response = await useGetList<Provider[]>('providers')
     if (!response.error) {
-      setProviders(response.data)
+      setProviders(response.data.sort((a, b) => a.id - b.id))
       setShow(false)
     }
   }

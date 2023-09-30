@@ -62,7 +62,6 @@ const AddProviderToInput = ({ id }: Props) => {
 
     const getProvider = async () => {
       if (id) {
-        console.log('id', id)
         const response = await useGetList<Provider>(`providers/${id}`)
         if (!response.error) {
           setTitle(response.data.name)
@@ -78,7 +77,7 @@ const AddProviderToInput = ({ id }: Props) => {
   return (
     <div className='d-flex flex-wrap justify-content-center col-12'>
       <h2 className='col-12 text-center'>{title}</h2>
-      <div className="col-lg-3 d-flex justify-content-center">
+      <div className="col-lg-3 d-flex justify-content-center rounded" style={{'background': 'rgba(33,37,41)'}}>
         <ProviderInputFormContainer showProviders={false} getRestringedBrandsId={getRestringedBrandsId} cancelAction={setInitialProviderInput} refreshProviderInputs={refreshProviderInputs} providerInput={providerInput} />
       </div>
       <div className="col-9 p-2">

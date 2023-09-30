@@ -9,11 +9,11 @@ interface Props {
 const Layout = ({ children }: Props) => {
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="container-fluid">
         <div className="row">
           <SideMenu />
-          <main className="col-md-9 ms-sm-auto col-lg-10 d-flex flex-wrap p-2 justify-content-center">
+          <main className="col-md-9 ms-sm-auto col-lg-10 d-flex flex-wrap p-2 justify-content-center" style={{background: 'rgba(33,37,41,.9)', color: 'white'}}>
             {
               children
             }

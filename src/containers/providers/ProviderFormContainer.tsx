@@ -17,7 +17,7 @@ const ProviderFormContainer = ({ refreshProviders, provider, addProvider, show, 
   const title = provider.id === 0 ? 'Agregar proovedor' : 'Editar proveedor'
   return (
     <>
-      <Button variant={'outline-dark'} className='my-2' onClick={addProvider}>
+      <Button variant={'outline-light'} className='my-2' onClick={addProvider}>
         Agregar
       </Button>
       <CustomModal title={title} show={show} handleClose={(() => setShow(false))}>

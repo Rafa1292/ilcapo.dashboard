@@ -18,7 +18,6 @@ const CreateProviderInput = ({ providerInput, refreshProviderInputs, getRestring
 
   const handleSubmit = async (newProviderInput: ProviderInput) => {
     setIsLoading(true)
-    console.log(newProviderInput)
     const response = await usePost<ProviderInput>('providerInputs', newProviderInput)
     if (!response.error) {
       refreshProviderInputs()
@@ -32,7 +31,7 @@ const CreateProviderInput = ({ providerInput, refreshProviderInputs, getRestring
   }
 
   return (
-    <Content minHeight='400px' isLoading={isLoading}>
+    <Content  isLoading={isLoading}>
       <ProviderInputForm showProviders={showProviders} getRestringedBrandsId={getRestringedBrandsId} errors={errors} currentProviderInput={createProviderInput} action={handleSubmit} />
     </Content>
   )

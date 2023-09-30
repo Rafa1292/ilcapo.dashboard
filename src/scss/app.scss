@@ -54,7 +54,9 @@ body {
   color: black;
 }
 
-
+.react-datalist-input__listbox-option{
+  color: black
+}
 
 .b-example-divider {
   height: 3rem;
@@ -196,7 +198,7 @@ body {
 }
 
 main {
-  min-height: calc(100vh - 70px);
+  min-height: calc(100vh);
   align-content: center;
   overflow-x: hidden;
 }

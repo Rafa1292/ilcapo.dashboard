@@ -32,13 +32,13 @@ const ProviderInputForm = ({ currentProviderInput, cancelAction, action, errors,
 
   const handleChange = (event: any) => {
     const { name, value } = event.target
-    setProviderInput({ ...providerInput, [name]: value })
+    setProviderInput({ ...providerInput, [name]: Number(value) })
   }
 
   const handleChangeMagnitude = (event: any) => {
     const { value } = event.target
-    setProviderInput({ ...providerInput, measure: { magnitudeId: parseInt(value) } as Measure, measureId: 0 })
-    setMagnitude(magnitudes.find(magnitude => magnitude.id === parseInt(value)))
+    setProviderInput({ ...providerInput, measure: { magnitudeId: Number(value) } as Measure, measureId: 0 })
+    setMagnitude(magnitudes.find(magnitude => magnitude.id === Number(value)))
   }
 
   const handleSubmit = () => {
