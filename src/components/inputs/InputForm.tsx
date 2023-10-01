@@ -23,9 +23,14 @@ const InputForm = ({ currentInput, action, errors }: Props) => {
   const [magnitudes, setMagnitudes] = useState<Magnitude[]>([])
   const [magnitude, setMagnitude] = useState<Magnitude>()
 
-  const handleChange = (event: any) => {
+  const handleChangeText = (event: any) => {
     const { name, value } = event.target
     setInput({ ...input, [name]: value })
+  }
+
+  const handleChangeNumber = (event: any) => {
+    const { name, value } = event.target
+    setInput({ ...input, [name]: Number(value) })
   }
 
   const handleChangeMagnitude = (event: any) => {
@@ -71,7 +76,7 @@ const InputForm = ({ currentInput, action, errors }: Props) => {
           customInputText={
             {
               label: 'Nombre de insumo', name: 'name',
-              handleChange: handleChange, pattern: regexOptions.text,
+              handleChange: handleChangeText, pattern: regexOptions.text,
               validationMessage: 'Ingrese un nombre válido'
             }
           } />
@@ -79,21 +84,21 @@ const InputForm = ({ currentInput, action, errors }: Props) => {
         <CustomInputNumber value={input.expectedPrice} customInputNumber={
           {
             label: 'Precio esperado', name: 'expectedPrice',
-            handleChange: handleChange, pattern: regexOptions.integer, validationMessage: 'Ingrese un precio válido'
+            handleChange: handleChangeNumber, pattern: regexOptions.integer, validationMessage: 'Ingrese un precio válido'
           }
         } />
 
         <CustomInputNumber value={input.stock} customInputNumber={
           {
             label: 'Stock', name: 'stock',
-            handleChange: handleChange, pattern: regexOptions.decimal, validationMessage: 'Ingrese un stock válido'
+            handleChange: handleChangeNumber, pattern: regexOptions.decimal, validationMessage: 'Ingrese un stock válido'
           }
         } />
 
         <CustomInputNumber value={input.presentation} customInputNumber={
           {
             label: 'Presentación', name: 'presentation',
-            handleChange: handleChange, pattern: regexOptions.decimal, validationMessage: 'Ingrese una presentación válida'
+            handleChange: handleChangeNumber, pattern: regexOptions.decimal, validationMessage: 'Ingrese una presentación válida'
           }
         } />
 
@@ -113,7 +118,7 @@ const InputForm = ({ currentInput, action, errors }: Props) => {
             customInputSelect={
               {
                 label: 'Medida', name: 'measureId',
-                handleChange: handleChange, pattern: '', validationMessage: 'Seleccione una medida'
+                handleChange: handleChangeText, pattern: '', validationMessage: 'Seleccione una medida'
               }}
             data={magnitude.measures.map(measure => { return { value: measure.id, label: measure.name } })}
             defaultLegend={'Seleccione una medida'}
@@ -124,7 +129,7 @@ const InputForm = ({ currentInput, action, errors }: Props) => {
           customInputSelect={
             {
               label: 'Categoria', name: 'inputCategoryId',
-              handleChange: handleChange, pattern: '', validationMessage: 'Seleccione una categoria'
+              handleChange: handleChangeText, pattern: '', validationMessage: 'Seleccione una categoria'
             }}
           data={inputCategories.map(inputCategory => { return { value: inputCategory.id, label: inputCategory.name } })}
           defaultLegend={'Seleccione una categoria'}

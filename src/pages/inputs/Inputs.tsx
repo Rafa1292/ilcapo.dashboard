@@ -48,7 +48,8 @@ const Inputs = () => {
   const refreshInputs = async () => {
     const response = await useGetList<Input[]>('inputs')
     if (!response.error) {
-      setInputs(response.data)
+      //order by name
+      setInputs(response.data.sort((a, b) => a.name.localeCompare(b.name)))
       setShow(false)
     }
   }

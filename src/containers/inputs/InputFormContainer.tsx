@@ -17,7 +17,7 @@ const InputFormContainer = ({ refreshInputs, input, addInput, show, setShow }: P
   const title = input.id === 0 ? 'Agregar insumo' : 'Editar insumo'
   return (
     <>
-      <Button variant={'outline-dark'} className='my-2' onClick={addInput}>
+      <Button variant={'outline-light'} className='my-2' onClick={addInput}>
         Agregar
       </Button>
       <CustomModal title={title} show={show} handleClose={(() => setShow(false))}>

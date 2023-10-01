@@ -62,6 +62,7 @@ const AddProviderToInput = ({ id }: Props) => {
     const getInput = async () => {
       if (id) {
         const response = await useGetList<Input>(`inputs/${id}`)
+        console.log(response)
         if (!response.error) {
           setTitle(response.data.name)
         }
