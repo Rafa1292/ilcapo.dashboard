@@ -26,6 +26,11 @@ const RecipeStepForm = ({ recipeStep, action, deleteRecipeStepIngredient, errors
     setCurrentRecipeStep({ ...currentRecipeStep, [name]: value })
   }
 
+  const handleChangeNumber = (event: any) => {
+    const { name, value } = event.target
+    setCurrentRecipeStep({ ...currentRecipeStep, [name]: Number(value) })
+  }
+
   const handleSubmit = () => {
     const newRecipeStep = { ...currentRecipeStep, recipeStepIngredients: recipeStep.recipeStepIngredients }
     validate(newRecipeStep) &&
@@ -51,7 +56,7 @@ const RecipeStepForm = ({ recipeStep, action, deleteRecipeStepIngredient, errors
         <CustomInputNumber value={currentRecipeStep.stepNumber} customInputNumber={
           {
             label: 'Numero de paso', name: 'stepNumber',
-            handleChange: handleChange, pattern: regexOptions.integer, validationMessage: 'Ingrese un numero válido'
+            handleChange: handleChangeNumber, pattern: regexOptions.integer, validationMessage: 'Ingrese un numero válido'
           }
         } />
         <CustomInputText value={currentRecipeStep.description}
@@ -67,7 +72,7 @@ const RecipeStepForm = ({ recipeStep, action, deleteRecipeStepIngredient, errors
         <CustomInputNumber value={currentRecipeStep.minutesOfPreparation} customInputNumber={
           {
             label: 'Duracion en minutos', name: 'minutesOfPreparation',
-            handleChange: handleChange, pattern: regexOptions.integer, validationMessage: 'Ingrese una duracion válida'
+            handleChange: handleChangeNumber, pattern: regexOptions.integer, validationMessage: 'Ingrese una duracion válida'
           }
         } />
         <h5 className='col-12 text-secondary my-1 fw-bold'>Insumos</h5>

@@ -37,7 +37,9 @@ const Recipes = () => {
   const refreshRecipes = async () => {
     const response = await useGetList<Recipe[]>('recipes')
     if (!response.error) {
-      setRecipes(response.data)
+      // order by name
+      console.log(response.data.sort((a, b) => a.name.localeCompare(b.name)))
+      setRecipes(response.data.sort((a, b) => a.name.localeCompare(b.name)))
       setShow(false)
     }
   }

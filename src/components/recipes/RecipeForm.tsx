@@ -20,6 +20,11 @@ const RecipeForm = ({ currentRecipe, action, errors }: Props) => {
     setRecipe({ ...recipe, [name]: value })
   }
 
+  const handleChangeCost = (event: any) => {
+    const { name, value } = event.target
+    setRecipe({ ...recipe, [name]: Number(value) })
+  }
+
   const handleSubmit = () => {
     action(recipe)
   }
@@ -39,7 +44,7 @@ const RecipeForm = ({ currentRecipe, action, errors }: Props) => {
         <CustomInputNumber value={recipe.cost} customInputNumber={
           {
             label: 'Costo', name: 'cost',
-            handleChange: handleChange, pattern: regexOptions.decimal, validationMessage: 'Ingrese un precio válido'
+            handleChange: handleChangeCost, pattern: regexOptions.decimal, validationMessage: 'Ingrese un precio válido'
           }
         } />
       </GenericForm>

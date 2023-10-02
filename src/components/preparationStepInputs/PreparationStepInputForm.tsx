@@ -33,8 +33,12 @@ const PreparationStepInputForm = ({ currentPreparationStepInput, errors, action,
 
   const handleChange = (event: any) => {
     const { name, value } = event.target
-    const val = value === '' ? '' : parseInt(value)
-    setPreparationStepInput({ ...preparationStepInput, [name]: val })
+    setPreparationStepInput({ ...preparationStepInput, [name]: value })
+  }
+
+  const handleChangeNumber = (event: any) => {
+    const { name, value } = event.target
+    setPreparationStepInput({ ...preparationStepInput, [name]: Number(value) })
   }
 
   const handleInput = (event: any) => {
@@ -111,6 +115,7 @@ const PreparationStepInputForm = ({ currentPreparationStepInput, errors, action,
       const response = await useGetList<InputCategory[]>('inputCategories')
       if (!response.error) {
         setInputCategories(response.data)
+        console.log(response.data)
         setInitialInputCategory(response.data)
       }
     }
@@ -138,7 +143,7 @@ const PreparationStepInputForm = ({ currentPreparationStepInput, errors, action,
           <CustomInputNumber showLabel={false} value={preparationStepInput.quantity} customInputNumber={
             {
               label: 'Cantidad', name: 'quantity',
-              handleChange: handleChange, pattern: regexOptions.integer, validationMessage: 'Ingrese una cantidad válida'
+              handleChange: handleChangeNumber, pattern: regexOptions.integer, validationMessage: 'Ingrese una cantidad válida'
             }
           } />
         </div>

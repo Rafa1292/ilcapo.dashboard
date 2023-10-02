@@ -17,7 +17,7 @@ const IngredientFormContainer = ({ refreshIngredients, ingredient, addIngredient
   const title = ingredient.id === 0 ? 'Agregar ingrediente' : 'Editar ingrediente'
   return (
     <>
-      <Button variant={'outline-dark'} className='my-2' onClick={addIngredient}>
+      <Button variant={'outline-light'} className='my-2' onClick={addIngredient}>
         Agregar
       </Button>
       <CustomModal title={title} show={show} handleClose={(() => setShow(false))}>

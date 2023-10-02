@@ -43,7 +43,8 @@ const Ingredients = () => {
   const refreshIngredients = async () => {
     const response = await useGetList<Ingredient[]>('ingredients')
     if (!response.error) {
-      setIngredients(response.data)
+      //order by name
+      setIngredients(response.data.sort((a, b) => a.name.localeCompare(b.name)))
       setShow(false)
     }
   }

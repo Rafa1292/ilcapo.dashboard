@@ -17,7 +17,7 @@ const RecipeFormContainer = ({ refreshRecipes, recipe, addRecipe, show, setShow 
   const title = recipe.id === 0 ? 'Agregar receta' : 'Editar receta'
   return (
     <>
-      <Button variant={'outline-dark'} className='my-2' onClick={addRecipe}>
+      <Button variant={'outline-light'} className='my-2' onClick={addRecipe}>
         Agregar
       </Button>
       <CustomModal title={title} show={show} handleClose={(() => setShow(false))}>

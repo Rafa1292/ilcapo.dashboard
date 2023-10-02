@@ -41,8 +41,12 @@ const RecipeStepIngredientForm = ({ currentRecipeStepIngredient, errors, action,
 
   const handleChange = (event: any) => {
     const { name, value } = event.target
-    const val = value === '' ? '' : parseInt(value)
-    setRecipeStepIngredient({ ...recipeStepIngredient, [name]: val })
+    setRecipeStepIngredient({ ...recipeStepIngredient, [name]: value })
+  }
+
+  const handleChangeNumber = (event: any) => {
+    const { name, value } = event.target
+    setRecipeStepIngredient({ ...recipeStepIngredient, [name]: Number(value) })
   }
 
   const handleInput = (event: any) => {
@@ -145,7 +149,7 @@ const RecipeStepIngredientForm = ({ currentRecipeStepIngredient, errors, action,
           <CustomInputNumber showLabel={false} value={recipeStepIngredient.quantity} customInputNumber={
             {
               label: 'Cantidad', name: 'quantity',
-              handleChange: handleChange, pattern: regexOptions.integer, validationMessage: 'Ingrese una cantidad válida'
+              handleChange: handleChangeNumber, pattern: regexOptions.integer, validationMessage: 'Ingrese una cantidad válida'
             }
           } />
         </div>

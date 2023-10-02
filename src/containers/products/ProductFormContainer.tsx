@@ -17,7 +17,7 @@ const ProductFormContainer = ({ refreshProducts, product, addProduct, show, setS
   const title = product.id === 0 ? 'Agregar insumo' : 'Editar insumo'
   return (
     <>
-      <Button variant={'outline-dark'} className='my-2' onClick={addProduct}>
+      <Button variant={'outline-light'} className='my-2' onClick={addProduct}>
         Agregar
       </Button>
       <CustomModal title={title} show={show} handleClose={(() => setShow(false))}>

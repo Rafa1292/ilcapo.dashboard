@@ -35,7 +35,8 @@ const SaleItemCategories = () => {
   const refreshSaleItemCategories = async () => {
     const response = await useGetList<SaleItemCategory[]>('saleItemCategories')
     if (!response.error) {
-      setSaleItemCategories(response.data)
+      // order by name
+      setSaleItemCategories(response.data.sort((a, b) => a.name.localeCompare(b.name)))
       setShow(false)
     }
   }

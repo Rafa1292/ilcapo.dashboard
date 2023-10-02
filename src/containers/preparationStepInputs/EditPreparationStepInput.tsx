@@ -33,7 +33,7 @@ const EditPreparationStepInput = ({ preparationStepInput, editPreparationStepInp
               {preparationStepInput?.measure?.name}
             </div>
             <div className="col-1 d-flex justify-content-center align-items-center">
-              {preparationStepInput.input.name}
+              {preparationStepInput?.input?.name}
             </div>
             <div className="py-1 px-1 d-flex justify-content-center align-items-center">
               <CustomBtn height='30px' buttonType={buttonTypes.edit} action={(() => setEditMode(true))} />

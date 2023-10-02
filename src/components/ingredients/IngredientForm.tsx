@@ -23,9 +23,14 @@ const IngredientForm = ({ currentIngredient, action, errors }: Props) => {
   const [magnitudes, setMagnitudes] = useState<Magnitude[]>([])
   const [magnitude, setMagnitude] = useState<Magnitude>()
 
-  const handleChange = (event: any) => {
+  const handleChangeText = (event: any) => {
     const { name, value } = event.target
     setIngredient({ ...ingredient, [name]: value })
+  }
+
+  const handleChangeNumber = (event: any) => {
+    const { name, value } = event.target
+    setIngredient({ ...ingredient, [name]: Number(value) })
   }
 
   const handleSubmit = () => {
@@ -64,7 +69,7 @@ const IngredientForm = ({ currentIngredient, action, errors }: Props) => {
           customInputText={
             {
               label: 'Nombre de ingrediente', name: 'name',
-              handleChange: handleChange, pattern: regexOptions.text,
+              handleChange: handleChangeText, pattern: regexOptions.text,
               validationMessage: 'Ingrese un nombre válido'
             }
           } />
@@ -72,14 +77,14 @@ const IngredientForm = ({ currentIngredient, action, errors }: Props) => {
         <CustomInputNumber value={ingredient.cost} customInputNumber={
           {
             label: 'Costo', name: 'cost',
-            handleChange: handleChange, pattern: regexOptions.decimal, validationMessage: 'Ingrese un precio válido'
+            handleChange: handleChangeNumber, pattern: regexOptions.decimal, validationMessage: 'Ingrese un precio válido'
           }
         } />
 
         <CustomInputNumber value={ingredient.presentation} customInputNumber={
           {
             label: 'Presentacion', name: 'presentation',
-            handleChange: handleChange, pattern: regexOptions.decimal, validationMessage: 'Ingrese una presentacion válida'
+            handleChange: handleChangeNumber, pattern: regexOptions.decimal, validationMessage: 'Ingrese una presentacion válida'
           }
         } />
 
@@ -99,7 +104,7 @@ const IngredientForm = ({ currentIngredient, action, errors }: Props) => {
             customInputSelect={
               {
                 label: 'Medida', name: 'measureId',
-                handleChange: handleChange, pattern: '', validationMessage: 'Seleccione una medida'
+                handleChange: handleChangeText, pattern: '', validationMessage: 'Seleccione una medida'
               }}
             data={magnitude.measures.map(measure => { return { value: measure.id, label: measure.name } })}
             defaultLegend={'Seleccione una medida'}
@@ -110,7 +115,7 @@ const IngredientForm = ({ currentIngredient, action, errors }: Props) => {
           customInputSelect={
             {
               label: 'Categoria', name: 'ingredientCategoryId',
-              handleChange: handleChange, pattern: '', validationMessage: 'Seleccione una categoria'
+              handleChange: handleChangeText, pattern: '', validationMessage: 'Seleccione una categoria'
             }}
           data={ingredientCategories.map(inputCategory => { return { value: inputCategory.id, label: inputCategory.name } })}
           defaultLegend={'Seleccione una categoria'}

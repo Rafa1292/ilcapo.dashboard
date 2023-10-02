@@ -55,7 +55,7 @@ const Products = () => {
   }, [])
 
   return (
-    <div className='col-lg-6 justify-content-center d-flex  flex-wrap'>
+    <div className='col-lg-8 justify-content-center d-flex  flex-wrap'>
       <h1 className='my-2 col-12 text-center'>Productos</h1>
       <ProductFormContainer
         refreshProducts={refreshProducts}

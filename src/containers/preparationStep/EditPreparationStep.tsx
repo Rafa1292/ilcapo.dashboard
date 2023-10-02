@@ -73,6 +73,7 @@ const EditPreparationStep = ({ preparationStep, refreshIngredient }: Props) => {
 
   const handleAddPreparationStepInput = async (preparationStepInput: PreparationStepInput) => {
     const response = await usePost<PreparationStepInput>('preparationStepInputs', {...preparationStepInput, preparationStepId: preparationStep.id})
+    console.log(response)
     if (!response.error) {
       refreshIngredient(preparationStep.ingredientId)
       setErrors([])

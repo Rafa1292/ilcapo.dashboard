@@ -17,7 +17,7 @@ const IngredientCategoryFormContainer = ({ refreshIngredientCategories, ingredie
   const title = ingredientCategory.id === 0 ? 'Agregar categoria' : 'Editar categoria'
   return (
     <>
-      <Button variant={'outline-dark'} className='my-2' onClick={addIngredientCategory}>
+      <Button variant={'outline-light'} className='my-2' onClick={addIngredientCategory}>
         Agregar
       </Button>
       <CustomModal title={title} show={show} handleClose={(() => setShow(false))}>

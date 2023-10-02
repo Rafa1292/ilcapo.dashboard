@@ -32,7 +32,7 @@ const EditRecipeStepIngredient = ({ recipeStepIngredient, editRecipeStepIngredie
               {recipeStepIngredient?.measure?.name}
             </div>
             <div className="col-1 text-center d-flex justify-content-center align-items-center">
-              {recipeStepIngredient.ingredient.name}
+              {recipeStepIngredient?.ingredient?.name}
             </div>
             <div className="py-1 px-1 d-flex justify-content-center align-items-center">
               <CustomBtn height='30px' buttonType={buttonTypes.edit} action={(() => setEditMode(true))} />

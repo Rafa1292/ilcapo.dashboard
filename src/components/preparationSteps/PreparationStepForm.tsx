@@ -20,9 +20,14 @@ const PreparationStepForm = ({ preparationStep, action, deletePreparationStepInp
   const [currentPreparationStep, setCurrentPreparationStep] = useState<PreparationStep>(preparationStep)
   const submitText = preparationStep?.id === 0 ? 'Agregar' : 'Editar'
 
-  const handleChange = (event: any) => {
+  const handleChangeText = (event: any) => {
     const { name, value } = event.target
     setCurrentPreparationStep({ ...currentPreparationStep, [name]: value })
+  }
+
+  const handleChangeNumber = (event: any) => {
+    const { name, value } = event.target
+    setCurrentPreparationStep({ ...currentPreparationStep, [name]: Number(value) })
   }
 
   const handleSubmit = () => {
@@ -50,14 +55,14 @@ const PreparationStepForm = ({ preparationStep, action, deletePreparationStepInp
         <CustomInputNumber value={currentPreparationStep.stepNumber} customInputNumber={
           {
             label: 'Numero de paso', name: 'stepNumber',
-            handleChange: handleChange, pattern: regexOptions.integer, validationMessage: 'Ingrese un numero válido'
+            handleChange: handleChangeNumber, pattern: regexOptions.integer, validationMessage: 'Ingrese un numero válido'
           }
         } />
         <CustomInputText value={currentPreparationStep.description}
           customInputText={
             {
               label: 'Descripcion', name: 'description',
-              handleChange: handleChange, pattern: regexOptions.text,
+              handleChange: handleChangeText, pattern: regexOptions.text,
               validationMessage: 'Ingrese una descripcion valida'
             }
           } />
@@ -66,7 +71,7 @@ const PreparationStepForm = ({ preparationStep, action, deletePreparationStepInp
         <CustomInputNumber value={currentPreparationStep.minutesOfPreparation} customInputNumber={
           {
             label: 'Duracion en minutos', name: 'minutesOfPreparation',
-            handleChange: handleChange, pattern: regexOptions.integer, validationMessage: 'Ingrese una duracion válida'
+            handleChange: handleChangeNumber, pattern: regexOptions.integer, validationMessage: 'Ingrese una duracion válida'
           }
         } />
         <h5 className='col-12 text-secondary my-1 fw-bold'>Insumos</h5>
