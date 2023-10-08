@@ -21,6 +21,10 @@ const initialProductModifier: ProductModifier = {
   modifierGroup: undefined,
   productId: 0,
   order: 0,
+  price: 0,
+  minSelect: 0,
+  maxSelect: 0,
+  priceByGroup: false,
   createdBy: 1,
   updatedBy: 1,
   delete: false

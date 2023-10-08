@@ -45,6 +45,8 @@ const Products = () => {
       setProducts(response.data)
       setShow(false)
     }
+
+    
   }
 
   useEffect(() => {

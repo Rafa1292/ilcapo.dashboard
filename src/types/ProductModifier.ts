@@ -2,10 +2,14 @@ import { ModifierGroup } from './ModifierGroup'
 
 export interface ProductModifier {
   id: number
-  productId: number
-  modifierGroupId: number
-  modifierGroup?: ModifierGroup
   order: number
+  modifierGroupId: number
+  productId: number
+  price: number
+  minSelect: number
+  maxSelect: number
+  priceByGroup: boolean
+  modifierGroup?: ModifierGroup
   delete: boolean
   createdBy?: number
   updatedBy?: number

@@ -30,12 +30,10 @@ const SaleItemForm = ({ currentSaleItem, action, errors }: Props) => {
   }
 
   const handleSubmit = () => {
-    console.log(saleItem)
     action(saleItem)
   }
 
   const addItemPrice = (itemPrice: ItemPrice) => {
-    console.log(saleItem)
     const currentItemPrice = saleItem.prices.find(
       (ip: ItemPrice) => ip.menuId === itemPrice.menuId
     )
