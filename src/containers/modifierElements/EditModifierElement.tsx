@@ -18,7 +18,7 @@ const EditModifierElement = ({ modifierElement, modifierGroups, modifierGroupId,
   const [editMode, setEditMode] = useState<boolean>(false)
 
   const action = async (modifierElement: ModifierElement) => {
-    const response = await usePatch(`modifierElements/${modifierElement.id}/${modifierGroupId}`, modifierElement)
+    const response = await usePatch(`modifierElements/${modifierElement.id}`, modifierElement)
     if (response.error) {
       setErrors(response.message)
     } else {
@@ -46,9 +46,6 @@ const EditModifierElement = ({ modifierElement, modifierGroups, modifierGroupId,
           <div className="col-12 d-flex flex-wrap justify-content-center">
             <div className="col-1 d-flex justify-content-center align-items-center">
               {modifierElement?.name}
-            </div>
-            <div className="col-1 d-flex justify-content-center align-items-center">
-              {modifierElement?.quantity}
             </div>
             {/* <div className="col-1 d-flex justify-content-center align-items-center">
               {modifierElement?.price}

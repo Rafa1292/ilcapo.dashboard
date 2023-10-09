@@ -6,12 +6,10 @@ export interface ModifierElement {
   id: number
   name: string
   defaultRecipeId: number
-  prices: ElementPrice[]
-  quantity: number
   combinable: boolean
-  numberOfParts: number
+  prices: ElementPrice[]
+  combinableGroupId: number
   modifierGroupId: number
-  combinableModifierGroupId: number
   modifierUpgrade: ModifierElementUpgrade
   productReference: ProductReference
   delete: boolean

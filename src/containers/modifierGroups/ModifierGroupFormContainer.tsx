@@ -18,7 +18,7 @@ const ModifierGroupFormContainer = ({ refreshModifierGroups, modifierGroups, mod
   const title = modifierGroup.id === 0 ? 'Agregar grupo' : 'Editar grupo'
   return (
     <>
-      <Button variant={'outline-dark'} className='my-2' onClick={addModifierGroup}>
+      <Button variant={'outline-light'} className='my-2' onClick={addModifierGroup}>
         Agregar
       </Button>
       <CustomModal title={title} show={show} handleClose={(() => setShow(false))}>

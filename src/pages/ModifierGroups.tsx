@@ -12,10 +12,7 @@ const ModifierGroups = () => {
   const initialModifierGroup: ModifierGroup = {
     id: 0,
     name: '',
-    minSelectable: 0,
-    maxSelectable: 0,
-    isRequired: false,
-    label: '',
+    showLabel: false,
     elements: [],
     delete: false,
     createdBy: 0,

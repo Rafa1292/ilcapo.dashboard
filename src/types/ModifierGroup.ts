@@ -3,10 +3,7 @@ import { ModifierElement } from './ModifierElement'
 export interface ModifierGroup {
   id: number
   name: string
-  minSelectable: number
-  maxSelectable: number
-  isRequired: boolean
-  label: string
+  showLabel: boolean
   elements: ModifierElement[]
   delete: boolean
   updatedBy?: number

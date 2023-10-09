@@ -106,18 +106,6 @@ const SaleItemForm = ({ currentSaleItem, action, errors }: Props) => {
           }}
         />
 
-        <CustomInputText
-          isRequired={false}
-          value={saleItem.description}
-          customInputText={{
-            label: 'Descripcion',
-            name: 'description',
-            handleChange: handleChange,
-            pattern: regexOptions.text,
-            validationMessage: 'Ingrese una descripcion válida',
-          }}
-        />
-
         <ItemPriceContainer
           addItemPrice={addItemPrice}
           removeItemPrice={removeItemPrice}

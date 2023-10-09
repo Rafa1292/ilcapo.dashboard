@@ -12,7 +12,6 @@ const SaleItems = () => {
   const initialSaleItem: SaleItem = {
     id: 0,
     name: '',
-    description: '',
     pictureUrl: '',
     saleItemCategoryId: 0,
     prices: [],

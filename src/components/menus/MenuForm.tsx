@@ -20,6 +20,11 @@ const MenuForm = ({ currentMenu, action, errors }: Props) => {
     setMenu({ ...menu, [name]: value })
   }
 
+  const handleChangeNumber = (event: any) => {
+    const { name, value } = event.target
+    setMenu({ ...menu, [name]: Number(value) })
+  }
+
   const handleSubmit = () => {
     action(menu)
   }
@@ -46,7 +51,7 @@ const MenuForm = ({ currentMenu, action, errors }: Props) => {
         customInputNumber={{
           label: 'Comision',
           name: 'comissionPercentage',
-          handleChange: handleChange,
+          handleChange: handleChangeNumber,
           pattern: regexOptions.integer,
           validationMessage: 'Ingrese un monto valido',
         }}

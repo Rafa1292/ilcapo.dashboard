@@ -17,7 +17,7 @@ const MenuFormContainer = ({ menu, addMenu, show, setShow, refreshMenus }: Props
 
   return (
     <>
-      <Button variant={'outline-dark'} className='my-2' onClick={addMenu}>
+      <Button variant={'outline-light'} className='my-2' onClick={addMenu}>
         Agregar
       </Button>
       <CustomModal title={title} show={show} handleClose={() => setShow(false)}>

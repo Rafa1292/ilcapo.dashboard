@@ -12,12 +12,10 @@ const initialModifierElement: ModifierElement = {
   id: 0,
   name: '',
   prices: [],
-  quantity: 0,
   defaultRecipeId: 0,
   combinable: false,
-  combinableModifierGroupId: 0,
+  combinableGroupId: 0,
   modifierGroupId: 0,
-  numberOfParts: 0,
   modifierUpgrade: { } as ModifierElementUpgrade,
   productReference: {} as ProductReference,
   delete: false,
@@ -38,7 +36,7 @@ const CreateModifierElement = ({ modifierGroupId, modifierGroups, refreshModifie
 
   const addModifierElement = async (modifierElement: ModifierElement) => {
     setLoading(true)
-    const response = await usePost<ModifierElement>(`modifierElements/${modifierGroupId}`, modifierElement)
+    const response = await usePost<ModifierElement>('modifierElements', modifierElement)
     if (response.error) {
       setErrors(response.message)
       setModifierElement(modifierElement)

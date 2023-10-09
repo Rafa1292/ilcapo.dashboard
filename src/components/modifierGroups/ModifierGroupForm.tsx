@@ -1,13 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { ModifierGroup } from '../../types/ModifierGroup'
 import { regexOptions } from '../../enums/regexOptions'
 import CustomInputText from '../generics/CustomInputText'
 import GenericForm from '../generics/GenericForm'
-import ModifierElementUpgrdeForm from '../modifierElementUpgrades/ModifierElementUpgradeForm'
 import CustomInputCheck from '../generics/CustomInputChecbox'
-import { ModifierElementUpgrade } from '../../types/ModifierElementUpgrade'
-import CustomInputNumber from '../generics/CustomInputNumber'
-import ModifierElementUpgradeContainer from '../../containers/modifierElementUpgrades/ModifierElementUpgradeContainer'
 
 interface Props {
   currentModifierGroup: ModifierGroup
@@ -46,37 +42,10 @@ const ModifierGroupForm = ({ currentModifierGroup: currentModifierGroup, action,
             }
           } />
 
-        <CustomInputText isRequired={false} value={modifierGroup.label}
-          customInputText={
-            {
-              label: 'Etiqueta', name: 'label',
-              handleChange: handleChange, pattern: regexOptions.text,
-              validationMessage: 'Ingrese un nombre válido'
-            }
-          } />
-
-        <CustomInputNumber value={modifierGroup.minSelectable}
-          customInputNumber={
-            {
-              label: 'Minimo seleccionable', name: 'minSelectable',
-              handleChange: handleChange, pattern: regexOptions.integer,
-              validationMessage: 'Ingrese un número válido'
-            }
-          } />
-
-        <CustomInputNumber value={modifierGroup.maxSelectable}
-          customInputNumber={
-            {
-              label: 'Maximo seleccionable', name: 'maxSelectable',
-              handleChange: handleChange, pattern: regexOptions.integer,
-              validationMessage: 'Ingrese un número válido'
-            }
-          } />
-
-        < CustomInputCheck value={modifierGroup.isRequired}
+        < CustomInputCheck value={modifierGroup.showLabel}
           customInputCheck={{
-            label: '¿Es obligatorio?', pattern: '', validationMessage: '',
-            name: 'isRequired', handleChange: handleIsRequiredCheck
+            label: '¿Mostrar etiqueta?', pattern: '', validationMessage: '',
+            name: 'showLabel', handleChange: handleIsRequiredCheck
           }
           } />
 

@@ -260,17 +260,6 @@ const ModifierElementForm = ({
           }}
         />
 
-        <CustomInputNumber
-          value={modifierElement.quantity}
-          customInputNumber={{
-            label: 'Cantidad seleccionable',
-            name: 'quantity',
-            handleChange: handleChange,
-            pattern: regexOptions.integer,
-            validationMessage: 'Ingrese una cantidad válida',
-          }}
-        />
-
         <CustomInputSelect
           value={modifierElement.defaultRecipeId}
           customInputSelect={{
@@ -299,20 +288,9 @@ const ModifierElementForm = ({
 
         {modifierElement.combinable && (
           <>
-            <CustomInputNumber
-              value={modifierElement.numberOfParts}
-              customInputNumber={{
-                label: 'Cantidad de partes',
-                name: 'numberOfParts',
-                handleChange: handleChange,
-                pattern: regexOptions.integer,
-                validationMessage: 'Ingrese una cantidad válida',
-              }}
-            />
-
             <CustomInputSelect
               showLabel={false}
-              value={modifierElement.combinableModifierGroupId}
+              value={modifierElement.combinableGroupId}
               customInputSelect={{
                 label: 'Modificadores',
                 name: 'combinableModifierGroupId',

@@ -22,7 +22,7 @@ const CustomInputNumber = ({ customInputNumber, value, showLabel = true, isRequi
             type="string"
             placeholder={customInputNumber.label}
             name={customInputNumber.name}
-            value={value === 0 ? '' : value}
+            value={value}
             onChange={customInputNumber.handleChange}
             required={isRequired}
             pattern={customInputNumber.pattern}

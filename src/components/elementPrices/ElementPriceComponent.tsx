@@ -82,7 +82,7 @@ const ElementPriceComponent = ({
                   handleChange: (ev) =>
                     addElementPrice({
                       ...elementPrice,
-                      price: ev.target.value,
+                      price: Number(ev.target.value),
                     }),
                   pattern: regexOptions.decimal,
                   validationMessage: 'Ingrese un precio válido',
